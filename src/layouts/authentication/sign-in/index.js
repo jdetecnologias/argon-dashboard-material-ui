@@ -29,10 +29,8 @@ import ArgonButton from "components/ArgonButton";
 
 // Authentication layout components
 import IllustrationLayout from "layouts/authentication/components/IllustrationLayout";
+import fundo from "assets/images/img-2.jpg";
 
-// Image
-const bgImage =
-  "https://raw.githubusercontent.com/creativetimofficial/public-assets/master/argon-dashboard-pro/assets/img/signin-ill.jpg";
 
 function Illustration() {
   const [rememberMe, setRememberMe] = useState(false);
@@ -41,13 +39,13 @@ function Illustration() {
 
   return (
     <IllustrationLayout
-      title="Sign In"
-      description="Enter your email and password to sign in"
+      title="Entrar"
+      description="Digite com seu email e senha para entrar no sistema"
       illustration={{
-        image: bgImage,
-        title: '"Attention is the new currency"',
+        image: fundo,
+        title: '"Atenção a sua saúde"',
         description:
-          "The more effortless the writing looks, the more effort the writer actually put into the process.",
+          "Tenha mais qualidade de vida cuidando de sua saúde para poder desfrutar de uma vida .",
       }}
     >
       <ArgonBox component="form" role="form">

@@ -38,8 +38,8 @@ const bgImage =
 function Cover() {
   return (
     <CoverLayout
-      title="Welcome!"
-      description="Use these awesome forms to login or create new account in your project for free."
+      title="Bem vindos!"
+      description="Use o formulário abaixo para se cadastrar"
       image={bgImage}
       imgPosition="top"
       button={{ color: "dark", variant: "gradient" }}
@@ -47,14 +47,8 @@ function Cover() {
       <Card>
         <ArgonBox p={3} mb={1} textAlign="center">
           <ArgonTypography variant="h5" fontWeight="medium">
-            Register with
+            Cadastrar
           </ArgonTypography>
-        </ArgonBox>
-        <ArgonBox mb={2}>
-          <Socials />
-        </ArgonBox>
-        <ArgonBox px={12}>
-          <Separator />
         </ArgonBox>
         <ArgonBox pt={2} pb={3} px={3}>
           <ArgonBox component="form" role="form">
