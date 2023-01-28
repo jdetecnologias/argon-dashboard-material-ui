@@ -162,22 +162,6 @@ function DashboardNavbar({ absolute, light, isMini }) {
           <ArgonBox sx={(theme) => navbarRow(theme, { isMini })}>
             <ArgonBox color={light ? "white" : "inherit"}>
               <Link to="/authentication/sign-in/basic">
-                <IconButton sx={navbarIconButton} size="small">
-                  <Icon
-                    sx={({ palette: { dark, white } }) => ({
-                      color: light && transparentNavbar ? white.main : dark.main,
-                    })}
-                  >
-                    account_circle
-                  </Icon>
-                  <ArgonTypography
-                    variant="button"
-                    fontWeight="medium"
-                    color={light && transparentNavbar ? "white" : "dark"}
-                  >
-                    Entrar
-                  </ArgonTypography>
-                </IconButton>
               </Link>
               <IconButton
                 size="small"
