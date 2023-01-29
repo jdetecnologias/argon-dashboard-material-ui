@@ -31,40 +31,6 @@ function Footer() {
   return (
     <ArgonBox component="footer" py={6}>
       <Grid container justifyContent="center">
-        <Grid item xs={10} lg={8}>
-          <ArgonBox display="flex" justifyContent="center" flexWrap="wrap" mb={3}>
-            <ArgonBox mr={{ xs: 2, lg: 3, xl: 6 }}>
-              <ArgonTypography component="a" href="#" variant="body2" color="secondary">
-                Company
-              </ArgonTypography>
-            </ArgonBox>
-            <ArgonBox mr={{ xs: 2, lg: 3, xl: 6 }}>
-              <ArgonTypography component="a" href="#" variant="body2" color="secondary">
-                About Us
-              </ArgonTypography>
-            </ArgonBox>
-            <ArgonBox mr={{ xs: 0, lg: 3, xl: 6 }}>
-              <ArgonTypography component="a" href="#" variant="body2" color="secondary">
-                Team
-              </ArgonTypography>
-            </ArgonBox>
-            <ArgonBox mr={{ xs: 2, lg: 3, xl: 6 }}>
-              <ArgonTypography component="a" href="#" variant="body2" color="secondary">
-                Product
-              </ArgonTypography>
-            </ArgonBox>
-            <ArgonBox mr={{ xs: 2, lg: 3, xl: 6 }}>
-              <ArgonTypography component="a" href="#" variant="body2" color="secondary">
-                Blog
-              </ArgonTypography>
-            </ArgonBox>
-            <ArgonBox>
-              <ArgonTypography component="a" href="#" variant="body2" color="secondary">
-                Pricing
-              </ArgonTypography>
-            </ArgonBox>
-          </ArgonBox>
-        </Grid>
         <Grid item xs={12} lg={8}>
           <ArgonBox display="flex" justifyContent="center" mt={1} mb={3}>
             <ArgonBox mr={3} color="secondary">

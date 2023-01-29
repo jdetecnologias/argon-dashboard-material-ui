@@ -68,7 +68,7 @@ function Cover() {
                 fontWeight="regular"
                 sx={{ cursor: "pointer", userSelect: "none" }}
               >
-                &nbsp;&nbsp;I agree the&nbsp;
+                &nbsp;&nbsp;Eu aceito os&nbsp;
               </ArgonTypography>
               <ArgonTypography
                 component="a"
@@ -77,17 +77,17 @@ function Cover() {
                 fontWeight="bold"
                 textGradient
               >
-                Terms and Conditions
+                Termos e condições
               </ArgonTypography>
             </ArgonBox>
             <ArgonBox mt={4} mb={1}>
               <ArgonButton variant="gradient" color="dark" fullWidth>
-                sign up
+                Cadastrar
               </ArgonButton>
             </ArgonBox>
             <ArgonBox mt={2}>
               <ArgonTypography variant="button" color="text" fontWeight="regular">
-                Already have an account?&nbsp;
+                Já tem uma conta?&nbsp;
                 <ArgonTypography
                   component={Link}
                   to="/authentication/sign-in"
@@ -96,7 +96,7 @@ function Cover() {
                   fontWeight="bold"
                   textGradient
                 >
-                  Sign in
+                  Entrar
                 </ArgonTypography>
               </ArgonTypography>
             </ArgonBox>
