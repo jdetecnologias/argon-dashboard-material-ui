@@ -15,10 +15,12 @@ Coded by www.creative-tim.com
 
 // react-router-dom components
 import { Link } from "react-router-dom";
-
+import {useState} from "react";
 // @mui material components
 import Card from "@mui/material/Card";
 import Checkbox from "@mui/material/Checkbox";
+import Alert from '@mui/material/Alert';
+import Stack from '@mui/material/Stack';
 
 // Argon Dashboard 2 MUI components
 import ArgonBox from "components/ArgonBox";
@@ -28,14 +30,25 @@ import ArgonButton from "components/ArgonButton";
 
 // Authentication layout components
 import CoverLayout from "layouts/authentication/components/CoverLayout";
-import Socials from "layouts/authentication/components/Socials";
-import Separator from "layouts/authentication/components/Separator";
-
+import { cadastrarUsuario } from "./controller/cadastrarUsuarioController";
+import Radio from '@mui/material/Radio';
+import RadioGroup from '@mui/material/RadioGroup';
+import FormControlLabel from '@mui/material/FormControlLabel';
+import FormControl from '@mui/material/FormControl';
+import FormLabel from '@mui/material/FormLabel';
+import If from "components/If/if";
 // Images
 const bgImage =
   "https://raw.githubusercontent.com/creativetimofficial/public-assets/master/argon-dashboard-pro/assets/img/signup-cover.jpg";
 
 function Cover() {
+  const [nome, setNome] = useState("");
+  const [email, setEmail] = useState("");
+  const [senha, setSenha] = useState("");
+  const [dt_nasc, setDataNasc] = useState("");
+  const [genero, setGenero] = useState("");
+  const [statusCadastro, setStatusCadastro] = useState(null);
+
   return (
     <CoverLayout
       title="Bem vindos!"
@@ -53,13 +66,32 @@ function Cover() {
         <ArgonBox pt={2} pb={3} px={3}>
           <ArgonBox component="form" role="form">
             <ArgonBox mb={2}>
-              <ArgonInput placeholder="Name" />
+              <ArgonInput placeholder="Nome" value={nome} onChange={(e)=>setNome(e.target.value)}/>
             </ArgonBox>
             <ArgonBox mb={2}>
-              <ArgonInput type="email" placeholder="Email" />
+              <ArgonInput type="date"  value={dt_nasc} onChange={(e)=>setDataNasc(e.target.value)} placeholder="Data nascimento" />
             </ArgonBox>
             <ArgonBox mb={2}>
-              <ArgonInput type="password" placeholder="Password" />
+            <FormControl>
+              <FormLabel id="demo-controlled-radio-buttons-group">Gênero</FormLabel>
+              <RadioGroup
+                row
+                aria-labelledby="demo-controlled-radio-buttons-group"
+                name="controlled-radio-buttons-group"
+                value={genero}
+                onChange={(e)=>setGenero(e.target.value)}
+              >
+                <FormControlLabel value="F" control={<Radio />} label="Feminino" />
+                <FormControlLabel value="M" control={<Radio />} label="Masculino" />
+                <FormControlLabel value="O" control={<Radio />} label="Outros" />
+              </RadioGroup>
+            </FormControl>
+            </ArgonBox>
+            <ArgonBox mb={2}>
+              <ArgonInput type="email" value={email} onChange={(e)=>setEmail(e.target.value)} placeholder="E-mail" />
+            </ArgonBox>
+            <ArgonBox mb={2}>
+              <ArgonInput type="password" value={senha} onChange={(e)=>setSenha(e.target.value)} placeholder="Senha" />
             </ArgonBox>
             <ArgonBox display="flex" alignItems="center">
               <Checkbox defaultChecked />
@@ -80,11 +112,26 @@ function Cover() {
                 Termos e condições
               </ArgonTypography>
             </ArgonBox>
+
             <ArgonBox mt={4} mb={1}>
-              <ArgonButton variant="gradient" color="dark" fullWidth>
+              <ArgonButton onClick={()=>cadastrarUsuario({nome, dt_nasc, email, senha, genero},setStatusCadastro)} variant="gradient" color="dark" fullWidth>
                 Cadastrar
               </ArgonButton>
             </ArgonBox>
+            <Stack sx={{ width: '100%' }} spacing={2}>
+              <If test={statusCadastro != null && !statusCadastro}>
+                <Alert variant="filled" severity="error">
+                  Erro ao efetuar o cadastro!
+                </Alert>
+
+              </If>
+              <If test={statusCadastro != null && statusCadastro}>
+                <Alert variant="filled" severity="success">
+                  Cadastrado com sucesso!
+                  Enviamos um email com o código de ativação.
+                </Alert>
+              </If>
+            </Stack>
             <ArgonBox mt={2}>
               <ArgonTypography variant="button" color="text" fontWeight="regular">
                 Já tem uma conta?&nbsp;
