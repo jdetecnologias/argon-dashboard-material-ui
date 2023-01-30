@@ -43,6 +43,7 @@ import createCache from "@emotion/cache";
 
 // Argon Dashboard 2 MUI routes
 import routes from "routes";
+import hiddenRoutes from "hiddenRoutes";
 
 // Argon Dashboard 2 MUI contexts
 import { useArgonController, setMiniSidenav, setOpenConfigurator } from "context";
@@ -62,6 +63,7 @@ export default function App() {
   const [onMouseEnter, setOnMouseEnter] = useState(false);
   const [rtlCache, setRtlCache] = useState(null);
   const { pathname } = useLocation();
+  const Allroutes = routes.concat(hiddenRoutes)
 
   // Cache for the rtl
   useMemo(() => {
@@ -150,7 +152,7 @@ export default function App() {
               color={sidenavColor}
               brand={darkSidenav || darkMode ? brand : brandDark}
               brandName="Gluco Scan"
-              routes={routes}
+              routes={Allroutes}
               onMouseEnter={handleOnMouseEnter}
               onMouseLeave={handleOnMouseLeave}
             />
@@ -160,7 +162,7 @@ export default function App() {
         )}
         {layout === "vr" && <Configurator />}
         <Routes>
-          {getRoutes(routes)}
+          {getRoutes(Allroutes)}
           <Route path="*" element={<Navigate to="/authentication/sign-in" />} />
         </Routes>
       </ThemeProvider>
@@ -184,7 +186,7 @@ export default function App() {
       )}
       {layout === "vr" && <Configurator />}
       <Routes>
-        {getRoutes(routes)}
+        {getRoutes(Allroutes)}
         <Route path="*" element={<Navigate to="/authentication/sign-in" />} />
       </Routes>
     </ThemeProvider>
