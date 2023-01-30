@@ -13,7 +13,7 @@ Coded by www.creative-tim.com
 * The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
 */
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 
 // react-router-dom components
 import { Link } from "react-router-dom";
@@ -30,13 +30,36 @@ import ArgonButton from "components/ArgonButton";
 // Authentication layout components
 import IllustrationLayout from "layouts/authentication/components/IllustrationLayout";
 import fundo from "assets/images/img-2.jpg";
-
+import { logarUsuario } from "./controller/logarUsuarioController";
 
 function Illustration() {
   const [rememberMe, setRememberMe] = useState(false);
+  const [email, setEmail] = useState("");
+  const [senha, setSenha] = useState("");
+  const [loginStatus, setLoginStatus] = useState(null);
 
   const handleSetRememberMe = () => setRememberMe(!rememberMe);
+  const handleLogin = (status, token, id_usuario)=>{
+    console.log(status, token, id_usuario);
 
+    if(status){
+      const dadosLogin ={
+        token,
+        email: email,
+        id_usuario
+      }
+      document.cookie = `dadosLogin=${JSON.stringify(dadosLogin)};`
+    }
+
+    setLoginStatus(status);
+  }
+  useEffect(() => {
+    if (loginStatus){
+      setTimeout(() => {
+          location.href = "/meus_indices";
+        },1000)
+    }
+ },[loginStatus]);
   return (
     <IllustrationLayout
       title="Entrar"
@@ -50,10 +73,10 @@ function Illustration() {
     >
       <ArgonBox component="form" role="form">
         <ArgonBox mb={2}>
-          <ArgonInput type="email" placeholder="Email" size="large" />
+          <ArgonInput type="email" value={email} onChange={(e)=>setEmail(e.target.value)} placeholder="Email" size="large" />
         </ArgonBox>
         <ArgonBox mb={2}>
-          <ArgonInput type="password" placeholder="Password" size="large" />
+          <ArgonInput type="password" value={senha} onChange={(e)=>setSenha(e.target.value)} placeholder="Password" size="large" />
         </ArgonBox>
         <ArgonBox display="flex" alignItems="center">
           <Switch checked={rememberMe} onChange={handleSetRememberMe} />
@@ -67,7 +90,7 @@ function Illustration() {
           </ArgonTypography>
         </ArgonBox>
         <ArgonBox mt={4} mb={1}>
-          <ArgonButton color="info" size="large" fullWidth>
+          <ArgonButton onClick={()=>logarUsuario({email, senha},handleLogin)} color="info" size="large" fullWidth>
             Sign In
           </ArgonButton>
         </ArgonBox>

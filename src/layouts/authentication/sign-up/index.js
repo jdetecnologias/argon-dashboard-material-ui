@@ -14,8 +14,8 @@ Coded by www.creative-tim.com
 */
 
 // react-router-dom components
-import { Link } from "react-router-dom";
-import {useState} from "react";
+import { Link, Navigate } from "react-router-dom";
+import {useState, useEffect} from "react";
 // @mui material components
 import Card from "@mui/material/Card";
 import Checkbox from "@mui/material/Checkbox";
@@ -48,6 +48,15 @@ function Cover() {
   const [dt_nasc, setDataNasc] = useState("");
   const [genero, setGenero] = useState("");
   const [statusCadastro, setStatusCadastro] = useState(null);
+
+  useEffect(() => {
+    if (statusCadastro){
+      setTimeout(() => {
+          location.href = "/authentication/confirm-user?email=" + email;
+        },3000)
+    }
+ },[statusCadastro]);
+
 
   return (
     <CoverLayout
