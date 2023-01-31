@@ -31,6 +31,7 @@ import ArgonButton from "components/ArgonButton";
 import IllustrationLayout from "layouts/authentication/components/IllustrationLayout";
 import fundo from "assets/images/img-2.jpg";
 import { logarUsuario } from "./controller/logarUsuarioController";
+import { setCookie } from "helper/cookies";
 
 function Illustration() {
   const [rememberMe, setRememberMe] = useState(false);
@@ -48,7 +49,8 @@ function Illustration() {
         email: email,
         id_usuario
       }
-      document.cookie = `dadosLogin=${JSON.stringify(dadosLogin)};`
+      setCookie("dadosLogin",JSON.stringify(dadosLogin),300)
+
     }
 
     setLoginStatus(status);
