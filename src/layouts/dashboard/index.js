@@ -16,32 +16,58 @@ Coded by www.creative-tim.com
 
 // @mui material components
 import Grid from "@mui/material/Grid";
-import Icon from "@mui/material/Icon";
 
 // Argon Dashboard 2 MUI components
 import ArgonBox from "components/ArgonBox";
-import ArgonTypography from "components/ArgonTypography";
 
+import { Navigate } from "react-router-dom";
+import { useState, useEffect } from "react";
 // Argon Dashboard 2 MUI example components
 import DashboardLayout from "examples/LayoutContainers/DashboardLayout";
 import DashboardNavbar from "examples/Navbars/DashboardNavbar";
-import Footer from "examples/Footer";
-import DetailedStatisticsCard from "examples/Cards/StatisticsCards/DetailedStatisticsCard";
-import SalesTable from "examples/Tables/SalesTable";
-import CategoriesList from "examples/Lists/CategoriesList";
-import GradientLineChart from "examples/Charts/LineCharts/GradientLineChart";
+import GradientLineChart from "examples/Charts/LineCharts/DefaultLineChart";
 
 // Argon Dashboard 2 MUI base styles
 import typography from "assets/theme/base/typography";
 
-// Dashboard layout components
-import Slider from "layouts/dashboard/components/Slider";
-
 // Data
 import gradientLineChartData from "layouts/dashboard/data/gradientLineChartData";
 
+import { getFitered } from "./controller/getFilteredController";
+import { getCookie } from "helper/cookies";
+import { adapterGlycemia } from "./adapter/dataAdapter";
+
 function Default() {
-  const { size } = typography;
+  const [listGlycemia, setListGlycemia] = useState([]);
+  const [dataChart,setDataChart ] = useState([]);
+
+  useEffect(() => {
+    let dadoslogin = getCookie("dadosLogin");
+  
+    if(dadoslogin === ""){
+      return <Navigate to="/autheticacion/sign-in"/>
+    }
+  
+    try{
+      dadoslogin = JSON.parse(dadoslogin);
+    }catch(e){
+      return <Navigate to="/autheticacion/sign-in"/>
+    }
+  
+    const token = dadoslogin.token;
+    const email = dadoslogin.email;
+    console.log(token,email)
+  
+    getFitered({email, data_inicio_filtro:"2023-01-22", data_fim_filtro:"2023-01-26" },token,(dados)=>{
+      setListGlycemia(dados);
+    })
+  },[])
+  	
+
+useEffect(() => {
+  setDataChart( adapterGlycemia(listGlycemia))
+},[listGlycemia])
+
   return (
     <DashboardLayout>
       <DashboardNavbar />
@@ -50,7 +76,7 @@ function Default() {
           <Grid item xs={12} lg={12}>
             <GradientLineChart
               title="Meus indíces de glicemia"
-              chart={gradientLineChartData}
+              chart={dataChart}
             />
           </Grid>
         </Grid>
