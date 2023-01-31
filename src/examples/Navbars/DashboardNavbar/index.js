@@ -58,6 +58,7 @@ import {
 // Images
 import team2 from "assets/images/team-2.jpg";
 import logoSpotify from "assets/images/small-logos/logo-spotify.svg";
+import { setCookie } from "helper/cookies";
 
 function DashboardNavbar({ absolute, light, isMini }) {
   const [navbarType, setNavbarType] = useState();
@@ -96,6 +97,14 @@ function DashboardNavbar({ absolute, light, isMini }) {
   const handleConfiguratorOpen = () => setOpenConfigurator(dispatch, !openConfigurator);
   const handleOpenMenu = (event) => setOpenMenu(event.currentTarget);
   const handleCloseMenu = () => setOpenMenu(false);
+  const handleLogout = () => {
+
+    const sair = window.confirm("Deseja realmente sair?");
+    if(sair){
+      setCookie("dadosLogin","");
+      location.href = "/authentication/sign-in";
+    }
+  }
 
   // Render the notifications menu
   const renderMenu = () => (
@@ -170,6 +179,14 @@ function DashboardNavbar({ absolute, light, isMini }) {
                 onClick={handleMiniSidenav}
               >
                 <Icon>{miniSidenav ? "menu_open" : "menu"}</Icon>
+              </IconButton>
+              <IconButton
+                size="small"
+                color={light && transparentNavbar ? "white" : "dark"}
+                sx={navbarIconButton}
+                onClick={handleLogout}
+              >
+                <Icon>logout</Icon>
               </IconButton>
               <IconButton
                 size="small"
