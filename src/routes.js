@@ -51,25 +51,6 @@ const routes = [
     icon: <ArgonBox component="i" color="primary" fontSize="14px" className="ni ni-tv-2" />,
     component: <Dashboard />,
   },
-  { type: "title", title: "Perfil", key: "account-pages" },
-  {
-    type: "route",
-    name: "Entrar",
-    key: "sign-in",
-    route: "/authentication/sign-in",
-    icon: (
-      <ArgonBox component="i" color="warning" fontSize="14px" className="ni ni-single-copy-04" />
-    ),
-    component: <SignIn />,
-  },
-  {
-    type: "route",
-    name: "Cadastrar",
-    key: "sign-up",
-    route: "/authentication/sign-up",
-    icon: <ArgonBox component="i" color="info" fontSize="14px" className="ni ni-collection" />,
-    component: <SignUp />,
-  },
 ];
 
 export default routes;

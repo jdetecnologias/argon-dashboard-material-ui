@@ -50,6 +50,26 @@ const hiddenRoutes = [
     route: "/authentication/confirm-user",
     component: <ConfirmUser />,
   },
+  
+  { type: "title", title: "Perfil", key: "account-pages" },
+  {
+    type: "route",
+    name: "Entrar",
+    key: "sign-in",
+    route: "/authentication/sign-in",
+    icon: (
+      <ArgonBox component="i" color="warning" fontSize="14px" className="ni ni-single-copy-04" />
+    ),
+    component: <SignIn />,
+  },
+  {
+    type: "route",
+    name: "Cadastrar",
+    key: "sign-up",
+    route: "/authentication/sign-up",
+    icon: <ArgonBox component="i" color="info" fontSize="14px" className="ni ni-collection" />,
+    component: <SignUp />,
+  },
 ];
 
 export default hiddenRoutes;
