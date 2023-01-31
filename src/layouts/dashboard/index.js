@@ -43,15 +43,15 @@ function Default() {
 
   useEffect(() => {
     let dadoslogin = getCookie("dadosLogin");
-  
+
     if(dadoslogin === ""){
-      return <Navigate to="/autheticacion/sign-in"/>
+     location.href = "/autheticacion/sign-in";
     }
   
     try{
       dadoslogin = JSON.parse(dadoslogin);
     }catch(e){
-      return <Navigate to="/autheticacion/sign-in"/>
+      location.href = "/autheticacion/sign-in"
     }
   
     const token = dadoslogin.token;
