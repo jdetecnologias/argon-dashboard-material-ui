@@ -1,3 +1,5 @@
+import { fetchAuth } from "helper/fetchAuth";
+
 export function getFiltered(dadosUsuario, token) {
     return new Promise((resolve, reject)=>{
         const config = {
@@ -9,8 +11,6 @@ export function getFiltered(dadosUsuario, token) {
               }
         }
 
-        console.log(config)
-
         const listkeys = Object.keys(dadosUsuario);
 
         const listQueryParams = listkeys.map(key=>{
@@ -18,8 +18,8 @@ export function getFiltered(dadosUsuario, token) {
         })
 
         const queryParams = listQueryParams.join('&');
-        console.log(queryParams)
-        fetch('http://localhost:8080/glycemia/get_filtered?'+queryParams,config).then(async response=>{
+
+        fetchAuth('http://localhost:8080/glycemia/get_filtered?'+queryParams,config).then(async response=>{
             const json = await response.json() ;
             resolve(json)
         }).catch(e=>{
