@@ -36,41 +36,83 @@ import gradientLineChartData from "layouts/dashboard/data/gradientLineChartData"
 import { getFitered } from "./controller/getFilteredController";
 import { getCookie } from "helper/cookies";
 import { adapterGlycemia } from "./adapter/dataAdapter";
+import ArgonInput from "components/ArgonInput";
+import dayjs from "dayjs";
+import ArgonButton from "components/ArgonButton";
 
 function Default() {
+
+
   const [listGlycemia, setListGlycemia] = useState([]);
   const [dataChart,setDataChart ] = useState([]);
+  const [data_inicio_filtro,setDataInicio_filtro] = useState("");
+  const [data_fim_filtro,setDataFim_filtro] = useState("");
+
+
+
 
   useEffect(() => {
-    let dadoslogin = getCookie("dadosLogin");
-
-    if(dadoslogin === ""){
-     location.href = "/autheticacion/sign-in";
-    }
-  
-    try{
-      dadoslogin = JSON.parse(dadoslogin);
-    }catch(e){
-      location.href = "/autheticacion/sign-in"
-    }
-  
-    const token = dadoslogin.token;
-    const email = dadoslogin.email;
-    console.log(token,email)
-  
-    getFitered({email, data_inicio_filtro:"2023-01-22", data_fim_filtro:"2023-01-26" },token,(dados)=>{
-      setListGlycemia(dados);
-    })
+    const dadoslogin = getDadosLogin();
+ 
+    filtrar(dadoslogin.email, data_inicio_filtro, data_fim_filtro,dadoslogin.token);
   },[])
+
+function filtrar(email, data_inicio_filtro, data_fim_filtro, token){
+  getFitered({email, data_inicio_filtro, data_fim_filtro },token,(dados)=>{
+    setListGlycemia(dados);
+  })
+}
+
+function handleFiltrar(){
+  const  dadosLogin = getDadosLogin();
+
+  filtrar(dadosLogin.email, data_inicio_filtro, data_fim_filtro, dadosLogin.token);
+}
+
+function getDadosLogin(){
+  let dadoslogin = getCookie("dadosLogin");
+
+  if(dadoslogin === ""){
+    location.href = "/autheticacion/sign-in";
+   }
+ 
+   try{
+     dadoslogin = JSON.parse(dadoslogin);
+   }catch(e){
+     location.href = "/autheticacion/sign-in"
+   }
+
+  return dadoslogin
+ }
+
   	
 
 useEffect(() => {
   setDataChart( adapterGlycemia(listGlycemia))
 },[listGlycemia])
 
+useEffect(() => {
+  const dataHoje = dayjs().format("YYYY-MM-DD")
+  setDataInicio_filtro(dataHoje)
+  setDataFim_filtro(dataHoje)
+},[])
+
   return (
     <DashboardLayout>
       <DashboardNavbar />
+      <Grid container spacing={3} mb={3}>
+        <Grid item xs={12} md={6} lg={3}>
+          <ArgonInput type="date" value={data_inicio_filtro} onChange={(e)=>setDataInicio_filtro(e.target.value)}  placeholder="Data Inicio"/>
+        </Grid>
+        <Grid item xs={12} md={6} lg={3}>
+          <ArgonInput type="date" value={data_fim_filtro} onChange={(e)=>setDataFim_filtro(e.target.value)} placeholder="Data Fim"/>  
+        </Grid>
+        <Grid item xs={12} md={6} lg={3}>
+          <ArgonButton onClick={handleFiltrar}>
+            Filtrar  
+          </ArgonButton>  
+        </Grid>
+      </Grid>
       <ArgonBox py={3}>    
         <Grid container spacing={3} mb={3}>
           <Grid item xs={12} lg={12}>

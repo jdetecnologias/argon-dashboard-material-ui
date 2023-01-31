@@ -19,7 +19,7 @@ export function getFiltered(dadosUsuario, token) {
 
         const queryParams = listQueryParams.join('&');
 
-        fetchAuth('http://localhost:8080/glycemia/get_filtered?'+queryParams,config).then(async response=>{
+        fetchAuth('https://gluco-scan-api.herokuapp.com/glycemia/get_filtered?'+queryParams,config).then(async response=>{
             const json = await response.json() ;
             resolve(json)
         }).catch(e=>{
