@@ -39,6 +39,7 @@ import { adapterGlycemia } from "./adapter/dataAdapter";
 import ArgonInput from "components/ArgonInput";
 import dayjs from "dayjs";
 import ArgonButton from "components/ArgonButton";
+import { loginRedirect } from "helper/loginRedirect";
 
 function Default() {
 
@@ -73,13 +74,14 @@ function getDadosLogin(){
   let dadoslogin = getCookie("dadosLogin");
 
   if(dadoslogin === ""){
-    location.href = "/autheticacion/sign-in";
+    loginRedirect()
+    return false;
    }
  
    try{
      dadoslogin = JSON.parse(dadoslogin);
    }catch(e){
-     location.href = "/autheticacion/sign-in"
+    loginRedirect()
    }
 
   return dadoslogin

@@ -3,6 +3,7 @@ export function fetchAuth(url, config){
         fetch(url, config).then(result=>{
             console.log(result)
             if(result.status ===  401 ){
+                alert("autenticação expirada, o site será redirecionado para página de login!")
                 location.href = "/authentication/sign-in";
             }else{
                 resolve(result);
