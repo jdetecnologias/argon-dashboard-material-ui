@@ -32,6 +32,8 @@ import IllustrationLayout from "layouts/authentication/components/IllustrationLa
 import fundo from "assets/images/img-2.jpg";
 import { logarUsuario } from "./controller/logarUsuarioController";
 import { setCookie } from "helper/cookies";
+import { getCookie } from "helper/cookies";
+import { hasValidDadosLogin } from "helper/dadosLoginCheck";
 
 function Illustration() {
   const [rememberMe, setRememberMe] = useState(false);
@@ -39,9 +41,14 @@ function Illustration() {
   const [senha, setSenha] = useState("");
   const [loginStatus, setLoginStatus] = useState(null);
 
+  const dadosLogin = getCookie("dadosLogin");
+
+  if(hasValidDadosLogin()){
+    location.href = "/meus_indices";
+  }
+  
   const handleSetRememberMe = () => setRememberMe(!rememberMe);
   const handleLogin = (status, token, id_usuario)=>{
-    console.log(status, token, id_usuario);
 
     if(status){
       const dadosLogin ={
@@ -55,6 +62,7 @@ function Illustration() {
 
     setLoginStatus(status);
   }
+
   useEffect(() => {
     if (loginStatus){
       setTimeout(() => {
