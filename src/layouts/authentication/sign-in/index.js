@@ -20,6 +20,8 @@ import { Link } from "react-router-dom";
 
 // @mui material components
 import Switch from "@mui/material/Switch";
+import Stack from '@mui/material/Stack';
+import Alert from '@mui/material/Alert';
 
 // Argon Dashboard 2 MUI components
 import ArgonBox from "components/ArgonBox";
@@ -34,6 +36,7 @@ import { logarUsuario } from "./controller/logarUsuarioController";
 import { setCookie } from "helper/cookies";
 import { getCookie } from "helper/cookies";
 import { hasValidDadosLogin } from "helper/dadosLoginCheck";
+import If from "components/If/if";
 
 function Illustration() {
   const [rememberMe, setRememberMe] = useState(false);
@@ -104,6 +107,13 @@ function Illustration() {
             Sign In
           </ArgonButton>
         </ArgonBox>
+        <Stack sx={{ width: '100%' }} spacing={2}>
+              <If test={loginStatus != null && !loginStatus}>
+                <Alert variant="filled" severity="error">
+                  Erro ao efetuar o Login!
+                </Alert>
+              </If>
+        </Stack>
         <ArgonBox mt={3} textAlign="center">
           <ArgonTypography variant="button" color="text" fontWeight="regular">
             Don&apos;t have an account?{" "}
