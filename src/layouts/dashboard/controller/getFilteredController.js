@@ -5,8 +5,13 @@ export async function getFitered(dadosUsuario,token, setDados){
     
     const isValidInitialDate =dayjs(dadosUsuario.data_inicio_filtro).isValid();
     const isValidEndDate = dayjs(dadosUsuario.data_fim_filtro).isValid();
+    const isInitialDateBigger = dayjs(dadosUsuario.data_inicio_filtro).isAfter(dadosUsuario.data_fim_filtro);
     const messageErrorsList = [];
     
+    if(isInitialDateBigger){
+        messageErrorsList.push("Data inicial é maior que a data final!");
+    }
+
     if(!isValidInitialDate){
         messageErrorsList.push("Data inicial inválida");
     }
