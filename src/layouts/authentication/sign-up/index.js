@@ -48,6 +48,12 @@ function Cover() {
   const [dt_nasc, setDataNasc] = useState("");
   const [genero, setGenero] = useState("");
   const [statusCadastro, setStatusCadastro] = useState(null);
+  const [messageErrorList, setMessageErrorList] = useState([]);
+
+  const handleCadastro = (statusCadastro, messageErrorList = [])=>{
+    setStatusCadastro(statusCadastro)
+    if(messageErrorList.length>0) setMessageErrorList(messageErrorList)
+  }
 
   useEffect(() => {
     if (statusCadastro){
@@ -123,14 +129,16 @@ function Cover() {
             </ArgonBox>
 
             <ArgonBox mt={4} mb={1}>
-              <ArgonButton onClick={()=>cadastrarUsuario({nome, dt_nasc, email, senha, genero},setStatusCadastro)} variant="gradient" color="dark" fullWidth>
+              <ArgonButton onClick={()=>cadastrarUsuario({nome, dt_nasc, email, senha, genero},handleCadastro)} variant="gradient" color="dark" fullWidth>
                 Cadastrar
               </ArgonButton>
             </ArgonBox>
             <Stack sx={{ width: '100%' }} spacing={2}>
               <If test={statusCadastro != null && !statusCadastro}>
                 <Alert variant="filled" severity="error">
-                  Erro ao efetuar o cadastro!
+                  {
+                    messageErrorList.map((item, index) => <p key={index}>{index+1} - {item}</p>)
+                  }
                 </Alert>
 
               </If>
