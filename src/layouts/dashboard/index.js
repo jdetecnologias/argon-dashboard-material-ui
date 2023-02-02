@@ -40,27 +40,38 @@ import ArgonInput from "components/ArgonInput";
 import dayjs from "dayjs";
 import ArgonButton from "components/ArgonButton";
 import { loginRedirect } from "helper/loginRedirect";
+import If from "components/If/if";
+import ErrorAlert from "./components/ErrorAlert/errorAlert";
 
 function Default() {
-
-
+  const dataHoje = dayjs().format("YYYY-MM-DD")
   const [listGlycemia, setListGlycemia] = useState([]);
   const [dataChart,setDataChart ] = useState([]);
-  const [data_inicio_filtro,setDataInicio_filtro] = useState("");
-  const [data_fim_filtro,setDataFim_filtro] = useState("");
-
-
-
+  const [data_inicio_filtro,setDataInicio_filtro] = useState(dataHoje);
+  const [data_fim_filtro,setDataFim_filtro] = useState(dataHoje);
+  const [messageErrorsList,setMessageErrorList] = useState([])
 
   useEffect(() => {
     const dadoslogin = getDadosLogin();
- 
     filtrar(dadoslogin.email, data_inicio_filtro, data_fim_filtro,dadoslogin.token);
   },[])
 
+  useEffect(() => {
+    setListGlycemia([]);
+  },[messageErrorsList])
+
+  useEffect(() => {
+    setDataChart( adapterGlycemia(listGlycemia))
+  },[listGlycemia])
+
 function filtrar(email, data_inicio_filtro, data_fim_filtro, token){
-  getFitered({email, data_inicio_filtro, data_fim_filtro },token,(dados)=>{
-    setListGlycemia(dados);
+  getFitered({email, data_inicio_filtro, data_fim_filtro },token,(dados, messageErrorsList)=>{
+     
+    if(messageErrorsList.length > 0){
+      setMessageErrorList(messageErrorsList);
+    }else{
+      setListGlycemia(dados);
+    }
   })
 }
 
@@ -87,18 +98,6 @@ function getDadosLogin(){
   return dadoslogin
  }
 
-  	
-
-useEffect(() => {
-  setDataChart( adapterGlycemia(listGlycemia))
-},[listGlycemia])
-
-useEffect(() => {
-  const dataHoje = dayjs().format("YYYY-MM-DD")
-  setDataInicio_filtro(dataHoje)
-  setDataFim_filtro(dataHoje)
-},[])
-
   return (
     <DashboardLayout>
       <DashboardNavbar />
@@ -115,17 +114,18 @@ useEffect(() => {
           </ArgonButton>  
         </Grid>
       </Grid>
-      <ArgonBox py={3}>    
-        <Grid container spacing={3} mb={3}>
-          <Grid item xs={12} lg={12}>
-            <GradientLineChart
-              title="Meus indíces de glicemia"
-              chart={dataChart}
-            />
+      <If test={messageErrorsList.length === 0} Else={<ErrorAlert messageErrorList={messageErrorsList} resetMessages={()=>setMessageErrorList([])}/>}>
+        <ArgonBox py={3}>    
+          <Grid container spacing={3} mb={3}>
+            <Grid item xs={12} lg={12}>
+              <GradientLineChart
+                title="Meus indíces de glicemia"
+                chart={dataChart}
+              />
+            </Grid>
           </Grid>
-        </Grid>
-      </ArgonBox>
-  
+        </ArgonBox>
+      </If>
     </DashboardLayout>
   );
 }
