@@ -43,6 +43,7 @@ function Illustration() {
   const [email, setEmail] = useState("");
   const [senha, setSenha] = useState("");
   const [loginStatus, setLoginStatus] = useState(null);
+  const [messageErrorList, setMessageErrorList] = useState([])
 
   const dadosLogin = getCookie("dadosLogin");
 
@@ -51,7 +52,7 @@ function Illustration() {
   }
   
   const handleSetRememberMe = () => setRememberMe(!rememberMe);
-  const handleLogin = (status, token, id_usuario)=>{
+  const handleLogin = (status, token, id_usuario, messageErrorsList = [])=>{
 
     if(status){
       const dadosLogin ={
@@ -61,6 +62,9 @@ function Illustration() {
       }
       setCookie("dadosLogin",JSON.stringify(dadosLogin),300)
 
+    }
+    else{
+      setMessageErrorList(messageErrorsList); 
     }
 
     setLoginStatus(status);
@@ -110,7 +114,9 @@ function Illustration() {
         <Stack sx={{ width: '100%' }} spacing={2}>
               <If test={loginStatus != null && !loginStatus}>
                 <Alert variant="filled" severity="error">
-                  Erro ao efetuar o Login!
+               {  
+                  messageErrorList.map((messageError, key)=> <p key={key}>{key+1} - {messageError}</p>)
+                }
                 </Alert>
               </If>
         </Stack>
