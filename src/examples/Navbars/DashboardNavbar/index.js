@@ -59,13 +59,26 @@ import {
 import team2 from "assets/images/team-2.jpg";
 import logoSpotify from "assets/images/small-logos/logo-spotify.svg";
 import { setCookie } from "helper/cookies";
+import { hasValidDadosLogin } from "helper/dadosLoginCheck";
+import { getCookie } from "helper/cookies";
 
 function DashboardNavbar({ absolute, light, isMini }) {
   const [navbarType, setNavbarType] = useState();
   const [controller, dispatch] = useArgonController();
   const { miniSidenav, transparentNavbar, fixedNavbar, openConfigurator } = controller;
   const [openMenu, setOpenMenu] = useState(false);
+  const [email, setEmail] = useState(null);
   const route = useLocation().pathname.split("/").slice(1);
+
+  useEffect(()=>{
+    
+    if(hasValidDadosLogin()){
+      let dadosLogin = getCookie("dadosLogin")
+      dadosLogin = JSON.parse(dadosLogin);
+
+      setEmail(dadosLogin.email);
+    }
+  },[])
 
   useEffect(() => {
     // Setting the navbar type
@@ -188,6 +201,14 @@ function DashboardNavbar({ absolute, light, isMini }) {
               >
                 <Icon>logout</Icon>
               </IconButton>
+              <ArgonTypography
+                variant="button"
+                fontWeight="regular"
+                color={light ? "white" : "dark"}
+                sx={{ lineHeight: 0 }}
+              >
+                  {email !== null?email:""}
+              </ArgonTypography>
               <IconButton
                 size="small"
                 color={light && transparentNavbar ? "white" : "dark"}
