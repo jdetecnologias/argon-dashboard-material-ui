@@ -114,8 +114,9 @@ function DashboardNavbar({ absolute, light, isMini }) {
 
     const sair = window.confirm("Deseja realmente sair?");
     if(sair){
-      setCookie("dadosLogin","");
-      location.href = "/authentication/sign-in";
+      setCookie("dadosLogin","",-10);
+      location.href = "/authentication/sign-in?logout=true";
+
     }
   }
 

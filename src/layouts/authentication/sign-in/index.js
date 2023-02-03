@@ -46,8 +46,12 @@ function Illustration() {
   const [messageErrorList, setMessageErrorList] = useState([])
 
   const dadosLogin = getCookie("dadosLogin");
+    
+  const windowUrl = window.location.search;
+  const params = new URLSearchParams(windowUrl);
+  const logout = params.get("logout");
 
-  if(hasValidDadosLogin()){
+  if(hasValidDadosLogin() && logout===null){
     location.href = "/meus_indices";
   }
   
