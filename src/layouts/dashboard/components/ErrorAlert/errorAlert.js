@@ -21,8 +21,7 @@ function ErrorAlert({messageErrorList, resetMessages}){
       const getMessages = () =>{
         return messageErrorList.map((item, index) => <p key={index}>{index+1} - {item}</p>)
       }
-      console.log(getMessages())
-    debugger
+
     return (
                 <Dialog
                 open={open}

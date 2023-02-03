@@ -7,6 +7,5 @@ export function mes(indiceMes){
 }
 
 export function formatDate(number){
-    console.log(number)
     return number > 9 ? number : "0" + number
 }

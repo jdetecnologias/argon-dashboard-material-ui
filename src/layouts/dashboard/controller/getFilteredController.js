@@ -24,7 +24,7 @@ export async function getFitered(dadosUsuario,token, setDados){
         messageErrorsList.push(err.message);
         setDados([],messageErrorsList);
     }  );
-    console.log(result);
+
     const resultStatus = result.reason === "success";
 
     if(resultStatus){

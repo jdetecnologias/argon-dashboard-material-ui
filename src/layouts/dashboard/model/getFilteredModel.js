@@ -23,7 +23,6 @@ export function getFiltered(dadosUsuario, token) {
             const json = await response.json() ;
             resolve(json)
         }).catch(e=>{
-            console.log(e);
             reject(e)
         })
     })
