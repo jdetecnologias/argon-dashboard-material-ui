@@ -31,7 +31,7 @@ import ArgonButton from "components/ArgonButton";
 
 // Authentication layout components
 import IllustrationLayout from "layouts/authentication/components/IllustrationLayout";
-import fundo from "assets/images/img-2.jpg";
+import fundo from "assets/images/background.png";
 import { logarUsuario } from "./controller/logarUsuarioController";
 import { setCookie } from "helper/cookies";
 import { getCookie } from "helper/cookies";
@@ -39,7 +39,6 @@ import { hasValidDadosLogin } from "helper/dadosLoginCheck";
 import If from "components/If/if";
 
 function Illustration() {
-  const [rememberMe, setRememberMe] = useState(false);
   const [email, setEmail] = useState("");
   const [senha, setSenha] = useState("");
   const [loginStatus, setLoginStatus] = useState(null);
@@ -55,7 +54,6 @@ function Illustration() {
     location.href = "/meus_indices";
   }
   
-  const handleSetRememberMe = () => setRememberMe(!rememberMe);
   const handleLogin = (status, token, id_usuario, messageErrorsList = [])=>{
 
     if(status){
@@ -99,20 +97,9 @@ function Illustration() {
         <ArgonBox mb={2}>
           <ArgonInput type="password" value={senha} onChange={(e)=>setSenha(e.target.value)} placeholder="Password" size="large" />
         </ArgonBox>
-        <ArgonBox display="flex" alignItems="center">
-          <Switch checked={rememberMe} onChange={handleSetRememberMe} />
-          <ArgonTypography
-            variant="button"
-            fontWeight="regular"
-            onClick={handleSetRememberMe}
-            sx={{ cursor: "pointer", userSelect: "none" }}
-          >
-            &nbsp;&nbsp;Remember me
-          </ArgonTypography>
-        </ArgonBox>
         <ArgonBox mt={4} mb={1}>
           <ArgonButton onClick={()=>logarUsuario({email, senha},handleLogin)} color="info" size="large" fullWidth>
-            Sign In
+            Entrar
           </ArgonButton>
         </ArgonBox>
         <Stack sx={{ width: '100%' }} spacing={2}>
@@ -126,7 +113,7 @@ function Illustration() {
         </Stack>
         <ArgonBox mt={3} textAlign="center">
           <ArgonTypography variant="button" color="text" fontWeight="regular">
-            Don&apos;t have an account?{" "}
+            Ainda não tem uma conta?{" "}
             <ArgonTypography
               component={Link}
               to="/authentication/sign-up"
@@ -134,7 +121,7 @@ function Illustration() {
               color="info"
               fontWeight="medium"
             >
-              Sign up
+              Cadastre-se
             </ArgonTypography>
           </ArgonTypography>
         </ArgonBox>

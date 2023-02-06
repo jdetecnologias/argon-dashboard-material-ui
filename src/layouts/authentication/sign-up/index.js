@@ -38,8 +38,7 @@ import FormControl from '@mui/material/FormControl';
 import FormLabel from '@mui/material/FormLabel';
 import If from "components/If/if";
 // Images
-const bgImage =
-  "https://raw.githubusercontent.com/creativetimofficial/public-assets/master/argon-dashboard-pro/assets/img/signup-cover.jpg";
+import  bgImage from  "assets/images/background.png";
 
 function Cover() {
   const [nome, setNome] = useState("");
