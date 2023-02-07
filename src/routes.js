@@ -35,9 +35,6 @@ Coded by www.creative-tim.com
 
 // Argon Dashboard 2 MUI layouts
 import Dashboard from "layouts/dashboard";
-import SignIn from "layouts/authentication/sign-in";
-import SignUp from "layouts/authentication/sign-up";
-import ConfirmUser from "layouts/authentication/confirm-activation";
 
 // Argon Dashboard 2 MUI components
 import ArgonBox from "components/ArgonBox";

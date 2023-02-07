@@ -46,7 +46,7 @@ function Cover() {
   useEffect(() => {
     if (statusCofirmacao){
       setTimeout(() => {
-          location.href = "/authentication/sign-in";
+          location.href = "/sign-in";
         },3000)
     }
  },[statusCofirmacao]);
@@ -94,7 +94,7 @@ function Cover() {
                 Já tem uma conta?&nbsp;
                 <ArgonTypography
                   component={Link}
-                  to="/authentication/sign-in"
+                  to="/sign-in"
                   variant="button"
                   color="dark"
                   fontWeight="bold"

@@ -116,7 +116,7 @@ function Illustration() {
             Ainda não tem uma conta?{" "}
             <ArgonTypography
               component={Link}
-              to="/authentication/sign-up"
+              to="/sign-up"
               variant="button"
               color="info"
               fontWeight="medium"

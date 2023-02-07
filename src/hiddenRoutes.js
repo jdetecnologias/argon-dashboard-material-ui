@@ -34,7 +34,6 @@ Coded by www.creative-tim.com
 */
 
 // Argon Dashboard 2 MUI layouts
-import Dashboard from "layouts/dashboard";
 import SignIn from "layouts/authentication/sign-in";
 import SignUp from "layouts/authentication/sign-up";
 import ConfirmUser from "layouts/authentication/confirm-activation";
@@ -47,16 +46,14 @@ const hiddenRoutes = [
     type: "route",
     name: "Confimar ativação conta",
     key: "confirmarAtivacao",
-    route: "/authentication/confirm-user",
+    route: "/confirm-user",
     component: <ConfirmUser />,
   },
-  
-  { type: "title", title: "Perfil", key: "account-pages" },
   {
     type: "route",
     name: "Entrar",
     key: "sign-in",
-    route: "/authentication/sign-in",
+    route: "/sign-in",
     icon: (
       <ArgonBox component="i" color="warning" fontSize="14px" className="ni ni-single-copy-04" />
     ),
@@ -66,7 +63,7 @@ const hiddenRoutes = [
     type: "route",
     name: "Cadastrar",
     key: "sign-up",
-    route: "/authentication/sign-up",
+    route: "/sign-up",
     icon: <ArgonBox component="i" color="info" fontSize="14px" className="ni ni-collection" />,
     component: <SignUp />,
   },

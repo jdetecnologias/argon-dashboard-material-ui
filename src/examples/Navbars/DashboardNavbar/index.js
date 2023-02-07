@@ -115,7 +115,7 @@ function DashboardNavbar({ absolute, light, isMini }) {
     const sair = window.confirm("Deseja realmente sair?");
     if(sair){
       setCookie("dadosLogin","",-10);
-      location.href = "/authentication/sign-in?logout=true";
+      location.href = "/sign-in?logout=true";
 
     }
   }
@@ -184,7 +184,7 @@ function DashboardNavbar({ absolute, light, isMini }) {
         {isMini ? null : (
           <ArgonBox sx={(theme) => navbarRow(theme, { isMini })}>
             <ArgonBox color={light ? "white" : "inherit"}>
-              <Link to="/authentication/sign-in/basic">
+              <Link to="/sign-in/basic">
               </Link>
               <IconButton
                 size="small"

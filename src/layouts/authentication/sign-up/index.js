@@ -57,7 +57,7 @@ function Cover() {
   useEffect(() => {
     if (statusCadastro){
       setTimeout(() => {
-          location.href = "/authentication/confirm-user?email=" + email;
+          location.href = "/confirm-user?email=" + email;
         },3000)
     }
  },[statusCadastro]);
@@ -153,7 +153,7 @@ function Cover() {
                 Já tem uma conta?&nbsp;
                 <ArgonTypography
                   component={Link}
-                  to="/authentication/sign-in"
+                  to="/sign-in"
                   variant="button"
                   color="dark"
                   fontWeight="bold"
