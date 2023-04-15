@@ -57,7 +57,8 @@ function Cover() {
   useEffect(() => {
     if (statusCadastro){
       setTimeout(() => {
-          location.href = "/confirm-user?email=" + email;
+          location.href = "/sign-in";
+          //location.href = "/confirm-user?email=" + email;
         },3000)
     }
  },[statusCadastro]);
