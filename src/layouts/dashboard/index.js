@@ -26,7 +26,7 @@ import { useState, useEffect } from "react";
 import DashboardLayout from "examples/LayoutContainers/DashboardLayout";
 import DashboardNavbar from "examples/Navbars/DashboardNavbar";
 import GradientLineChart from "examples/Charts/LineCharts/DefaultLineChart";
-
+import ArgonTypography from "components/ArgonTypography";
 // Argon Dashboard 2 MUI base styles
 import typography from "assets/theme/base/typography";
 
@@ -42,6 +42,7 @@ import ArgonButton from "components/ArgonButton";
 import { loginRedirect } from "helper/loginRedirect";
 import If from "components/If/if";
 import ErrorAlert from "./components/ErrorAlert/errorAlert";
+import colors from "../../assets/theme/base/colors";
 
 function Default() {
   const dataHoje = dayjs().format("YYYY-MM-DD")
@@ -50,7 +51,15 @@ function Default() {
   const [data_inicio_filtro,setDataInicio_filtro] = useState(dataHoje);
   const [data_fim_filtro,setDataFim_filtro] = useState(dataHoje);
   const [messageErrorsList,setMessageErrorList] = useState([])
-
+  const [metaDataList, setMetaDataList] = useState([
+                                            {prop:"valor_glicemia", label:"Glicemia", show:true,color:"success"},
+                                            {prop:"heartRate", label:"Frequência cardiaca", show:false,color:"error"},
+                                            {prop:"oxymetry", label:"Oximetria", show:false,color:"primary"},
+                                            {prop:"bodyTemperature", label:"Temperatura corporal", show:false,color:"warning"},
+                                            {prop:"weight", label:"Peso", show:false,color:"secondary"},
+                                            {prop:"steps", label:"Passos", show:false,color:"info"}
+                                          ])
+                                          
   useEffect(() => {
     const dadoslogin = getDadosLogin();
     filtrar(dadoslogin.email, data_inicio_filtro, data_fim_filtro,dadoslogin.token);
@@ -61,8 +70,9 @@ function Default() {
   },[messageErrorsList])
 
   useEffect(() => {
-    setDataChart( adapterGlycemia(listGlycemia))
-  },[listGlycemia])
+    setDataChart( adapterGlycemia(listGlycemia, [].concat(metaDataList).filter(option=>option.show)))
+  },[listGlycemia,metaDataList])
+
 
 function filtrar(email, data_inicio_filtro, data_fim_filtro, token){
   getFitered({email, data_inicio_filtro, data_fim_filtro },token,(dados, messageErrorsList)=>{
@@ -98,6 +108,26 @@ function getDadosLogin(){
   return dadoslogin
  }
 
+ function setMetaDataOptions(prop, value){
+  const newList = [].concat(metaDataList)
+  const index = newList.findIndex(item=>item.prop === prop);
+  const register = newList.find(item=>item.prop === prop)
+  
+  register.show = value;
+
+  newList[index] = register;
+  setMetaDataList(()=>newList)
+ }
+
+ function GetColor(color){
+  let cl = colors
+    
+  cl = cl[color] || cl["dark"]
+  cl = cl.main
+
+  return cl
+ }
+
   return (
     <DashboardLayout>
       <DashboardNavbar />
@@ -125,6 +155,15 @@ function getDadosLogin(){
             </Grid>
           </Grid>
         </ArgonBox>
+        <Grid item xs={12} lg={12} >
+        	<ArgonTypography
+                variant="button"
+                fontWeight="weight"
+                sx={{ lineHeight: 0 }}
+              >  
+              	{metaDataList.map((item, key)=><><span style={{color:GetColor(item.color)}}><input key={key} style={{marginLeft:"20px"}} onChange={()=>setMetaDataOptions(item.prop, !item.show)} checked={item.show} type="checkbox"/>{item.label}</span></>)}
+          </ArgonTypography>
+        </Grid>
       </If>
     </DashboardLayout>
   );
