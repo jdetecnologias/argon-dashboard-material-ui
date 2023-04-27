@@ -50,6 +50,8 @@ function Default() {
   const [dataChart,setDataChart ] = useState([]);
   const [data_inicio_filtro,setDataInicio_filtro] = useState(dataHoje);
   const [data_fim_filtro,setDataFim_filtro] = useState(dataHoje);
+  const [hora_inicio,setHoraInicio] = useState("00:00");
+  const [hora_fim,setHoraFim] = useState("23:59");
   const [messageErrorsList,setMessageErrorList] = useState([])
   const [metaDataList, setMetaDataList] = useState([
                                             {prop:"valor_glicemia", label:"Glicemia", show:true,color:"success"},
@@ -75,7 +77,7 @@ function Default() {
 
 
 function filtrar(email, data_inicio_filtro, data_fim_filtro, token){
-  getFitered({email, data_inicio_filtro, data_fim_filtro },token,(dados, messageErrorsList)=>{
+  getFitered({email, data_inicio_filtro, data_fim_filtro, hora_inicio, hora_fim },token,(dados, messageErrorsList)=>{
      
     if(messageErrorsList.length > 0){
       setMessageErrorList(messageErrorsList);
@@ -132,11 +134,13 @@ function getDadosLogin(){
     <DashboardLayout>
       <DashboardNavbar />
       <Grid container spacing={3} mb={3}>
-        <Grid item xs={12} md={6} lg={3}>
+        <Grid item xs={12} md={6} lg={2}>
           <ArgonInput type="date" value={data_inicio_filtro} onChange={(e)=>setDataInicio_filtro(e.target.value)}  placeholder="Data Inicio"/>
+          <ArgonInput type="time" value={hora_inicio} onChange={(e)=>setHoraInicio(e.target.value)} />         
         </Grid>
-        <Grid item xs={12} md={6} lg={3}>
-          <ArgonInput type="date" value={data_fim_filtro} onChange={(e)=>setDataFim_filtro(e.target.value)} placeholder="Data Fim"/>  
+        <Grid item xs={12} md={6} lg={2}>
+          <ArgonInput type="date" value={data_fim_filtro} onChange={(e)=>setDataFim_filtro(e.target.value)} placeholder="Data Fim"/> 
+          <ArgonInput type="time" value={hora_fim}  onChange={(e)=>setHoraFim(e.target.value)} />  
         </Grid>
         <Grid item xs={12} md={6} lg={3}>
           <ArgonButton onClick={handleFiltrar}>
