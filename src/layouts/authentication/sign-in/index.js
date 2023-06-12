@@ -84,10 +84,7 @@ function Illustration() {
       title="Entrar"
       description="Digite com seu email e senha para entrar no sistema"
       illustration={{
-        image: fundo,
-        title: '"Atenção a sua saúde"',
-        description:
-          "Tenha mais qualidade de vida cuidando de sua saúde para poder desfrutar de uma vida .",
+        image: fundo
       }}
     >
       <ArgonBox component="form" role="form">

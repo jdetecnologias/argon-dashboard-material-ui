@@ -26,6 +26,7 @@ import ArgonTypography from "components/ArgonTypography";
 // Argon Dashboard 2 MUI example components
 import DefaultNavbar from "examples/Navbars/DefaultNavbar";
 import PageLayout from "examples/LayoutContainers/PageLayout";
+import logo from "assets/images/logo-ct.png";
 
 function IllustrationLayout({ color, header, title, description, button, illustration, children }) {
   return (
@@ -36,6 +37,7 @@ function IllustrationLayout({ color, header, title, description, button, illustr
             <ArgonBox pt={3} px={3}>
               {!header ? (
                 <>
+                  <img src={logo} style={{width:"305px", height:"100px"}}/>
                   <ArgonBox mb={1}>
                     <ArgonTypography variant="h4" fontWeight="bold">
                       {title}
@@ -72,6 +74,7 @@ function IllustrationLayout({ color, header, title, description, button, illustr
               src={illustration.image}
               alt="background"
               width="100%"
+              height="90%"
               position="absolute"
               top={0}
               left={0}
@@ -84,7 +87,7 @@ function IllustrationLayout({ color, header, title, description, button, illustr
               position="absolute"
               topl={0}
               left={0}
-              opacity={0.7}
+              opacity={0}
             />
             <ArgonBox position="relative">
               {illustration.title && (
