@@ -87,6 +87,34 @@ function filtrar(email, data_inicio_filtro, data_fim_filtro, token){
   })
 }
 
+function getValues(labelName){
+
+  if(dataChart && dataChart.datasets){
+    const dataset = dataChart.datasets.find(dataset=>dataset.label === labelName)
+    if(dataset !== undefined && dataset !== null && dataset.data && dataset.data.length > 0 ){
+      return dataset.data
+    } 
+
+    return [];
+  }
+  return[];
+}
+
+function getAverage(values){
+  if(values !== undefined && values !== null && values.length>0){
+    const average = values.reduce((avg, val,index)=>{
+      let totalValue = avg*(index);
+      totalValue += val;
+
+      return totalValue/(index+1);
+    },0)
+
+    return average;
+  }
+
+  return 0;
+}
+
 function handleFiltrar(){
   const  dadosLogin = getDadosLogin();
 
@@ -159,14 +187,36 @@ function getDadosLogin(){
             </Grid>
           </Grid>
         </ArgonBox>
-        <Grid item xs={12} lg={12} >
+        <Grid item xs={12} lg={12} className="d-lg-none d-xl-block" style={{position:"absolute", top:300, left:30,zIndex:9999}} >
         	<ArgonTypography
                 variant="button"
                 fontWeight="weight"
                 sx={{ lineHeight: 0 }}
-              >  
-              	{metaDataList.map((item, key)=><><span style={{color:GetColor(item.color)}}><input key={key} style={{marginLeft:"20px"}} onChange={()=>setMetaDataOptions(item.prop, !item.show)} checked={item.show} type="checkbox"/>{item.label}</span></>)}
+              > 
+                <ul className="list-group list-group-flush">
+                  <li className="list-group-item text-center" style={{height:"50px",lineHeight:"50px" }}>Constantes Diárias</li>
+              	{metaDataList.map((item, key)=><><li className="list-group-item" style={{color:GetColor(item.color),padding:"10px"}}><input key={key} style={{marginLeft:"20px"}} onChange={()=>setMetaDataOptions(item.prop, !item.show)} checked={item.show} type="checkbox"/>{item.label}</li></>)}
+                </ul>
           </ArgonTypography>
+        </Grid>
+        <Grid item xs={12} lg={12} >
+                <div className="row">
+                  <div className="col-1 text-center" style={{height:"100px", lineHeight:"50px"}}>
+                    Médias <br/>(período)
+                  </div>
+
+              	{metaDataList.map((item, key)=>{
+                   return ( <>
+                              <div className="col-1 m-1" style={{height:"100px",border:`solid 1px ${GetColor(item.color)}`}}>
+                                <div style={{fontSize:"15px"}}>{item.label}</div>
+                                <div className="text-center" style={{fontWeight:"800",fontSize:"22px",height:"80px",lineHeight:"80px"}}>{parseInt(getAverage(getValues(item.label)))}</div>
+                              </div>
+                            </>
+                          )
+                  }
+                  )
+                }
+                </div>
         </Grid>
       </If>
     </DashboardLayout>
