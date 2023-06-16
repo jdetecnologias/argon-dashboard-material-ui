@@ -87,6 +87,20 @@ function filtrar(email, data_inicio_filtro, data_fim_filtro, token){
   })
 }
 
+function getTextByLenght(text){
+  const stringLength = text.length;
+  const element = document.querySelector(".averageCard");
+  const width = element.clientWidth;
+  const num = 7.6;
+  const qtdLength = parseInt(width/num); 
+
+  if(stringLength > qtdLength){
+    return text.substring(0,qtdLength-1);;
+  }else{
+    return text;
+  }
+}
+
 function getValues(labelName){
 
   if(dataChart && dataChart.datasets){
@@ -201,19 +215,19 @@ function getDadosLogin(){
         </Grid>
         <Grid item xs={12} lg={12} >
                 <div className="row">
-                  <div className="col-1 text-center" style={{height:"100px", lineHeight:"50px"}}>
+                  <div className="col-4  col-sm-3 col-xxl-2 text-center" style={{height:"150px", lineHeight:"50px"}}>
                     Médias <br/>(período)
                   </div>
                 <If test={metaDataList.filter(metaData=>metaData.show).length <= 0}>
-                <div className="col-11 text-center" style={{height:"100px", lineHeight:"100px", fontWeight:900}}>
+                <div className="col-8 col-sm-9 col-lg-11" style={{height:"150px", lineHeight:"100px", fontWeight:900}}>
                     Nenhuma constante selecionada!
                   </div>           
                 </If>
                   {metaDataList.filter(metaData=>metaData.show).map((item, key)=>{
                     return ( <>
-                                <div className="col-1 m-1" style={{height:"100px",border:`solid 1px ${GetColor(item.color)}`}}>
-                                  <div style={{fontSize:"15px"}}>{item.label}</div>
-                                  <div className="text-center" style={{fontWeight:"800",fontSize:"22px",height:"80px",lineHeight:"80px"}}>{parseInt(getAverage(getValues(item.label)))}</div>
+                                <div className="col-4  col-sm-3 col-xxl-1 m-1" style={{height:"150px"}}>
+                                  <div className="d-inline" style={{fontSize:"12px"}}>{getTextByLenght(item.label)}</div>
+                                  <div className="text-center averageCard" style={{fontWeight:"800",fontSize:"22px",height:"120px",lineHeight:"120px",border:`solid 1px ${GetColor(item.color)}`}}>{parseInt(getAverage(getValues(item.label)))}</div>
                                 </div>
                               </>
                             )
