@@ -201,16 +201,30 @@ function getDadosLogin(){
             </Grid>
           </Grid>
         </ArgonBox>
-        <Grid item xs={12} lg={12} className="d-lg-none d-xl-block" style={{position:"absolute", top:300, left:30,zIndex:9999}} >
+        <Grid item xs={12} lg={12} className="d-none d-xl-block" style={{position:"absolute", top:300, left:30,zIndex:9999}} >
         	<ArgonTypography
                 variant="button"
                 fontWeight="weight"
-                sx={{ lineHeight: 0 }}
+                sx={{ lineHeight: 0 }} 
               > 
                 <ul className="list-group list-group-flush">
                   <li className="list-group-item text-center" style={{height:"50px",lineHeight:"50px" }}>Constantes Diárias</li>
               	{metaDataList.map((item, key)=><><li className="list-group-item" style={{color:GetColor(item.color),padding:"10px"}}><input key={key} style={{marginLeft:"20px"}} onChange={()=>setMetaDataOptions(item.prop, !item.show)} checked={item.show} type="checkbox"/>{item.label}</li></>)}
                 </ul>
+          </ArgonTypography>
+        </Grid>
+        <Grid item xs={12} lg={12} className="d-block d-xl-none">
+        	<ArgonTypography
+                variant="button"
+                fontWeight="weight"
+                sx={{ lineHeight: 0 }}
+              > 
+                <button className="btn btn-primary" type="button" role="button" data-bs-toggle="collapse" data-bs-target="#constantes" aria-expanded="false" aria-controls="constantes">
+                  Constantes Diárias
+                </button>
+                <div className="p-1 row collapse" id="constantes">                 
+              	  {metaDataList.map((item, key)=><><span className="col-12" style={{color:GetColor(item.color),padding:"10px"}}><input key={key} style={{marginLeft:"20px"}} onChange={()=>setMetaDataOptions(item.prop, !item.show)} checked={item.show} type="checkbox"/>{item.label}</span></>)}
+                </div>
           </ArgonTypography>
         </Grid>
         <Grid item xs={12} lg={12} >
