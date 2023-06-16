@@ -204,18 +204,23 @@ function getDadosLogin(){
                   <div className="col-1 text-center" style={{height:"100px", lineHeight:"50px"}}>
                     Médias <br/>(período)
                   </div>
-
-              	{metaDataList.map((item, key)=>{
-                   return ( <>
-                              <div className="col-1 m-1" style={{height:"100px",border:`solid 1px ${GetColor(item.color)}`}}>
-                                <div style={{fontSize:"15px"}}>{item.label}</div>
-                                <div className="text-center" style={{fontWeight:"800",fontSize:"22px",height:"80px",lineHeight:"80px"}}>{parseInt(getAverage(getValues(item.label)))}</div>
-                              </div>
-                            </>
-                          )
+                <If test={metaDataList.filter(metaData=>metaData.show).length <= 0}>
+                <div className="col-11 text-center" style={{height:"100px", lineHeight:"100px", fontWeight:900}}>
+                    Nenhuma constante selecionada!
+                  </div>           
+                </If>
+                  {metaDataList.filter(metaData=>metaData.show).map((item, key)=>{
+                    return ( <>
+                                <div className="col-1 m-1" style={{height:"100px",border:`solid 1px ${GetColor(item.color)}`}}>
+                                  <div style={{fontSize:"15px"}}>{item.label}</div>
+                                  <div className="text-center" style={{fontWeight:"800",fontSize:"22px",height:"80px",lineHeight:"80px"}}>{parseInt(getAverage(getValues(item.label)))}</div>
+                                </div>
+                              </>
+                            )
+                    }
+                    )
                   }
-                  )
-                }
+
                 </div>
         </Grid>
       </If>
