@@ -90,7 +90,7 @@ function filtrar(email, data_inicio_filtro, data_fim_filtro, token){
 function getTextByLenght(text){
   const stringLength = text.length;
   const element = document.querySelector(".averageCard");
-  const width = element.clientWidth;
+  const width = element?element.clientWidth:100;
   const num = 7.6;
   const qtdLength = parseInt(width/num); 
 
