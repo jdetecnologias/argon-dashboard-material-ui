@@ -43,8 +43,11 @@ import { loginRedirect } from "helper/loginRedirect";
 import If from "components/If/if";
 import ErrorAlert from "./components/ErrorAlert/errorAlert";
 import colors from "../../assets/theme/base/colors";
-
+import GoogleMapReact from 'google-map-react';
+import Map from "./map/map";
+let qtyMapShow = -1;
 function Default() {
+  qtyMapShow += 1;
   const dataHoje = dayjs().format("YYYY-MM-DD")
   const [listGlycemia, setListGlycemia] = useState([]);
   const [dataChart,setDataChart ] = useState([]);
@@ -193,11 +196,14 @@ function getDadosLogin(){
       <If test={messageErrorsList.length === 0} Else={<ErrorAlert messageErrorList={messageErrorsList} resetMessages={()=>setMessageErrorList([])}/>}>
         <ArgonBox py={3}>    
           <Grid container spacing={3} mb={3}>
-            <Grid item xs={12} lg={12}>
+            <Grid item xs={8} lg={8}>
               <GradientLineChart
                 title="Meus indíces de glicemia"
                 chart={dataChart}
               />
+            </Grid>
+            <Grid item xs={4} lg={4}>
+                <Map/>
             </Grid>
           </Grid>
         </ArgonBox>
