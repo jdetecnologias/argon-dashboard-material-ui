@@ -35,6 +35,7 @@ Coded by www.creative-tim.com
 
 // Argon Dashboard 2 MUI layouts
 import Dashboard from "layouts/dashboard";
+import Averages from "layouts/averages";
 
 // Argon Dashboard 2 MUI components
 import ArgonBox from "components/ArgonBox";
@@ -48,6 +49,14 @@ const routes = [
     icon: <ArgonBox component="i" color="primary" fontSize="14px" className="ni ni-tv-2" />,
     component: <Dashboard />,
   },
+  {
+    type: "route",
+    name: "Médias diárias",
+    key: "average",
+    route: "/medias_diarias",
+    icon: <ArgonBox component="i" color="primary" fontSize="14px" className="ni ni-chart-bar-32" />,
+    component: <Averages />,
+  }
 ];
 
 export default routes;
