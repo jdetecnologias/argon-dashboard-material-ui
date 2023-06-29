@@ -43,7 +43,6 @@ import { loginRedirect } from "helper/loginRedirect";
 import If from "components/If/if";
 import ErrorAlert from "./components/ErrorAlert/errorAlert";
 import colors from "../../assets/theme/base/colors";
-import GoogleMapReact from 'google-map-react';
 import Map from "./map/map";
 let qtyMapShow = -1;
 function Default() {
@@ -196,13 +195,13 @@ function getDadosLogin(){
       <If test={messageErrorsList.length === 0} Else={<ErrorAlert messageErrorList={messageErrorsList} resetMessages={()=>setMessageErrorList([])}/>}>
         <ArgonBox py={3}>    
           <Grid container spacing={3} mb={3}>
-            <Grid item xs={8} lg={8}>
+            <Grid item className="col-md-12 col-lg-8">
               <GradientLineChart
                 title="Meus indíces de glicemia"
                 chart={dataChart}
               />
             </Grid>
-            <Grid item xs={4} lg={4}>
+            <Grid item className="col-md-12 col-lg-4">
                 <Map/>
             </Grid>
           </Grid>
@@ -235,8 +234,8 @@ function getDadosLogin(){
         </Grid>
         <Grid item xs={12} lg={12} >
                 <div className="row">
-                  <div className="col-4  col-sm-3 col-xxl-2 text-center" style={{height:"150px", lineHeight:"50px"}}>
-                    Médias <br/>(período)
+                  <div className="col-12 text-center">
+                    Médias (período)
                   </div>
                 <If test={metaDataList.filter(metaData=>metaData.show).length <= 0}>
                 <div className="col-8 col-sm-9 col-lg-11" style={{height:"150px", lineHeight:"100px", fontWeight:900}}>
@@ -245,9 +244,9 @@ function getDadosLogin(){
                 </If>
                   {metaDataList.filter(metaData=>metaData.show).map((item, key)=>{
                     return ( <>
-                                <div className="col-4  col-sm-3 col-xxl-1 m-1" style={{height:"150px"}}>
-                                  <div className="d-inline" style={{fontSize:"12px"}}>{getTextByLenght(item.label)}</div>
-                                  <div className="text-center averageCard" style={{fontWeight:"800",fontSize:"22px",height:"120px",lineHeight:"120px",border:`solid 1px ${GetColor(item.color)}`}}>{parseInt(getAverage(getValues(item.label)))}</div>
+                                <div className="col-4  col-sm-3 col-xxl-1 m-1 shadow rounded-5 text-center lg:h-36">
+                                  <div className="text-xs mt-3">{getTextByLenght(item.label)}</div>
+                                  <div className="text-center averageCard mt-4">{parseInt(getAverage(getValues(item.label)))}</div>
                                 </div>
                               </>
                             )
