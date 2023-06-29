@@ -21,7 +21,7 @@ function Map(){
 
 
     return (
-            <div style={{position:"relative", left:"-40px"}} id="wrapper-9cd199b9cc5410cd3b1ad21cab2e54d3">
+            <div  id="wrapper-9cd199b9cc5410cd3b1ad21cab2e54d3">
               <div id="map-9cd199b9cc5410cd3b1ad21cab2e54d3">
                 </div>
                 <a href="https://1map.com/pt/map-embed">1 Map</a>
