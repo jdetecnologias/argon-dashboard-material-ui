@@ -7,9 +7,11 @@ export  default function CardList(props){
                 <div className="col-12 text-center">
                     Médias (período)
                 </div>
-                {
-                props.children
-                }
+                <div className="grid 3xl:grid-cols-10 2xl:grid-cols-6 sm:grid-cols-3 justify-center gap-2">
+                    {
+                        props.children
+                    }
+                </div>
 
             </div>
         </div>
