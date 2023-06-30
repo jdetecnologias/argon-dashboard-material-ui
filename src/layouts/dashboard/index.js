@@ -236,8 +236,9 @@ function getDadosLogin(){
         </Grid>
         <CardList>
           {
-            metaDataList.filter(metaData=>metaData.show).map((item, key)=>(
+            metaDataList.map((item, key)=>(
               <ItemCard 
+                className={item.show ? "bg-slate-500 text-white":""}
                 key={key} 
                 value={parseInt(getAverage(getValues(item.label)))} 
                 label={getTextByLenght(item.label)}
