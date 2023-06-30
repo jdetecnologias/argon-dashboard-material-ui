@@ -45,6 +45,7 @@ import ErrorAlert from "./components/ErrorAlert/errorAlert";
 import colors from "../../assets/theme/base/colors";
 import Map from "./map/map";
 import ItemCard from "./components/ItemCard/itemCard";
+import CardList from "./components/CardList/cardList";
 let qtyMapShow = -1;
 function Default() {
   qtyMapShow += 1;
@@ -233,24 +234,18 @@ function getDadosLogin(){
                 </div>
           </ArgonTypography>
         </Grid>
-        <Grid item xs={12} lg={12} >
-                <div className="row">
-                  <div className="col-12 text-center">
-                    Médias (período)
-                  </div>
-                  {
-                  metaDataList.filter(metaData=>metaData.show).map((item, key)=>(
-                        <ItemCard 
-                          key={key} 
-                          value={parseInt(getAverage(getValues(item.label)))} 
-                          label={getTextByLenght(item.label)}
-                        />
-                      )
-                    )
-                  }
-
-                </div>
-        </Grid>
+        <CardList>
+          {
+            metaDataList.filter(metaData=>metaData.show).map((item, key)=>(
+              <ItemCard 
+                key={key} 
+                value={parseInt(getAverage(getValues(item.label)))} 
+                label={getTextByLenght(item.label)}
+                />
+              )
+            )
+          }        
+        </CardList>
       </If>
     </DashboardLayout>
   );
