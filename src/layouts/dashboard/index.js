@@ -238,12 +238,15 @@ function getDadosLogin(){
                   <div className="col-12 text-center">
                     Médias (período)
                   </div>
-                <If test={metaDataList.filter(metaData=>metaData.show).length <= 0}>
-                <div className="col-8 col-sm-9 col-lg-11" style={{height:"150px", lineHeight:"100px", fontWeight:900}}>
-                    Nenhuma constante selecionada!
-                  </div>           
-                </If>
-                  {metaDataList.filter(metaData=>metaData.show).map((item, key)=><ItemCard key={key} value={parseInt(getAverage(getValues(item.label)))} label={getTextByLenght(item.label)}/>)
+                  {
+                  metaDataList.filter(metaData=>metaData.show).map((item, key)=>(
+                        <ItemCard 
+                          key={key} 
+                          value={parseInt(getAverage(getValues(item.label)))} 
+                          label={getTextByLenght(item.label)}
+                        />
+                      )
+                    )
                   }
 
                 </div>
