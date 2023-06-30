@@ -44,6 +44,7 @@ import If from "components/If/if";
 import ErrorAlert from "./components/ErrorAlert/errorAlert";
 import colors from "../../assets/theme/base/colors";
 import Map from "./map/map";
+import ItemCard from "./components/ItemCard/itemCard";
 let qtyMapShow = -1;
 function Default() {
   qtyMapShow += 1;
@@ -242,16 +243,7 @@ function getDadosLogin(){
                     Nenhuma constante selecionada!
                   </div>           
                 </If>
-                  {metaDataList.filter(metaData=>metaData.show).map((item, key)=>{
-                    return ( <>
-                                <div className="col-4  col-sm-3 col-xxl-1 m-1 shadow rounded-5 text-center lg:h-36">
-                                  <div className="text-xs mt-3">{getTextByLenght(item.label)}</div>
-                                  <div className="text-center averageCard mt-4">{parseInt(getAverage(getValues(item.label)))}</div>
-                                </div>
-                              </>
-                            )
-                    }
-                    )
+                  {metaDataList.filter(metaData=>metaData.show).map((item, key)=><ItemCard key={key} value={parseInt(getAverage(getValues(item.label)))} label={getTextByLenght(item.label)}/>)
                   }
 
                 </div>
@@ -260,5 +252,6 @@ function getDadosLogin(){
     </DashboardLayout>
   );
 }
+
 
 export default Default;
