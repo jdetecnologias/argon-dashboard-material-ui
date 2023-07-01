@@ -179,20 +179,20 @@ function getDadosLogin(){
   return (
     <DashboardLayout>
       <DashboardNavbar />
-      <div className="mt-52 grid grid-rows-2">
+      <div className="grid grid-rows-2 relative text-xs md:text-md lg:text-lg">
         <div className="grid 4xl:grid-cols-6 3xl:grid-cols-5 2xl:grid-cols-4 sm:grid-cols-3">
           <div className="grid grid-rows-2">
             De:
             <div>
-              <input type="date" value={data_inicio_filtro} onChange={(e)=>setDataInicio_filtro(e.target.value)}  placeholder="Data Inicio"/>
-              <input type="time" value={hora_inicio} onChange={(e)=>setHoraInicio(e.target.value)} />         
+              <input className="p-1" type="date" value={data_inicio_filtro} onChange={(e)=>setDataInicio_filtro(e.target.value)}  placeholder="Data Inicio"/>
+              <input className="p-1 ml-1" type="time" value={hora_inicio} onChange={(e)=>setHoraInicio(e.target.value)} />         
             </div>
           </div>
           <div className="grid grid-rows-2">
             Até:
             <div>
-              <input type="date" value={data_fim_filtro} onChange={(e)=>setDataFim_filtro(e.target.value)} placeholder="Data Fim"/> 
-              <input type="time" value={hora_fim}  onChange={(e)=>setHoraFim(e.target.value)} />  
+              <input type="date" className="p-1" value={data_fim_filtro} onChange={(e)=>setDataFim_filtro(e.target.value)} placeholder="Data Fim"/> 
+              <input type="time" className="p-1 ml-1" value={hora_fim}  onChange={(e)=>setHoraFim(e.target.value)} />  
             </div>
           </div>
         </div>
