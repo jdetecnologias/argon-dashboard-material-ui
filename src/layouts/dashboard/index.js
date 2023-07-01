@@ -179,21 +179,31 @@ function getDadosLogin(){
   return (
     <DashboardLayout>
       <DashboardNavbar />
-      <Grid container spacing={3} mb={3}>
-        <Grid item xs={12} md={6} lg={2}>
-          <ArgonInput type="date" value={data_inicio_filtro} onChange={(e)=>setDataInicio_filtro(e.target.value)}  placeholder="Data Inicio"/>
-          <ArgonInput type="time" value={hora_inicio} onChange={(e)=>setHoraInicio(e.target.value)} />         
-        </Grid>
-        <Grid item xs={12} md={6} lg={2}>
-          <ArgonInput type="date" value={data_fim_filtro} onChange={(e)=>setDataFim_filtro(e.target.value)} placeholder="Data Fim"/> 
-          <ArgonInput type="time" value={hora_fim}  onChange={(e)=>setHoraFim(e.target.value)} />  
-        </Grid>
-        <Grid item xs={12} md={6} lg={3}>
-          <ArgonButton onClick={handleFiltrar}>
-            Filtrar  
-          </ArgonButton>  
-        </Grid>
-      </Grid>
+      <div className="mt-52 grid grid-rows-2">
+        <div className="grid 4xl:grid-cols-6 3xl:grid-cols-5 2xl:grid-cols-4 sm:grid-cols-3">
+          <div className="grid grid-rows-2">
+            De:
+            <div>
+              <input type="date" value={data_inicio_filtro} onChange={(e)=>setDataInicio_filtro(e.target.value)}  placeholder="Data Inicio"/>
+              <input type="time" value={hora_inicio} onChange={(e)=>setHoraInicio(e.target.value)} />         
+            </div>
+          </div>
+          <div className="grid grid-rows-2">
+            Até:
+            <div>
+              <input type="date" value={data_fim_filtro} onChange={(e)=>setDataFim_filtro(e.target.value)} placeholder="Data Fim"/> 
+              <input type="time" value={hora_fim}  onChange={(e)=>setHoraFim(e.target.value)} />  
+            </div>
+          </div>
+        </div>
+        <div>
+            <button className="bg-white h-8 w-12 shadow rounded text-gray-300" onClick={handleFiltrar}>
+              <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="ml-2 h-8 w-8">
+                <path strokeLinecap="round" strokeLinejoin="round" d="M12 3c2.755 0 5.455.232 8.083.678.533.09.917.556.917 1.096v1.044a2.25 2.25 0 01-.659 1.591l-5.432 5.432a2.25 2.25 0 00-.659 1.591v2.927a2.25 2.25 0 01-1.244 2.013L9.75 21v-6.568a2.25 2.25 0 00-.659-1.591L3.659 7.409A2.25 2.25 0 013 5.818V4.774c0-.54.384-1.006.917-1.096A48.32 48.32 0 0112 3z" />
+              </svg>
+            </button>  
+          </div>
+      </div>
       <If test={messageErrorsList.length === 0} Else={<ErrorAlert messageErrorList={messageErrorsList} resetMessages={()=>setMessageErrorList([])}/>}>
         <ArgonBox py={3}>    
           <Grid container spacing={3} mb={3}>
