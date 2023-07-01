@@ -46,6 +46,8 @@ import colors from "../../assets/theme/base/colors";
 import Map from "./map/map";
 import ItemCard from "./components/ItemCard/itemCard";
 import CardList from "./components/CardList/cardList";
+import DateTime from "./components/FilterItem/dateTimeItem";
+import ButtonFilter from "./components/FilterItem/buttonFilter";
 let qtyMapShow = -1;
 function Default() {
   qtyMapShow += 1;
@@ -181,28 +183,10 @@ function getDadosLogin(){
       <DashboardNavbar />
       <div className="grid grid-rows-2 relative text-xs md:text-md lg:text-lg">
         <div className="grid 4xl:grid-cols-6 3xl:grid-cols-5 2xl:grid-cols-4 sm:grid-cols-3">
-          <div className="grid grid-rows-2">
-            De:
-            <div>
-              <input className="p-1" type="date" value={data_inicio_filtro} onChange={(e)=>setDataInicio_filtro(e.target.value)}  placeholder="Data Inicio"/>
-              <input className="p-1 ml-1" type="time" value={hora_inicio} onChange={(e)=>setHoraInicio(e.target.value)} />         
-            </div>
-          </div>
-          <div className="grid grid-rows-2">
-            Até:
-            <div>
-              <input type="date" className="p-1" value={data_fim_filtro} onChange={(e)=>setDataFim_filtro(e.target.value)} placeholder="Data Fim"/> 
-              <input type="time" className="p-1 ml-1" value={hora_fim}  onChange={(e)=>setHoraFim(e.target.value)} />  
-            </div>
-          </div>
+          <DateTime valueDate={data_inicio_filtro} label="De:" valueTime={hora_inicio} onChangeDate={(e)=>setDataInicio_filtro(e.target.value)} onChangeTime={(e)=>setHoraInicio(e.target.value)}/>
+          <DateTime valueDate={data_fim_filtro} label="De:" valueTime={hora_fim} onChangeDate={(e)=>setDataFim_filtro(e.target.value)} onChangeTime={(e)=>setHoraFim(e.target.value)}/>
         </div>
-        <div>
-            <button className="bg-white h-8 w-12 shadow rounded text-gray-300" onClick={handleFiltrar}>
-              <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="ml-2 h-8 w-8">
-                <path strokeLinecap="round" strokeLinejoin="round" d="M12 3c2.755 0 5.455.232 8.083.678.533.09.917.556.917 1.096v1.044a2.25 2.25 0 01-.659 1.591l-5.432 5.432a2.25 2.25 0 00-.659 1.591v2.927a2.25 2.25 0 01-1.244 2.013L9.75 21v-6.568a2.25 2.25 0 00-.659-1.591L3.659 7.409A2.25 2.25 0 013 5.818V4.774c0-.54.384-1.006.917-1.096A48.32 48.32 0 0112 3z" />
-              </svg>
-            </button>  
-          </div>
+        <ButtonFilter onClick={handleFiltrar}/>
       </div>
       <If test={messageErrorsList.length === 0} Else={<ErrorAlert messageErrorList={messageErrorsList} resetMessages={()=>setMessageErrorList([])}/>}>
         <ArgonBox py={3}>    
