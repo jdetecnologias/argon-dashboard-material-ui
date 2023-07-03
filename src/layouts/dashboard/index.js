@@ -46,9 +46,8 @@ import colors from "../../assets/theme/base/colors";
 import Map from "./map/map";
 import ItemCard from "./components/ItemCard/itemCard";
 import CardList from "./components/CardList/cardList";
-import DateTime from "./components/FilterItem/dateTimeItem";
-import ButtonFilter from "./components/FilterItem/buttonFilter";
 import FilterContainer from "./components/FilterItem/FilterContainer";
+import Chart from "./components/Chart/chart";
 let qtyMapShow = -1;
 function Default() {
   qtyMapShow += 1;
@@ -190,12 +189,7 @@ function getDadosLogin(){
       <If test={messageErrorsList.length === 0} Else={<ErrorAlert messageErrorList={messageErrorsList} resetMessages={()=>setMessageErrorList([])}/>}>
         <ArgonBox py={3}>    
           <Grid container spacing={3} mb={3}>
-            <Grid item className="col-md-12 col-lg-8">
-              <GradientLineChart
-                title="Meus indíces de glicemia"
-                chart={dataChart}
-              />
-            </Grid>
+            <Chart dataChart={dataChart}/>
             <Grid item className="col-md-12 col-lg-4">
                 <Map/>
             </Grid>
