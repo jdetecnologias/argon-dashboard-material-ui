@@ -48,6 +48,7 @@ import ItemCard from "./components/ItemCard/itemCard";
 import CardList from "./components/CardList/cardList";
 import DateTime from "./components/FilterItem/dateTimeItem";
 import ButtonFilter from "./components/FilterItem/buttonFilter";
+import FilterContainer from "./components/FilterItem/FilterContainer";
 let qtyMapShow = -1;
 function Default() {
   qtyMapShow += 1;
@@ -181,13 +182,11 @@ function getDadosLogin(){
   return (
     <DashboardLayout>
       <DashboardNavbar />
-      <div className="grid grid-rows-2 relative text-xs md:text-md lg:text-lg">
-        <div className="grid 4xl:grid-cols-6 3xl:grid-cols-5 2xl:grid-cols-4 sm:grid-cols-3">
-          <DateTime valueDate={data_inicio_filtro} label="De:" valueTime={hora_inicio} onChangeDate={(e)=>setDataInicio_filtro(e.target.value)} onChangeTime={(e)=>setHoraInicio(e.target.value)}/>
-          <DateTime valueDate={data_fim_filtro} label="De:" valueTime={hora_fim} onChangeDate={(e)=>setDataFim_filtro(e.target.value)} onChangeTime={(e)=>setHoraFim(e.target.value)}/>
-        </div>
-        <ButtonFilter onClick={handleFiltrar}/>
-      </div>
+      <FilterContainer
+        hora_inicio={hora_inicio} data_inicio_filtro={data_inicio_filtro} hora_fim={hora_fim}  data_fim_filtro={data_fim_filtro}
+        setDataInicio_filtro={setDataInicio_filtro} setHoraInicio={setHoraInicio} setDataFim_filtro={setDataFim_filtro}  setHoraFim={setHoraFim}
+        handleFiltrar={handleFiltrar}
+      />
       <If test={messageErrorsList.length === 0} Else={<ErrorAlert messageErrorList={messageErrorsList} resetMessages={()=>setMessageErrorList([])}/>}>
         <ArgonBox py={3}>    
           <Grid container spacing={3} mb={3}>
