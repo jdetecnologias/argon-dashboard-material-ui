@@ -48,6 +48,7 @@ import ItemCard from "./components/ItemCard/itemCard";
 import CardList from "./components/CardList/cardList";
 import FilterContainer from "./components/FilterItem/FilterContainer";
 import Chart from "./components/Chart/chart";
+import ChartList from "./components/Chart/chartList";
 let qtyMapShow = -1;
 function Default() {
   qtyMapShow += 1;
@@ -187,22 +188,7 @@ function getDadosLogin(){
         handleFiltrar={handleFiltrar}
       />
       <If test={messageErrorsList.length === 0} Else={<ErrorAlert messageErrorList={messageErrorsList} resetMessages={()=>setMessageErrorList([])}/>}>
-        <ArgonBox py={3}>    
-          <div className=" md:grid md:grid-cols-4 flex flex-col-reverse ">
-            <div className="grid grid-cols-1 md:grid-cols-2 3xl:grid-cols-3 gap-1 col-span-3 ">
-              {
-                dataChart.datasets && dataChart.datasets.map((dataset, key)=>{
-                  return <Chart key={key} title={dataset.label} dataChart={{labels:dataChart.labels[key], datasets:[dataset]}}/>
-                })
-              }
-              
-
-            </div>
-            <div>
-                <Map/>
-            </div>
-          </div>
-        </ArgonBox>
+        <ChartList dataChart={dataChart}/>
         <CardList>
           {
             metaDataList.map((item, key)=>(
