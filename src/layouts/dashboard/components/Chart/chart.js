@@ -1,11 +1,11 @@
 import GradientLineChart from "examples/Charts/LineCharts/DefaultLineChart";
 import PropTypes from "prop-types";
 export default function Chart(props){
-    const {dataChart, _className} = props;    
+    const {dataChart, _className,title} = props;    
     return (
         <div className={_className}>
         <GradientLineChart
-        title="Meus indíces de glicemia"
+        title={title}
         chart={dataChart}
         />
         </div>
@@ -15,4 +15,5 @@ export default function Chart(props){
 Chart.propTypes = {
     dataChart: PropTypes.objectOf(PropTypes.array).isRequired,
     _className: PropTypes.string.isRequired,
+    title: PropTypes.string.isRequired,
 }

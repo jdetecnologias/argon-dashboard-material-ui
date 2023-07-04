@@ -188,12 +188,20 @@ function getDadosLogin(){
       />
       <If test={messageErrorsList.length === 0} Else={<ErrorAlert messageErrorList={messageErrorsList} resetMessages={()=>setMessageErrorList([])}/>}>
         <ArgonBox py={3}>    
-          <Grid container spacing={3} mb={3}>
-            <Chart dataChart={dataChart}/>
-            <Grid item className="col-md-12 col-lg-4">
+          <div className=" md:grid md:grid-cols-4 flex flex-col-reverse ">
+            <div className="grid grid-cols-1 md:grid-cols-2 3xl:grid-cols-3 gap-1 col-span-3 ">
+              {
+                dataChart.datasets && dataChart.datasets.map((dataset, key)=>{
+                  return <Chart key={key} title={dataset.label} dataChart={{labels:dataChart.labels[key], datasets:[dataset]}}/>
+                })
+              }
+              
+
+            </div>
+            <div>
                 <Map/>
-            </Grid>
-          </Grid>
+            </div>
+          </div>
         </ArgonBox>
         <CardList>
           {
