@@ -17,14 +17,14 @@ export  default function ItemCard(props){
          "Peso": <Weight _className="w-20" colorFill="red"/>,
          "Passos": <Steps _className="w-20" colorFill="red"/>
         }
-    const _className = props.className+" cursor-pointer shadow rounded-5 text-center h-36 grid grid-cols-2";
+    const _className = props.className+" cursor-pointer content-evenly shadow rounded-5 text-center h-36 grid grid-rows-10";
     return (
             <div className={_className} onClick={()=>props.onClick()}>
-                <div className="text-center averageCard p-4">            
-                    {icons[label]}
-                </div>
-                <div className="text-lg text-left pt-4">
+                <div className="text-sm text-center row-span-1">
                     {label}
+                </div>
+                <div className="px-14 w-24">            
+                    {icons[label]}
                 </div>
             </div>
     )
