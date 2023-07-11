@@ -1,4 +1,5 @@
 import GradientLineChart from "examples/Charts/LineCharts/DefaultLineChart";
+import { getAverage } from "helper/math";
 import PropTypes from "prop-types";
 export default function Chart(props){
     const {dataChart, _className,title} = props;    
@@ -11,8 +12,14 @@ export default function Chart(props){
                 height={200}
                 />
             </div>
-            <div className="text-lime-300 col-span-2 text-9xl">
-                25
+            <div className="text-lime-300 col-span-2">
+                <div className="text-sm">
+                    Média do período:
+                </div>
+                <div className="text-6xl">
+                    {parseInt(getAverage(dataChart.datasets[0].data))}
+                </div>
+
             </div>
         </div>
     )
