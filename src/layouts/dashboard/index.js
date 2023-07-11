@@ -49,6 +49,7 @@ import CardList from "./components/CardList/cardList";
 import FilterContainer from "./components/FilterItem/FilterContainer";
 import Chart from "./components/Chart/chart";
 import ChartList from "./components/Chart/chartList";
+import { getAverage } from "helper/math";
 let qtyMapShow = -1;
 function Default() {
   qtyMapShow += 1;
@@ -121,20 +122,6 @@ function getValues(labelName){
   return[];
 }
 
-function getAverage(values){
-  if(values !== undefined && values !== null && values.length>0){
-    const average = values.reduce((avg, val,index)=>{
-      let totalValue = avg*(index);
-      totalValue += val;
-
-      return totalValue/(index+1);
-    },0)
-
-    return average;
-  }
-
-  return 0;
-}
 
 function handleFiltrar(){
   const  dadosLogin = getDadosLogin();
