@@ -182,7 +182,7 @@ function getDadosLogin(){
                 <ItemCard 
                   onClick={()=>setMetaDataOptions(item.prop, !item.show)}
                   key={key}
-                  className={"cursor-pointer "+ (item.show ? " font-bold text-gray-600":"text-gray-200")}
+                  className={"cursor-pointer "+ (item.show ? " font-bold text-gray-500 opacity-100":"opacity-20")}
                   value={parseInt(getAverage(getValues(item.label)))} 
                   label={item.label}
                   />
