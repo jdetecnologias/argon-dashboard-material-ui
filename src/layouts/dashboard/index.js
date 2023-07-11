@@ -184,7 +184,7 @@ function getDadosLogin(){
                   key={key}
                   className={"cursor-pointer "+ (item.show ? "bg-slate-500 text-white":"")}
                   value={parseInt(getAverage(getValues(item.label)))} 
-                  label={getTextByLenght(item.label)}
+                  label={item.label}
                   />
               )
             )
