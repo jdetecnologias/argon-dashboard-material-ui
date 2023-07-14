@@ -20,7 +20,9 @@ export default function FilterContainer(props){
                 <DateTime valueDate={data_inicio_filtro} label="De:" valueTime={hora_inicio} onChangeDate={(e)=>setDataInicio_filtro(e.target.value)} onChangeTime={(e)=>setHoraInicio(e.target.value)}/>
                 <DateTime valueDate={data_fim_filtro} label="De:" valueTime={hora_fim} onChangeDate={(e)=>setDataFim_filtro(e.target.value)} onChangeTime={(e)=>setHoraFim(e.target.value)}/>
             </div>
-            <ButtonFilter onClick={handleFiltrar}/>
+            <div className='mt-1'>
+                <ButtonFilter onClick={handleFiltrar}/>
+            </div>
         </div>
 
     )
