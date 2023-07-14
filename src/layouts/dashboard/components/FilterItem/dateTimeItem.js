@@ -3,7 +3,7 @@ import PropTypes from "prop-types";
 export default function DateTime(props){
     const {label, valueDate, valueTime, onChangeDate, onChangeTime} = props;
     return (
-                <div className="grid grid-rows-2 text-xs md:text-md lg:text-lg">
+                <div className="grid grid-rows-2 text-xs  md:text-lg">
                     {label}
                 <div>
                 <input className="p-1" type="date" value={valueDate} onChange={(e)=>onChangeDate(e)}  placeholder={label}/>
