@@ -23,7 +23,7 @@ export  default function ItemCard(props){
                 <div className="text-sm text-center row-span-1">
                     {label}
                 </div>
-                <div className="px-14 w-24">            
+                <div className="flex flex-row justify-center flex-wrap align-middle">            
                     {icons[label]}
                 </div>
             </div>
