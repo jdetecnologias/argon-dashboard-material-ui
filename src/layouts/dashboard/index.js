@@ -146,6 +146,21 @@ function getDadosLogin(){
   return dadoslogin
  }
 
+ function setMetaDataItemShow(prop){
+  const newList = [].concat(metaDataList)
+
+  newList.forEach(item => {
+    if(item.prop === prop){
+      item.show = true;
+    }else{
+      item.show = false;
+    }
+  })
+
+
+  setMetaDataList(()=>newList)
+ }
+
  function setMetaDataOptions(prop, value){
   const newList = [].concat(metaDataList)
   const index = newList.findIndex(item=>item.prop === prop);
@@ -160,7 +175,7 @@ function getDadosLogin(){
  function GetColor(color){
   let cl = colors
     
-  cl = cl[color] || cl["dark"]
+  cl = /*cl[color] ||*/ cl["dark"]
   cl = cl.main
 
   return cl
@@ -180,7 +195,7 @@ function getDadosLogin(){
           {
             metaDataList.map((item, key)=>(
                 <ItemCard 
-                  onClick={()=>setMetaDataOptions(item.prop, !item.show)}
+                  onClick={()=>setMetaDataItemShow(item.prop)}
                   key={key}
                   className={"cursor-pointer "+ (item.show ? " font-bold text-gray-500 opacity-100":"opacity-20")}
                   value={parseInt(getAverage(getValues(item.label)))} 

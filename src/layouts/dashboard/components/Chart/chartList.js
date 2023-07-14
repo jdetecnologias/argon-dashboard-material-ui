@@ -5,7 +5,7 @@ export default function ChartList(props){
     const {dataChart} = props;    
     return (
         <div className=" md:grid md:grid-cols-4 flex flex-col-reverse mt-16">
-            <div className="grid grid-cols-1 md:grid-cols-2  gap-1 col-span-3">
+            <div className="grid grid-cols-1 gap-1 col-span-3">
             {
                 dataChart.datasets && dataChart.datasets.map((dataset, key)=>{
                 return <
