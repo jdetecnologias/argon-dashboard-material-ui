@@ -18,7 +18,7 @@ export default function ChartList(props){
                                 key={key} 
                                 title={dataset.label} 
                                 lightTheme={lightTheme}
-                                dataChart={{labels:dataChart.labels[key], datasets:[dataset]}}
+                                dataChart={{labels:dataChart.labels, datasets:[dataset]}}
                             />
                     })
                 }
