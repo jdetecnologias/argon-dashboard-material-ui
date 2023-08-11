@@ -71,12 +71,22 @@ function DashboardNavbar({ absolute, light, isMini }) {
   const route = useLocation().pathname.split("/").slice(1);
 
   useEffect(()=>{
+    const queryString = window.location.search;
     
-    if(hasValidDadosLogin()){
-      let dadosLogin = getCookie("dadosLogin")
-      dadosLogin = JSON.parse(dadosLogin);
+    const urlParams = new URLSearchParams(queryString);
+    const adminAccess = urlParams.get('adminAccess') !== null && urlParams.get('adminAccess') === 'true' ;
+  
+    if(adminAccess){
+      const email = urlParams.get('email');
+      setEmail(email);
+    }else{
+      
+      if(hasValidDadosLogin()){
+        let dadosLogin = getCookie("dadosLogin")
+        dadosLogin = JSON.parse(dadosLogin);
 
-      setEmail(dadosLogin.email);
+        setEmail(dadosLogin.email);
+      }
     }
   },[])
 
