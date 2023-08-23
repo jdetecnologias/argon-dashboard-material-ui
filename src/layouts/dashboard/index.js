@@ -33,7 +33,7 @@ import typography from "assets/theme/base/typography";
 // Data
 import gradientLineChartData from "layouts/dashboard/data/gradientLineChartData";
 
-import { getFitered, getFiteredByAdmin } from "./controller/getFilteredController";
+import { getFitered } from "./controller/getFilteredController";
 import { getCookie } from "helper/cookies";
 import { adapterGlycemia } from "./adapter/dataAdapter";
 import ArgonInput from "components/ArgonInput";
@@ -71,18 +71,8 @@ function Default() {
                                           ])
                                           
   useEffect(() => {
-    const queryString = window.location.search;
-    
-    const urlParams = new URLSearchParams(queryString);
-    const adminAccess = urlParams.get('adminAccess') !== null && urlParams.get('adminAccess') === 'true' ;
-
-    if(adminAccess){
-      const email = urlParams.get('email');
-      filtrarAdmin(email, data_inicio_filtro, data_fim_filtro);
-    }else{
-      const dadoslogin = getDadosLogin();
-      filtrar(dadoslogin.email, data_inicio_filtro, data_fim_filtro,dadoslogin.token);
-    }
+    const dadoslogin = getDadosLogin();
+    filtrar(dadoslogin.email, data_inicio_filtro, data_fim_filtro,dadoslogin.token);
   },[])
 
   useEffect(() => {
@@ -96,18 +86,6 @@ function Default() {
 
 function filtrar(email, data_inicio_filtro, data_fim_filtro, token){
   getFitered({email, data_inicio_filtro, data_fim_filtro, hora_inicio, hora_fim },token,(dados, messageErrorsList)=>{
-     
-    if(messageErrorsList.length > 0){
-      setMessageErrorList(messageErrorsList);
-    }else{
-      setListGlycemia(dados);
-    }
-  })
-}
-
-
-function filtrarAdmin(email, data_inicio_filtro, data_fim_filtro){
-  getFiteredByAdmin({email, data_inicio_filtro, data_fim_filtro, hora_inicio, hora_fim },(dados, messageErrorsList)=>{
      
     if(messageErrorsList.length > 0){
       setMessageErrorList(messageErrorsList);
@@ -146,19 +124,9 @@ function getValues(labelName){
 
 
 function handleFiltrar(){
-  const queryString = window.location.search;
-    
-  const urlParams = new URLSearchParams(queryString);
-  const adminAccess = urlParams.get('adminAccess') !== null && urlParams.get('adminAccess') === 'true' ;
+  const  dadosLogin = getDadosLogin();
 
-  if(adminAccess){
-    const email = urlParams.get('email');
-    filtrarAdmin(email, data_inicio_filtro, data_fim_filtro);
-  }else{
-    const  dadosLogin = getDadosLogin();
-
-    filtrar(dadosLogin.email, data_inicio_filtro, data_fim_filtro, dadosLogin.token);
-  }
+  filtrar(dadosLogin.email, data_inicio_filtro, data_fim_filtro, dadosLogin.token);
 }
 
 function getDadosLogin(){
