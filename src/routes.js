@@ -49,14 +49,14 @@ const routes = [
     icon: <ArgonBox component="i" color="primary" fontSize="14px" className="ni ni-tv-2" />,
     component: <Dashboard />,
   },
-  {
+  /*{
     type: "route",
     name: "Médias diárias",
     key: "average",
     route: "/medias_diarias",
     icon: <ArgonBox component="i" color="primary" fontSize="14px" className="ni ni-chart-bar-32" />,
     component: <Averages />,
-  }
+  }*/
 ];
 
 export default routes;
