@@ -5,7 +5,7 @@ import ChartThemeSelector from "./chartThemeSelector";
 import { useState } from "react";
 export default function ChartList(props){
     const {dataChart} = props;   
-    const [lightTheme, setLightTheme] = useState(false); 
+    const [lightTheme, setLightTheme] = useState(true); 
     return (
             <div className=" md:grid md:grid-cols-4 flex flex-col-reverse mt-16">
                 <div className="col-span-3">
