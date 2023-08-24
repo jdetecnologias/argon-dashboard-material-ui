@@ -56,8 +56,8 @@ const colors = {
   },
 
   info: {
-    main: "#37a000",
-    dark: "#37a000",
+    main: "#BEBEBE",
+    dark: "#BEBEBE",
   },
 
   success: {
