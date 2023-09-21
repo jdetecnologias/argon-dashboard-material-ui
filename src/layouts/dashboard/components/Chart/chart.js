@@ -8,7 +8,7 @@ export default function Chart(props){
     let mainClassName ="grid grid-cols-10 "+bgClassName; 
     mainClassName +=  _className !== undefined ? " "+_className : ""; 
     return (
-        <div className={mainClassName}>
+        <div id="grafico" className={mainClassName}>
             <div className={lightTheme?"col-span-8":"col-span-8 invert"}>
                 <GradientLineChart
                 title={title}
