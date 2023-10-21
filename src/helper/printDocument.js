@@ -99,7 +99,13 @@ export const PrintContentCanvas = function(AquerySelector, _canvas){
                             paiCanvas.innerHTML = '<img src="${canvas}"/>';
 						</script>
 					`
-				
+	const jsScriptComplement = `
+					<script>
+						const img = document.querySelector("img");
+						img.parentElement.style.height = (img.height+50)+'px';
+					</script>
+				`
+
 	const getAttributes = function(elemento){
 												return Object.values(elemento.attributes)
 														.map(AttrObj=>AttrObj.name)
@@ -114,7 +120,7 @@ export const PrintContentCanvas = function(AquerySelector, _canvas){
 	const  newWin=window.open('','_blank');
 	
 	newWin.document.open();
-	
+
 	const html = `
 					<html>
 						<head>
@@ -127,6 +133,7 @@ export const PrintContentCanvas = function(AquerySelector, _canvas){
 							</div>
 						</body>
 						${jsScript}
+						${jsScriptComplement}
 					</html>
 				
 				`
