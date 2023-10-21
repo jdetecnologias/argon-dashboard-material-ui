@@ -50,11 +50,13 @@ import FilterContainer from "./components/FilterItem/FilterContainer";
 import Chart from "./components/Chart/chart";
 import ChartList from "./components/Chart/chartList";
 import { getAverage } from "helper/math";
+import ChartAcc from "./components/Chart/chartAcc";
 let qtyMapShow = -1;
 function Default() {
   qtyMapShow += 1;
   const dataHoje = dayjs().format("YYYY-MM-DD")
   const [listGlycemia, setListGlycemia] = useState([]);
+  const [optionAccumulate, setOptionAccumulate] = useState(false);
   const [dataChart,setDataChart ] = useState([]);
   const [data_inicio_filtro,setDataInicio_filtro] = useState(dataHoje);
   const [data_fim_filtro,setDataFim_filtro] = useState(dataHoje);
@@ -131,6 +133,14 @@ function getTextByLenght(text){
   }
 }
 
+function handleAccumulate(){
+  if(optionAccumulate){
+    setMetaDataItemShow(metaDataList[0].prop)
+  }
+
+  setOptionAccumulate(!optionAccumulate);
+}
+
 function getValues(labelName){
 
   if(dataChart && dataChart.datasets){
@@ -178,6 +188,19 @@ function getDadosLogin(){
   return dadoslogin
  }
 
+ function setMetaDataItemShowAcc(prop){
+  const newList = [].concat(metaDataList)
+
+  newList.forEach(item => {
+    if(item.prop === prop){
+      item.show = !item.show;
+    }
+  })
+
+
+  setMetaDataList(()=>newList)
+ }
+
  function setMetaDataItemShow(prop){
   const newList = [].concat(metaDataList)
 
@@ -222,12 +245,24 @@ function getDadosLogin(){
         handleFiltrar={handleFiltrar}
       />
       <If test={messageErrorsList.length === 0} Else={<ErrorAlert messageErrorList={messageErrorsList} resetMessages={()=>setMessageErrorList([])}/>}>
+      <If test={optionAccumulate}>
+        <ChartAcc dataChart={dataChart}/>
+      </If>
+      <If test={!optionAccumulate}>
         <ChartList dataChart={dataChart}/>
+      </If>
+      <label className="relative inline-flex items-center cursor-pointer h-6">
+                <input type="checkbox" onChange={handleAccumulate}  value="" checked={optionAccumulate} className="sr-only peer"/>
+                <div className="w-11 h-6 bg-gray-200 peer-focus:outline-none peer-focus:ring-4 peer-focus:ring-blue-300 dark:peer-focus:ring-blue-800 rounded-full peer dark:bg-gray-700 peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all dark:border-gray-600 peer-checked:bg-blue-600"></div>
+                <span className="ml-3 text-sm font-medium text-gray-900 dark:text-gray-300">Selecão multipla</span>
+      </label>
         <CardList>
+
           {
             metaDataList.map((item, key)=>(
+
                 <ItemCard 
-                  onClick={()=>setMetaDataItemShow(item.prop)}
+                  onClick={!optionAccumulate?()=>setMetaDataItemShow(item.prop):()=>setMetaDataItemShowAcc(item.prop)}
                   key={key}
                   className={"cursor-pointer "+ (item.show ? " font-bold text-gray-500 opacity-100":"opacity-20")}
                   value={parseInt(getAverage(getValues(item.label)))} 
