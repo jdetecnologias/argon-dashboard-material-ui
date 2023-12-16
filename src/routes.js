@@ -39,6 +39,15 @@ import Averages from "layouts/averages";
 
 // Argon Dashboard 2 MUI components
 import ArgonBox from "components/ArgonBox";
+import { BodyTemperature } from "layouts/dashboard/assets/bodyTemperature";
+import { FrequencyHeart } from "layouts/dashboard/assets/frequencyHeart";
+import { Oximetry } from "layouts/dashboard/assets/oximetry";
+import { Glycemia } from "layouts/dashboard/assets/glycemia";
+import { Steps } from "layouts/dashboard/assets/steps";
+import { Activities } from "layouts/dashboard/assets/activities";
+import { Localization } from "layouts/dashboard/assets/localization";
+import { ClipBoard } from "layouts/dashboard/assets/clipboard";
+import { Sleep } from "layouts/dashboard/assets/sleep";
 
 const routes = [
   {
@@ -62,7 +71,7 @@ const routes = [
     name: "Atender",
     key: "average",
     route: "/medias_diarias",
-    icon: <ArgonBox component="i" color="black" fontSize="14px" className="fa fa-bicycle" />,
+    icon: <ClipBoard colorFill="#000" _className="" />,
     component: <Averages />,
   },
   {
@@ -70,7 +79,7 @@ const routes = [
     name: "Glicemia",
     key: "average",
     route: "/medias_diarias",
-    icon: <ArgonBox component="i" color="black" fontSize="14px" className="ni ni-chart-bar-32" />,
+    icon: <Glycemia colorFill="#000" _className=""/>,
     component: <Averages />,
   },
   {
@@ -78,7 +87,7 @@ const routes = [
     name: "Oximetria",
     key: "average",
     route: "/medias_diarias",
-    icon: <ArgonBox component="i" color="black" fontSize="14px" className="ni ni-chart-bar-32" />,
+    icon: <Oximetry colorFill="#000" _className=""/>,
     component: <Averages />,
   },
   {
@@ -86,7 +95,7 @@ const routes = [
     name: "Temperatura",
     key: "average",
     route: "/medias_diarias",
-    icon: <ArgonBox component="i" color="black" fontSize="14px" className="ni ni-chart-bar-32" />,
+    icon:  <BodyTemperature colorFill="#000" _className=""/>,
     component: <Averages />,
   },
   {
@@ -94,7 +103,7 @@ const routes = [
     name: "Batimentos",
     key: "average",
     route: "/medias_diarias",
-    icon: <ArgonBox component="i" color="black" fontSize="14px" className="ni ni-chart-bar-32" />,
+    icon: <FrequencyHeart colorFill="#000" _className=""/>,
     component: <Averages />,
   },
   {
@@ -102,7 +111,7 @@ const routes = [
     name: "Atividades",
     key: "average",
     route: "/medias_diarias",
-    icon: <ArgonBox component="i" color="black" fontSize="14px" className="ni ni-chart-bar-32" />,
+    icon: <Activities colorFill="#000" _className=""/>,
     component: <Averages />,
   },
   {
@@ -110,7 +119,7 @@ const routes = [
     name: "Passos",
     key: "average",
     route: "/medias_diarias",
-    icon: <ArgonBox component="i" color="black" fontSize="14px" className="ni ni-chart-bar-32" />,
+    icon: <Steps colorFill="#000" _className=""/>,
     component: <Averages />,
   },
   {
@@ -118,7 +127,7 @@ const routes = [
     name: "Sono",
     key: "average",
     route: "/medias_diarias",
-    icon: <ArgonBox component="i" color="black" fontSize="14px" className="ni ni-chart-bar-32" />,
+    icon: <Sleep colorFill="#000" _className="" />,
     component: <Averages />,
   },
   {
@@ -126,7 +135,7 @@ const routes = [
     name: "Localizar",
     key: "average",
     route: "/medias_diarias",
-    icon: <ArgonBox component="i" color="black" fontSize="14px" className="ni ni-chart-bar-32" />,
+    icon: <Localization colorFill="#000" _className=""/>,
     component: <Averages />,
   },
   {
