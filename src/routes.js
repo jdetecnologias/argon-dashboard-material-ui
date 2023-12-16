@@ -48,6 +48,7 @@ import { Activities } from "layouts/dashboard/assets/activities";
 import { Localization } from "layouts/dashboard/assets/localization";
 import { ClipBoard } from "layouts/dashboard/assets/clipboard";
 import { Sleep } from "layouts/dashboard/assets/sleep";
+import { Back } from "layouts/dashboard/assets/back";
 
 const routes = [
   {
@@ -143,7 +144,7 @@ const routes = [
     name: "Voltar",
     key: "average",
     route: "/medias_diarias",
-    icon: <ArgonBox component="i" color="black" fontSize="14px" className="ni ni-chart-bar-32" />,
+    icon: <Back colorFill="#000" _className="" />,
     component: <Averages />,
   }
 ];
