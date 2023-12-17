@@ -1,6 +1,11 @@
 import PropTypes from 'prop-types'
 import DateTime from './dateTimeItem'
 import ButtonFilter from './buttonFilter'
+import { Height } from 'layouts/dashboard/assets/height';
+import { Steps } from 'layouts/dashboard/assets/steps';
+import { Oximetry } from 'layouts/dashboard/assets/oximetry';
+import { Weight } from 'layouts/dashboard/assets/weight';
+import { Age } from 'layouts/dashboard/assets/age';
 
 export default function FilterContainer(props){
     const {
@@ -20,8 +25,68 @@ export default function FilterContainer(props){
                 <DateTime valueDate={data_inicio_filtro} label="De:" valueTime={hora_inicio} onChangeDate={(e)=>setDataInicio_filtro(e.target.value)} onChangeTime={(e)=>setHoraInicio(e.target.value)}/>
                 <DateTime valueDate={data_fim_filtro} label="De:" valueTime={hora_fim} onChangeDate={(e)=>setDataFim_filtro(e.target.value)} onChangeTime={(e)=>setHoraFim(e.target.value)}/>
             </div>
-            <div className='mt-1'>
-                <ButtonFilter onClick={handleFiltrar}/>
+            <div className='grid grid-cols-10 '>
+                <div className='mt-1 col-span-3'>
+                    <ButtonFilter onClick={handleFiltrar}/>
+                </div>
+                <div className='grid grid-cols-7 text-xs col-span-7'>
+                    <div className='grid grid-rows-3'>
+                        <div>
+                            Altura(cm):
+                        </div>
+                        <div className='grid grid-cols-2 w-20 text-lg font-bold '>
+                            170 <Height colorFill="#000" _className=""/>
+                        </div>
+                    </div>
+                    <div className='grid grid-rows-3'>
+                        <div>
+                            Passos:
+                        </div>
+                        <div className='grid grid-cols-2 w-20 text-lg font-bold '>
+                            55 <Steps colorFill="#000" _className=""/>
+                        </div>
+                    </div>
+                    <div className='grid grid-rows-3'>
+                        <div>
+                            Peso(KG):
+                        </div>
+                        <div className='grid grid-cols-2 w-20 text-lg font-bold '>
+                            155 <Weight colorFill="#000" _className=""/>
+                        </div>
+                    </div>
+                    <div className='grid grid-rows-3'>
+                        <div>
+                            Peso ideal(KG):
+                        </div>
+                        <div className='grid grid-cols-2 w-20 text-lg font-bold '>
+                            85 <Weight colorFill="#000" _className=""/>
+                        </div>
+                    </div>
+                    <div className='grid grid-rows-3'>
+                        <div>
+                            Idade:
+                        </div>
+                        <div className='grid grid-cols-2 w-20 text-lg font-bold '>
+                            46 <Age colorFill="#000" _className=""/>
+                        </div>
+                    </div>
+                    <div className='grid grid-rows-3'>
+                        <div>
+
+                        </div>
+                        <div className='grid grid-cols-2 w-20 text-lg font-bold '>
+
+                        </div>
+                    </div>
+                    <div className='grid grid-rows-3'>
+                        <div>
+                        BPG:
+                        </div>
+                        <div className='grid grid-cols-2 w-20 text-lg font-bold '>
+                            150 <Oximetry colorFill="#000" _className=""/>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
 
