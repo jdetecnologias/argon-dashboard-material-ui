@@ -51,6 +51,7 @@ import Chart from "./components/Chart/chart";
 import ChartList from "./components/Chart/chartList";
 import { getAverage } from "helper/math";
 import ChartAcc from "./components/Chart/chartAcc";
+import Gauge from "./gauge/gauge";
 let qtyMapShow = -1;
 function Default() {
   qtyMapShow += 1;
@@ -235,7 +236,7 @@ function getDadosLogin(){
 
   return cl
  }
-
+ 
   return (
     <DashboardLayout>
       <DashboardNavbar />
@@ -272,10 +273,10 @@ function getDadosLogin(){
             )
           }        
         </CardList>
+
       </If>
     </DashboardLayout>
   );
 }
-
 
 export default Default;

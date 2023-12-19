@@ -41,6 +41,7 @@ import sidenavLogoLabel from "examples/Sidenav/styles/sidenav";
 
 // Argon Dashboard 2 MUI context
 import { useArgonController, setMiniSidenav } from "context";
+import Gauge from "layouts/dashboard/gauge/gauge";
 
 function Sidenav({ color, brand, brandName, routes, ...rest }) {
   const [controller, dispatch] = useArgonController();
@@ -154,6 +155,7 @@ function Sidenav({ color, brand, brandName, routes, ...rest }) {
       </ArgonBox>
       <Divider light={darkSidenav} />
       <List>{renderRoutes}</List>
+      <Gauge/>
     </SidenavRoot>
   );
 }
