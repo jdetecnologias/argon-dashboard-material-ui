@@ -37,14 +37,14 @@ function Gauge(){
         },
         staticLabels: {
           font: "10px sans-serif",
-          labels: [0, 3, 5, 7],
+          labels: [0, 85, 140, 250, 300],
           fractionDigits: 0
         },
         staticZones: [
-           {strokeStyle: "#F03E3E", min: 0, max: 3},
-           {strokeStyle: "#FFDD00", min: 3, max: 5},
-           {strokeStyle: "#30B32D", min: 5, max: 7},
-           {strokeStyle: "#FFDD00", min: 7, max: 10}
+           {strokeStyle: "#F03E3E", min: 0, max: 85},
+           {strokeStyle: "#FFDD00", min: 85, max: 140},
+           {strokeStyle: "#30B32D", min: 140, max: 250},
+           {strokeStyle: "#FFDD00", min: 250, max: 300}
         ],
         limitMax: 4,
         limitMin: 1,
@@ -58,8 +58,8 @@ function Gauge(){
       demoGauge.setOptions(opts);
       demoGauge.setTextField(document.getElementById("preview-textfield"));
       demoGauge.minValue = 0;
-      demoGauge.maxValue = 10;
-      demoGauge.set(5);
+      demoGauge.maxValue = 300;
+      demoGauge.set(112);
 
     }, 3000)
 
