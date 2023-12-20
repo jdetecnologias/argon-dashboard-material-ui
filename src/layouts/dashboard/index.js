@@ -51,6 +51,7 @@ import Chart from "./components/Chart/chart";
 import ChartList from "./components/Chart/chartList";
 import { getAverage } from "helper/math";
 import ChartAcc from "./components/Chart/chartAcc";
+import fundo from "./assets/fundo2.png"
 import Gauge from "./gauge/gauge";
 let qtyMapShow = -1;
 function Default() {
@@ -72,7 +73,7 @@ function Default() {
                                             {prop:"weight", label:"Peso", show:false,color:"secondary"},
                                             {prop:"steps", label:"Passos", show:false,color:"info"}
                                           ])
-                                          
+   const numbersOfDivs = [1,2,3,4,5]                                       
   useEffect(() => {
     const queryString = window.location.search;
     
@@ -257,23 +258,37 @@ function getDadosLogin(){
                 <div className="w-11 h-6 bg-gray-200 peer-focus:outline-none peer-focus:ring-4 peer-focus:ring-blue-300 dark:peer-focus:ring-blue-800 rounded-full peer dark:bg-gray-700 peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all dark:border-gray-600 peer-checked:bg-blue-600"></div>
                 <span className="ml-3 text-sm font-medium text-gray-900 dark:text-gray-300">Selecão multipla</span>
       </label>
-        <CardList>
+          <CardList>
 
-          {
-            metaDataList.map((item, key)=>(
+            {
+              metaDataList.map((item, key)=>(
 
-                <ItemCard 
-                  onClick={!optionAccumulate?()=>setMetaDataItemShow(item.prop):()=>setMetaDataItemShowAcc(item.prop)}
-                  key={key}
-                  className={"cursor-pointer "+ (item.show ? " font-bold text-gray-500 opacity-100":"opacity-20")}
-                  value={parseInt(getAverage(getValues(item.label)))} 
-                  label={item.label}
-                  />
+                  <ItemCard 
+                    onClick={!optionAccumulate?()=>setMetaDataItemShow(item.prop):()=>setMetaDataItemShowAcc(item.prop)}
+                    key={key}
+                    className={"cursor-pointer "+ (item.show ? " font-bold text-gray-500 opacity-100":"opacity-20")}
+                    value={parseInt(getAverage(getValues(item.label)))} 
+                    label={item.label}
+                    />
+                )
               )
-            )
-          }        
-        </CardList>
+            }        
+          </CardList>
+          <div className={"grid grid-cols-"+numbersOfDivs.length}>
+            {
+              numbersOfDivs.map((item, key)=>{
+                    return(
+                            <div key={key} id={"caixa"+item}>
+                              <div className='w-32 font-bold' style={{position:"relative"}}>
+                                <img src={fundo}/> 
+                                <div style={{position:"absolute", top:"50%", left:"50%", transform:"translateY(-50%) translateX(-50%)"}}>{Math.round(Math.random()*100)+"%"}</div>
+                              </div>
+                            </div>
+                          )
 
+              })
+            }
+          </div>
       </If>
     </DashboardLayout>
   );

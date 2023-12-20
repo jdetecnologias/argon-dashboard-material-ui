@@ -10,10 +10,13 @@ import fundo from "layouts/dashboard/assets/fundo.png"
 import { Steps } from "layouts/dashboard/assets/steps";
 import { FrequencyHeart } from "layouts/dashboard/assets/frequencyHeart";
 import { Activities } from "layouts/dashboard/assets/activities";
+import If from "components/If/if";
+
 
 export default function ChartList(props){
     const {dataChart} = props;   
     const [lightTheme, setLightTheme] = useState(true); 
+    const [showMap, setShowMap] = useState(true); 
     return (
             <div className=" md:grid md:grid-cols-4 flex flex-col-reverse mt-16">
                 <div className="col-span-3">
@@ -35,7 +38,12 @@ export default function ChartList(props){
 
                 </div>
                 <div>
-                    <Map/>
+                    <button onClick={()=>setShowMap(true)} className={showMap?"bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-1 rounded":"bg-blue-500 hover:bg-blue-700 text-white font-bold py-1 px-1 rounded"}>Mapa</button>
+                    <button onClick={()=>setShowMap(false)} className={!showMap?"ml-1 bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-1 rounded":"ml-1 bg-blue-500 hover:bg-blue-700 text-white font-bold py-1 px-1 rounded"}>Dados paciente</button>
+                    <If test={showMap}>
+                        <Map/>
+                    </If>
+                    <If test={!showMap}>
                     <div>
                         <h5 className="text-center text-sm font-extrabold">Horas de sono:</h5>
                         <div className="grid grid-cols-2">
@@ -106,6 +114,7 @@ export default function ChartList(props){
                         </div>    
 
                     </div>
+                    </If>
                 </div>
             </div>
     )
