@@ -274,7 +274,7 @@ function getDadosLogin(){
               )
             }        
           </CardList>
-          <div className={"grid grid-cols-"+numbersOfDivs.length}>
+          <div className="grid grid-cols-5">
             {
               numbersOfDivs.map((item, key)=>{
                     return(
