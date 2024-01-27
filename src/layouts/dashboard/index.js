@@ -52,10 +52,10 @@ import ChartList from "./components/Chart/chartList";
 import { getAverage } from "helper/math";
 import ChartAcc from "./components/Chart/chartAcc";
 import fundo from "./assets/fundo2.png"
-import Gauge from "./gauge/gauge";
 import { useRecoilState } from "recoil";
-import { appDataState } from "./components/StateHandler/atoms/atoms";
+import { appDataState, glycemiaAverage } from "./components/StateHandler/atoms/atoms";
 import { GetLastAppData } from "./model/getAppDataModel";
+
 let qtyMapShow = -1;
 function Default() {
   qtyMapShow += 1;

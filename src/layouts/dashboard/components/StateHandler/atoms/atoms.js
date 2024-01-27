@@ -10,7 +10,6 @@ const appDataState = atom({
     default: ({}), // default value (aka initial value)
   });
 
-
 export {appDataState}
 
 
