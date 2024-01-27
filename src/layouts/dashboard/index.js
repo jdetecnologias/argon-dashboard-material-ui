@@ -53,9 +53,15 @@ import { getAverage } from "helper/math";
 import ChartAcc from "./components/Chart/chartAcc";
 import fundo from "./assets/fundo2.png"
 import Gauge from "./gauge/gauge";
+import { useRecoilState } from "recoil";
+import { appDataState } from "./components/StateHandler/atoms/atoms";
+import { GetLastAppData } from "./model/getAppDataModel";
 let qtyMapShow = -1;
 function Default() {
   qtyMapShow += 1;
+
+  const [data, setData] = useRecoilState(appDataState)
+  console.log("principal escopo", data);
   const dataHoje = dayjs().format("YYYY-MM-DD")
   const [listGlycemia, setListGlycemia] = useState([]);
   const [optionAccumulate, setOptionAccumulate] = useState(false);
@@ -86,6 +92,13 @@ function Default() {
     }else{
       const dadoslogin = getDadosLogin();
       filtrar(dadoslogin.email, data_inicio_filtro, data_fim_filtro,dadoslogin.token);
+
+      GetLastAppData('liteste@gmail.com').then(result=>{
+        if(result.data && result.data.message){
+          setData(result.data.message);
+        }
+
+      })
     }
   },[])
 

@@ -6,6 +6,8 @@ import { Steps } from 'layouts/dashboard/assets/steps';
 import { Oximetry } from 'layouts/dashboard/assets/oximetry';
 import { Weight } from 'layouts/dashboard/assets/weight';
 import { Age } from 'layouts/dashboard/assets/age';
+import { useRecoilState } from 'recoil';
+import { appDataState } from '../StateHandler/atoms/atoms';
 
 export default function FilterContainer(props){
     const {
@@ -19,6 +21,8 @@ export default function FilterContainer(props){
             setHoraFim,
             handleFiltrar
         } = props;
+
+    const [appData, setAppData] = useRecoilState(appDataState)
     return (
         <div className="grid grid-rows-2 relative text-xs md:text-lg">
             <div className="grid 4xl:grid-cols-6 3xl:grid-cols-5 2xl:grid-cols-4 md:grid-cols-2 sm:grid-cols-3">
@@ -35,7 +39,7 @@ export default function FilterContainer(props){
                             Altura(cm):
                         </div>
                         <div className='grid grid-cols-2 w-20 text-lg font-bold '>
-                            170 <Height colorFill="#000" _className=""/>
+                            {appData.height?appData.height:0} <Height colorFill="#000" _className=""/>
                         </div>
                     </div>
                     <div className='grid grid-rows-3'>
@@ -43,7 +47,7 @@ export default function FilterContainer(props){
                             Passos:
                         </div>
                         <div className='grid grid-cols-2 w-20 text-lg font-bold '>
-                            55 <Steps colorFill="#000" _className=""/>
+                            {appData.steps?appData.steps:0} <Steps colorFill="#000" _className=""/>
                         </div>
                     </div>
                     <div className='grid grid-rows-3'>
@@ -51,7 +55,7 @@ export default function FilterContainer(props){
                             Peso(KG):
                         </div>
                         <div className='grid grid-cols-2 w-20 text-lg font-bold '>
-                            155 <Weight colorFill="#000" _className=""/>
+                            {appData.weight?appData.weight:0} <Weight colorFill="#000" _className=""/>
                         </div>
                     </div>
                     <div className='grid grid-rows-3'>
@@ -59,7 +63,7 @@ export default function FilterContainer(props){
                             Peso ideal(KG):
                         </div>
                         <div className='grid grid-cols-2 w-20 text-lg font-bold '>
-                            85 <Weight colorFill="#000" _className=""/>
+                            {appData.idealWeight?appData.idealWeight:0} <Weight colorFill="#000" _className=""/>
                         </div>
                     </div>
                     <div className='grid grid-rows-3'>
@@ -67,7 +71,7 @@ export default function FilterContainer(props){
                             Idade:
                         </div>
                         <div className='grid grid-cols-2 w-20 text-lg font-bold '>
-                            46 <Age colorFill="#000" _className=""/>
+                            {appData.age?appData.age:0} <Age colorFill="#000" _className=""/>
                         </div>
                     </div>
                     <div className='grid grid-rows-3'>
@@ -83,7 +87,7 @@ export default function FilterContainer(props){
                         BPG:
                         </div>
                         <div className='grid grid-cols-2 w-20 text-lg font-bold '>
-                            150 <Oximetry colorFill="#000" _className=""/>
+                            {appData.vbg?appData.vbg:0} <Oximetry colorFill="#000" _className=""/>
                         </div>
                     </div>
                 </div>

@@ -11,12 +11,16 @@ import { Steps } from "layouts/dashboard/assets/steps";
 import { FrequencyHeart } from "layouts/dashboard/assets/frequencyHeart";
 import { Activities } from "layouts/dashboard/assets/activities";
 import If from "components/If/if";
+import { useRecoilState } from "recoil";
+import { appDataState } from "../StateHandler/atoms/atoms";
+import { minutoToHour } from "helper/date";
 
 
 export default function ChartList(props){
     const {dataChart} = props;   
     const [lightTheme, setLightTheme] = useState(true); 
     const [showMap, setShowMap] = useState(true); 
+    const [appData, setAppData] = useRecoilState(appDataState);
     return (
             <div className=" md:grid md:grid-cols-4 flex flex-col-reverse mt-16">
                 <div className="col-span-3">
@@ -52,7 +56,7 @@ export default function ChartList(props){
                             </div>
                             <div className='w-48 font-bold'  style={{position:"relative"}}>
                                 <img src={fundo}/> 
-                                <span style={{position:"absolute", top:"50%", left:"50%", transform:"translateY(-50%) translateX(-50%)"}}>8H</span>
+                                <span style={{position:"absolute", top:"50%", left:"50%", transform:"translateY(-50%) translateX(-50%)"}}>{appData.sleepTime?minutoToHour(appData.sleepTime):0}</span>
                             </div>
                         </div>    
 
@@ -67,7 +71,7 @@ export default function ChartList(props){
                                     </div>
                                 </div>
                                 <div className="p-2 text-center text-xs font-extrabold">
-                                    485
+                                    {appData.steps?parseInt(appData.steps):0}
                                 </div>
                             </div>
                             <div className="grid grid-rows-3">
@@ -78,7 +82,7 @@ export default function ChartList(props){
                                     </div>
                                 </div>
                                 <div className="p-2 text-center text-xs font-extrabold">
-                                    8
+                                {appData.activities?parseInt(appData.activities):0}
                                 </div>
                             </div>
                             <div className="grid grid-rows-3">
@@ -89,7 +93,7 @@ export default function ChartList(props){
                                     </div>
                                 </div>
                                 <div className="p-2 text-center text-xs font-extrabold">
-                                    12
+                                    {appData.intensityMovements?parseInt(appData.intensityMovements):0}
                                 </div>
                             </div>
                         </div>    
@@ -98,17 +102,17 @@ export default function ChartList(props){
                     <div>
                         <div className="grid grid-cols-2">
                         <div>
-                                <h5 className="text-center text-sm font-extrabold">Tempo Ativo</h5>
+                                <h5 className="text-center text-sm font-extrabold">Distância</h5>
                                 <div className='w-48 font-bold' style={{position:"relative"}}>
                                     <img src={fundo}/> 
-                                    <div style={{position:"absolute", top:"50%", left:"50%", transform:"translateY(-50%) translateX(-50%)"}}>6KM</div>
+                                    <div style={{position:"absolute", top:"50%", left:"50%", transform:"translateY(-50%) translateX(-50%)"}}>{appData.distance?parseInt(appData.distance):0}Mt</div>
                                 </div>
                             </div>
                             <div>
                                 <h5 className="text-center text-sm font-extrabold">Tempo Ativo</h5>
                                 <div className='w-48 font-bold' style={{position:"relative"}}>
                                     <img src={fundo}/> 
-                                    <div style={{position:"absolute", top:"50%", left:"50%", transform:"translateY(-50%) translateX(-50%)"}}>1.6H</div>
+                                    <div style={{position:"absolute", top:"50%", left:"50%", transform:"translateY(-50%) translateX(-50%)"}}>{appData.avtiveTime?minutoToHour(appData.avtiveTime):0}</div>
                                 </div>
                             </div>
                         </div>    
