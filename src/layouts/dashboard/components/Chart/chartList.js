@@ -12,7 +12,7 @@ import { FrequencyHeart } from "layouts/dashboard/assets/frequencyHeart";
 import { Activities } from "layouts/dashboard/assets/activities";
 import If from "components/If/if";
 import { useRecoilState } from "recoil";
-import { appDataState } from "../StateHandler/atoms/atoms";
+import { appDataState } from "../../../../stateHandler/atoms/atoms";
 import { minutoToHour } from "helper/date";
 
 

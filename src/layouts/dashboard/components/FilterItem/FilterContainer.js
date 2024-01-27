@@ -7,7 +7,7 @@ import { Oximetry } from 'layouts/dashboard/assets/oximetry';
 import { Weight } from 'layouts/dashboard/assets/weight';
 import { Age } from 'layouts/dashboard/assets/age';
 import { useRecoilState } from 'recoil';
-import { appDataState } from '../StateHandler/atoms/atoms';
+import { appDataState } from '../../../../stateHandler/atoms/atoms';
 
 export default function FilterContainer(props){
     const {

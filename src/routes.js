@@ -34,7 +34,7 @@ Coded by www.creative-tim.com
 */
 
 // Argon Dashboard 2 MUI layouts
-import Dashboard from "layouts/dashboard/components/StateHandler/stateHandler";
+import Dashboard from "layouts/dashboard/index";
 import Averages from "layouts/averages";
 
 // Argon Dashboard 2 MUI components

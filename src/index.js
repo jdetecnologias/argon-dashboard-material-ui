@@ -27,15 +27,18 @@ import PerfectScrollbar from "react-perfect-scrollbar";
 // react-perfect-scrollbar styles
 import "react-perfect-scrollbar/dist/css/styles.css";
 import "./assets/css/main.css";
+import { RecoilRoot } from "recoil";
 const container = document.getElementById("root");
 const root = createRoot(container);
 
 root.render(
-  <BrowserRouter>
-    <ArgonControllerProvider>
-      <PerfectScrollbar>
-        <App />
-      </PerfectScrollbar>
-    </ArgonControllerProvider>
-  </BrowserRouter>
+  <RecoilRoot>
+    <BrowserRouter>
+      <ArgonControllerProvider>
+        <PerfectScrollbar>
+          <App />
+        </PerfectScrollbar>
+      </ArgonControllerProvider>
+    </BrowserRouter>
+  </RecoilRoot>
 );

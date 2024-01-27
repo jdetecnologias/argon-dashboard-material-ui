@@ -53,7 +53,7 @@ import { getAverage } from "helper/math";
 import ChartAcc from "./components/Chart/chartAcc";
 import fundo from "./assets/fundo2.png"
 import { useRecoilState } from "recoil";
-import { appDataState, glycemiaAverage } from "./components/StateHandler/atoms/atoms";
+import { appDataState, glycemiaAverage } from "../../stateHandler/atoms/atoms";
 import { GetLastAppData } from "./model/getAppDataModel";
 
 let qtyMapShow = -1;
