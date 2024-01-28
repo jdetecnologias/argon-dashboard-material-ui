@@ -1,5 +1,6 @@
 import { useState, useEffect } from "react";
 import { GetGlycemiaAverage } from "../model/getGlycemiaData";
+import { getCookie } from "helper/cookies";
 
 function cleanScript(){
   const scrElmemnt = document.querySelector("script[ident=indicadorSaude")
@@ -15,11 +16,16 @@ function Gauge(){
   cleanScript()
   console.log(glycemiaAVG)
   useEffect(() => {
-    GetGlycemiaAverage('148347@ics.com',48).then(result=>{
-      if(result.data && result.data.message){
-        setGlycemiaAvg(result.data.message);
-      }
-    })
+    let dadosLogin = getCookie("dadosLogin");
+    if(dadosLogin != ""){
+      dadosLogin = JSON.parse(dadosLogin);
+
+      GetGlycemiaAverage(dadosLogin.email,48).then(result=>{
+        if(result.data && result.data.message){
+          setGlycemiaAvg(Number(result.data.message)+50);
+        }
+      })   
+    }
   },[])
 
   if(glycemiaAVG > 0){
@@ -100,7 +106,7 @@ function Gauge(){
 
     return (
       <div style={{borderTop:"10px solid black"}}  >
-        <p className="text-center text-sm">média {glycemiaAVG}</p>
+        <p className="text-center text-sm"> {glycemiaAVG > 0 ? `Média ${glycemiaAVG}` : 'Sem dados coletados' }</p>
         <div id="preview">
           <canvas width="250" height="150" id="indicadorSaude"></canvas>
           <div id="preview-textfield"></div>
