@@ -70,7 +70,7 @@ const routes = [
   {
     type: "route",
     name: "Atender",
-    key: "average",
+    key: "diaria",
     route: "/medias_diarias",
     icon: <ClipBoard colorFill="#000" _className="" />,
     component: <Averages />,
@@ -78,7 +78,7 @@ const routes = [
   {
     type: "route",
     name: "Glicemia",
-    key: "average",
+    key: "diaria2",
     route: "/medias_diarias",
     icon: <Glycemia colorFill="#000" _className=""/>,
     component: <Averages />,
@@ -86,7 +86,7 @@ const routes = [
   {
     type: "route",
     name: "Oximetria",
-    key: "average",
+    key: "adiaria3",
     route: "/medias_diarias",
     icon: <Oximetry colorFill="#000" _className=""/>,
     component: <Averages />,
@@ -94,7 +94,7 @@ const routes = [
   {
     type: "route",
     name: "Temperatura",
-    key: "average",
+    key: "diaria4",
     route: "/medias_diarias",
     icon:  <BodyTemperature colorFill="#000" _className=""/>,
     component: <Averages />,
@@ -102,7 +102,7 @@ const routes = [
   {
     type: "route",
     name: "Batimentos",
-    key: "average",
+    key: "diaria5",
     route: "/medias_diarias",
     icon: <FrequencyHeart colorFill="#000" _className=""/>,
     component: <Averages />,
@@ -110,7 +110,7 @@ const routes = [
   {
     type: "route",
     name: "Atividades",
-    key: "average",
+    key: "diaria6",
     route: "/medias_diarias",
     icon: <Activities colorFill="#000" _className=""/>,
     component: <Averages />,
@@ -118,7 +118,7 @@ const routes = [
   {
     type: "route",
     name: "Passos",
-    key: "average",
+    key: "diaria7",
     route: "/medias_diarias",
     icon: <Steps colorFill="#000" _className=""/>,
     component: <Averages />,
@@ -126,7 +126,7 @@ const routes = [
   {
     type: "route",
     name: "Sono",
-    key: "average",
+    key: "diaria8",
     route: "/medias_diarias",
     icon: <Sleep colorFill="#000" _className="" />,
     component: <Averages />,
@@ -134,7 +134,7 @@ const routes = [
   {
     type: "route",
     name: "Localizar",
-    key: "average",
+    key: "diaria9",
     route: "/medias_diarias",
     icon: <Localization colorFill="#000" _className=""/>,
     component: <Averages />,
@@ -142,7 +142,7 @@ const routes = [
   {
     type: "route",
     name: "Voltar",
-    key: "average",
+    key: "diaria10",
     route: "/medias_diarias",
     icon: <Back colorFill="#000" _className="" />,
     component: <Averages />,

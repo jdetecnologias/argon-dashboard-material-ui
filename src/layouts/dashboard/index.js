@@ -61,8 +61,7 @@ function Default() {
   qtyMapShow += 1;
 
   const [data, setData] = useRecoilState(appDataState)
-  console.log("principal escopo", data);
-  const dataHoje = dayjs().format("YYYY-MM-DD")
+   const dataHoje = dayjs().format("YYYY-MM-DD")
   const [listGlycemia, setListGlycemia] = useState([]);
   const [optionAccumulate, setOptionAccumulate] = useState(false);
   const [dataChart,setDataChart ] = useState([]);
