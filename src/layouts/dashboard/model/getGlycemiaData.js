@@ -11,7 +11,7 @@ export function GetGlycemiaAverage(email, interval, token) {
               }
         }
 
-        const url = `http://localhost:8080/glycemia/avg?email=${email}&interval=${interval}`;
+        const url = `https://gluco-scan-api.herokuapp.com/glycemia/avg?email=${email}&interval=${interval}`;
 
         fetchAuth(url,config).then(async response=>{
             const json = await response.json() ;
@@ -33,7 +33,7 @@ export function GetLastGlycemia(email) {
               }
         }
 
-        const url = `http://localhost:8080/glycemia/last/glicemia?email=${email}`;
+        const url = `https://gluco-scan-api.herokuapp.com/glycemia/last/glicemia?email=${email}`;
 
         fetchAuth(url,config).then(async response=>{
             const json = await response.json() ;

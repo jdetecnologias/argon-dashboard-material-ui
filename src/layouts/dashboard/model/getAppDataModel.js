@@ -9,7 +9,7 @@ export function GetLastAppData(userEmail) {
                 'Content-Type': 'application/json'
                           }
         }
-        const url = `http://localhost:8080/mobileApp/get/last/${userEmail}`;
+        const url = `https://gluco-scan-api.herokuapp.com/mobileApp/get/last/${userEmail}`;
 
 
         fetchAuth(url,config).then(async response=>{
