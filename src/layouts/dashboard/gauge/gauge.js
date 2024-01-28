@@ -20,7 +20,7 @@ function Gauge(){
     if(dadosLogin != ""){
       dadosLogin = JSON.parse(dadosLogin);
 
-      GetGlycemiaAverage(dadosLogin.email,5000).then(result=>{
+      GetGlycemiaAverage(dadosLogin.email,24).then(result=>{
         if(result.data && result.data.message){
           setGlycemiaAvg(Number(result.data.message)+50);
         }
