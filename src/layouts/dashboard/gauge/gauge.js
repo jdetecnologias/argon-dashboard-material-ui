@@ -20,7 +20,7 @@ function Gauge(){
     if(dadosLogin != ""){
       dadosLogin = JSON.parse(dadosLogin);
 
-      GetGlycemiaAverage(dadosLogin.email,48).then(result=>{
+      GetGlycemiaAverage(dadosLogin.email,5000).then(result=>{
         if(result.data && result.data.message){
           setGlycemiaAvg(Number(result.data.message)+50);
         }
@@ -69,12 +69,13 @@ function Gauge(){
           },
           staticLabels: {
             font: "10px sans-serif",
-            labels: [0,70,100,140,200,250,300],
+            labels: [0,70,100,140,200,250],
             fractionDigits: 0
           },
           staticZones: [
-             {strokeStyle: "#FFDD00", min: 0, max: 140},
-             {strokeStyle: "#F03E3E", min: 140, max: 300}
+            {strokeStyle: "green", min: 0, max: 100},
+             {strokeStyle: "orange", min: 100, max: 140},
+             {strokeStyle: "red", min: 140, max: 250}
           ],
           limitMax: 4,
           limitMin: 1,
@@ -88,7 +89,7 @@ function Gauge(){
         demoGauge.setOptions(opts);
         demoGauge.setTextField(document.getElementById("preview-textfield"));
         demoGauge.minValue = 0;
-        demoGauge.maxValue = 300;
+        demoGauge.maxValue = 250;
         demoGauge.set(${glycemiaAVG});
   
       }, 3000)
