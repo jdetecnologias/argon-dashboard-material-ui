@@ -23,7 +23,7 @@ export function GetGlycemiaAverage(email, interval, token) {
 }
 
 
-export function getFilteredByAdmin(dadosUsuario) {
+export function GetLastGlycemia(email) {
     return new Promise((resolve, reject)=>{
         const config = {
             method: 'GET',
@@ -33,15 +33,9 @@ export function getFilteredByAdmin(dadosUsuario) {
               }
         }
 
-        const listkeys = Object.keys(dadosUsuario);
+        const url = `http://localhost:8080/glycemia/last/glicemia?email=${email}`;
 
-        const listQueryParams = listkeys.map(key=>{
-            return `${key}=${dadosUsuario[key]}`;
-        })
-
-        const queryParams = listQueryParams.join('&');
-
-        fetchAuth('https://gluco-scan-api.herokuapp.com/admin/glycemia/get_filtered?'+queryParams,config).then(async response=>{
+        fetchAuth(url,config).then(async response=>{
             const json = await response.json() ;
             resolve(json)
         }).catch(e=>{
