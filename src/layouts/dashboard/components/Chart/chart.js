@@ -12,16 +12,31 @@ export default function Chart(props){
     const [lastGlycemia, setLastGlycemia] = useState({});
 
     useEffect(() => {
-        let dadosLogin = getCookie("dadosLogin");
-        if(dadosLogin != ""){
-          dadosLogin = JSON.parse(dadosLogin);
+        const queryString = window.location.search;
     
-          GetLastGlycemia(dadosLogin.email).then(result=>{
-            if(result.data && result.data.message){
-                setLastGlycemia(result.data.message);
-            }
-          })   
-        }
+        const urlParams = new URLSearchParams(queryString);
+        const adminAccess = urlParams.get('adminAccess') !== null && urlParams.get('adminAccess') === 'true' ;
+        let email = "";
+
+        if(adminAccess){
+            email = urlParams.get('email');
+          }else{
+              let dadosLogin = getCookie("dadosLogin");
+              if(dadosLogin != ""){
+                dadosLogin = JSON.parse(dadosLogin);  
+                email = dadosLogin.email;
+              }
+          }
+
+          if(email !== ""){
+            GetLastGlycemia(email).then(result=>{
+                if(result.data && result.data.message){
+                    setLastGlycemia(result.data.message);
+                }
+              });  
+          }
+
+
       },[]);
     
     const bgClassName = lightTheme ? "" : "bg-black";
@@ -43,13 +58,13 @@ export default function Chart(props){
                 <div className="text-sm font-black">
                     Menor: {parseInt(getMin(dataChart.datasets[0].data))}
                 </div>
-                <div className="text-sm">
+                <div className="text-sm font-black">
                     Média:
                 </div>
                 <div className="text-4xl text-center">
                     {parseInt(getAverage(dataChart.datasets[0].data))}
                 </div>
-                <div className="text-sm">
+                <div className="text-sm font-black">
                     Atual({lastGlycemia && lastGlycemia.data?dayjs(lastGlycemia.data).format("DD/MM/YYYY"):"Sem dados"}): {lastGlycemia && lastGlycemia.lastGlycemia ? lastGlycemia.lastGlycemia : 0}
                 </div>    
                 <div className="text-4xl text-center">

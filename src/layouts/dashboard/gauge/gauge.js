@@ -16,15 +16,27 @@ function Gauge(){
   cleanScript()
   console.log(glycemiaAVG)
   useEffect(() => {
-    let dadosLogin = getCookie("dadosLogin");
-    if(dadosLogin != ""){
-      dadosLogin = JSON.parse(dadosLogin);
+    const queryString = window.location.search;
+    
+    const urlParams = new URLSearchParams(queryString);
+    const adminAccess = urlParams.get('adminAccess') !== null && urlParams.get('adminAccess') === 'true' ;
+    let email = "";
 
-      GetGlycemiaAverage(dadosLogin.email,24).then(result=>{
+    if(adminAccess){
+      email = urlParams.get('email');
+    }else{
+        let dadosLogin = getCookie("dadosLogin");
+        if(dadosLogin != ""){
+          dadosLogin = JSON.parse(dadosLogin);  
+          email = dadosLogin.email;
+        }
+    }
+    if(email !== ""){
+      GetGlycemiaAverage(email,48).then(result=>{
         if(result.data && result.data.message){
           setGlycemiaAvg(Number(result.data.message)+50);
         }
-      })   
+      }) 
     }
   },[])
 

@@ -84,21 +84,24 @@ function Default() {
     
     const urlParams = new URLSearchParams(queryString);
     const adminAccess = urlParams.get('adminAccess') !== null && urlParams.get('adminAccess') === 'true' ;
-
+    let email = "";
     if(adminAccess){
-      const email = urlParams.get('email');
+      email = urlParams.get('email');
       filtrarAdmin(email, data_inicio_filtro, data_fim_filtro);
     }else{
       const dadoslogin = getDadosLogin();
+      email = dadoslogin.email;
       filtrar(dadoslogin.email, data_inicio_filtro, data_fim_filtro,dadoslogin.token);
+    }
 
-      GetLastAppData('liteste@gmail.com').then(result=>{
+    if(email !== ""){
+      GetLastAppData(email).then(result=>{
         if(result.data && result.data.message){
           setData(result.data.message);
         }
-
-      })
+      });
     }
+
   },[])
 
   useEffect(() => {
