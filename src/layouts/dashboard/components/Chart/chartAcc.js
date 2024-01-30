@@ -13,7 +13,7 @@ export default function ChartAcc(props){
             <div className=" md:grid md:grid-cols-4 flex flex-col-reverse mt-16">
                 <div className="col-span-3">
                     <ChartThemeSelector onChange={setLightTheme} value={lightTheme}/>
-                    <button className="btn btn-primary ml-2" onClick={()=>PrintContentCanvas("#grafico","canvas")}><Print collorFill="#fff" /></button>
+                    <button className="btn btn-primary ml-2" onClick={()=>PrintContentCanvas("#grafico","#grafico canvas")}><Print collorFill="#fff" /></button>
                      <ChartAccSvg 
                         key={1} 
                         title="Dados" 
