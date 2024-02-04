@@ -27,14 +27,14 @@ import FilterContainer from "./components/FilterItem/FilterContainer";
 import ChartList from "./components/Chart/chartList";
 import { getAverage } from "helper/math";
 import fundo2 from "./assets/fundo2.png"
-import { appDataState } from "../../stateHandler/atoms/atoms";
+import { appDataState, metaDataListState } from "../../stateHandler/atoms/atoms";
 import { GetLastAppData } from "./model/getAppDataModel";
 
 let qtyMapShow = -1;
 function Default() {
   qtyMapShow += 1;
 
-  const [data, setData] = useRecoilState(appDataState)
+  const [appData, setData] = useRecoilState(appDataState)
    const dataHoje = dayjs().format("YYYY-MM-DD")
   const [listGlycemia, setListGlycemia] = useState([]);
   const [listGlycemiaOne, setListGlycemiaOne] = useState([]);
@@ -46,16 +46,8 @@ function Default() {
   const [hora_inicio,setHoraInicio] = useState("00:00");
   const [hora_fim,setHoraFim] = useState("23:59");
   const [messageErrorsList,setMessageErrorList] = useState([])
-  const [metaDataList, setMetaDataList] = useState([
-                                            {prop:"valor_glicemia", label:"Glicemia", show:true,color:"success"},
-                                            {prop:"heartRate", label:"Frequência cardiaca", show:false,color:"error"},
-                                            {prop:"oxymetry", label:"Oximetria", show:false,color:"primary"},
-                                            {prop:"bodyTemperature", label:"Temperatura corporal", show:false,color:"warning"},
-                                            {prop:"weight", label:"Peso", show:false,color:"secondary"},
-                                            {prop:"steps", label:"Passos", show:false,color:"info"}
-                                          ])
+  const [metaDataList, setMetaDataList] = useRecoilState(metaDataListState)
   const [lightTheme, setLightTheme] = useState(true); 
-  const [appData, setAppData] = useRecoilState(appDataState);
 
    const numbersOfDivs = [1,2,3,4,5]                                       
   useEffect(() => {
@@ -200,17 +192,20 @@ function getDadosLogin(){
  }
 
  function setMetaDataItemShow(prop){
-  const newList = [].concat(metaDataList)
+  const newList = metaDataList.map(item => {
+                                              const newObj = Object.keys(item).reduce((obj,propr, index)=>{
+                                                  obj[propr] = item[propr]
+                                                  return obj;
+                                                },{}) 
+                                              if(item.prop === prop){
+                                                newObj.show = true;
+                                              }else{
+                                                newObj.show = false;
+                                              }
 
-  newList.forEach(item => {
-    if(item.prop === prop){
-      item.show = true;
-    }else{
-      item.show = false;
-    }
-  })
-
-
+                                              return newObj;
+                                            });
+  
   setMetaDataList(()=>newList)
  }
 
@@ -322,23 +317,7 @@ function getDadosLogin(){
                 <div className="w-11 h-6 bg-gray-200 peer-focus:outline-none peer-focus:ring-4 peer-focus:ring-blue-300 dark:peer-focus:ring-blue-800 rounded-full peer dark:bg-gray-700 peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all dark:border-gray-600 peer-checked:bg-blue-600"></div>
                 <span className="ml-3 text-sm font-medium text-gray-900 dark:text-gray-300">Selecão multipla</span>
       </label>
-          <CardList style={{display:"none"}}>
-
-            {
-              metaDataList.map((item, key)=>(
-
-                  <ItemCard 
-                    onClick={!optionAccumulate?()=>setMetaDataItemShow(item.prop):()=>setMetaDataItemShowAcc(item.prop)}
-                    key={key}
-                    className={"cursor-pointer "+ (item.show ? " font-bold text-gray-500 opacity-100":"opacity-20")}
-                    value={parseInt(getAverage(getValues(item.label)))} 
-                    label={item.label}
-                    />
-                )
-              )
-            }        
-          </CardList>
-          <div className="grid grid-cols-5">
+      <div className="grid grid-cols-5">
             {
               numbersOfDivs.map((item, key)=>{
                     return(

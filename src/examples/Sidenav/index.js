@@ -42,6 +42,8 @@ import sidenavLogoLabel from "examples/Sidenav/styles/sidenav";
 // Argon Dashboard 2 MUI context
 import { useArgonController, setMiniSidenav } from "context";
 import Gauge from "layouts/dashboard/gauge/gauge";
+import SidenavItemControlls from "./SidenavItemControlls";
+import MenuItem from "components/MenuItem/menuItem";
 
 function Sidenav({ color, brand, brandName, routes, ...rest }) {
   const [controller, dispatch] = useArgonController();
@@ -69,54 +71,6 @@ function Sidenav({ color, brand, brandName, routes, ...rest }) {
     // Remove event listener on cleanup
     return () => window.removeEventListener("resize", handleMiniSidenav);
   }, [dispatch, location]);
-
-  // Render all the routes from the routes.js (All the visible items on the Sidenav)
-  const renderRoutes = routes.map(({ type, name, icon, title, key, href, route }) => {
-    let returnValue;
-
-    if (type === "route") {
-      if (href) {
-        returnValue = (
-          <Link href={href} key={key} target="_blank" rel="noreferrer">
-            <SidenavItem
-              name={name}
-              icon={icon}
-              active={key === itemName}
-              noCollapse={noCollapse}
-            />
-          </Link>
-        );
-      } else {
-        returnValue = (
-          <NavLink to={route} key={key}>
-            <SidenavItem name={name} icon={icon} active={key === itemName} />
-          </NavLink>
-        );
-      }
-    } else if (type === "title") {
-      returnValue = (
-        <ArgonTypography
-          key={key}
-          color={darkSidenav ? "white" : "dark"}
-          display="block"
-          variant="caption"
-          fontWeight="bold"
-          textTransform="uppercase"
-          opacity={0.6}
-          pl={3}
-          mt={2}
-          mb={1}
-          ml={1}
-        >
-          {title}
-        </ArgonTypography>
-      );
-    } else if (type === "divider") {
-      returnValue = <Divider key={key} light={darkSidenav} />;
-    }
-
-    return returnValue;
-  });
 
   return (
     <SidenavRoot {...rest} variant="permanent" ownerState={{ darkSidenav, miniSidenav, layout }}>
@@ -154,11 +108,11 @@ function Sidenav({ color, brand, brandName, routes, ...rest }) {
         </ArgonBox>
       </ArgonBox>
       <Divider light={darkSidenav} />
-      <List>{renderRoutes}</List>
+      <MenuItem routes={routes}/>
       <Gauge/>
     </SidenavRoot>
   );
-}
+} 
 
 // Setting default values for the props of Sidenav
 Sidenav.defaultProps = {

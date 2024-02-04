@@ -32,13 +32,13 @@ const container = document.getElementById("root");
 const root = createRoot(container);
 
 root.render(
-  <RecoilRoot>
     <BrowserRouter>
       <ArgonControllerProvider>
         <PerfectScrollbar>
+        <RecoilRoot>
           <App />
+        </RecoilRoot>
         </PerfectScrollbar>
       </ArgonControllerProvider>
     </BrowserRouter>
-  </RecoilRoot>
 );
