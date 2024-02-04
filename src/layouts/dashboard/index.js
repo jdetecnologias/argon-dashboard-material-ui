@@ -1,59 +1,33 @@
-/* eslint-disable no-unused-vars */
-/**
-=========================================================
-* Argon Dashboard 2 MUI - v3.0.0
-=========================================================
 
-* Product Page: https://www.creative-tim.com/product/argon-dashboard-material-ui
-* Copyright 2022 Creative Tim (https://www.creative-tim.com)
-
-Coded by www.creative-tim.com
-
- =========================================================
-
-* The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
-*/
-
-// @mui material components
-import Grid from "@mui/material/Grid";
-
-// Argon Dashboard 2 MUI components
-import ArgonBox from "components/ArgonBox";
-
-import { Navigate } from "react-router-dom";
 import { useState, useEffect } from "react";
 // Argon Dashboard 2 MUI example components
 import DashboardLayout from "examples/LayoutContainers/DashboardLayout";
 import DashboardNavbar from "examples/Navbars/DashboardNavbar";
-import GradientLineChart from "examples/Charts/LineCharts/DefaultLineChart";
-import ArgonTypography from "components/ArgonTypography";
-// Argon Dashboard 2 MUI base styles
-import typography from "assets/theme/base/typography";
-
-// Data
-import gradientLineChartData from "layouts/dashboard/data/gradientLineChartData";
-
+import Map from "layouts/dashboard/map/map";
+import ChartThemeSelector from "./components/Chart/chartThemeSelector";
+import { PrintContentCanvas } from 'helper/printDocument';
+import { Print } from "layouts/dashboard/assets/print";
+import { Sleep } from "layouts/dashboard/assets/sleep";
+import fundo from "layouts/dashboard/assets/fundo.png"
+import { Steps } from "layouts/dashboard/assets/steps";
+import { FrequencyHeart } from "layouts/dashboard/assets/frequencyHeart";
+import { Activities } from "layouts/dashboard/assets/activities";
+import If from "components/If/if";
+import { useRecoilState } from "recoil";
+import { minutoToHour } from "helper/date";
 import { getFitered, getFiteredByAdmin } from "./controller/getFilteredController";
 import { getCookie } from "helper/cookies";
 import { adapterGlycemia } from "./adapter/dataAdapter";
-import ArgonInput from "components/ArgonInput";
 import dayjs from "dayjs";
-import ArgonButton from "components/ArgonButton";
 import { loginRedirect } from "helper/loginRedirect";
-import If from "components/If/if";
 import ErrorAlert from "./components/ErrorAlert/errorAlert";
-import colors from "../../assets/theme/base/colors";
-import Map from "./map/map";
 import ItemCard from "./components/ItemCard/itemCard";
 import CardList from "./components/CardList/cardList";
 import FilterContainer from "./components/FilterItem/FilterContainer";
-import Chart from "./components/Chart/chart";
 import ChartList from "./components/Chart/chartList";
 import { getAverage } from "helper/math";
-import ChartAcc from "./components/Chart/chartAcc";
-import fundo from "./assets/fundo2.png"
-import { useRecoilState } from "recoil";
-import { appDataState, glycemiaAverage } from "../../stateHandler/atoms/atoms";
+import fundo2 from "./assets/fundo2.png"
+import { appDataState } from "../../stateHandler/atoms/atoms";
 import { GetLastAppData } from "./model/getAppDataModel";
 
 let qtyMapShow = -1;
@@ -63,6 +37,8 @@ function Default() {
   const [data, setData] = useRecoilState(appDataState)
    const dataHoje = dayjs().format("YYYY-MM-DD")
   const [listGlycemia, setListGlycemia] = useState([]);
+  const [listGlycemiaOne, setListGlycemiaOne] = useState([]);
+  const [listGlycemiaTwo, setListGlycemiaTwo] = useState([]);
   const [optionAccumulate, setOptionAccumulate] = useState(false);
   const [dataChart,setDataChart ] = useState([]);
   const [data_inicio_filtro,setDataInicio_filtro] = useState(dataHoje);
@@ -78,6 +54,9 @@ function Default() {
                                             {prop:"weight", label:"Peso", show:false,color:"secondary"},
                                             {prop:"steps", label:"Passos", show:false,color:"info"}
                                           ])
+  const [lightTheme, setLightTheme] = useState(true); 
+  const [appData, setAppData] = useRecoilState(appDataState);
+
    const numbersOfDivs = [1,2,3,4,5]                                       
   useEffect(() => {
     const queryString = window.location.search;
@@ -92,6 +71,11 @@ function Default() {
       const dadoslogin = getDadosLogin();
       email = dadoslogin.email;
       filtrar(dadoslogin.email, data_inicio_filtro, data_fim_filtro,dadoslogin.token);
+      const oneday =  dayjs(data_inicio_filtro).add(-1,'day').format('YYYY-MM-DD');
+      const twoday = dayjs(data_inicio_filtro).add(-2,'day').format('YYYY-MM-DD') 
+
+      filtrarFullDay(dadoslogin.email,oneday, dadoslogin.token,setListGlycemiaOne);
+      filtrarFullDay(dadoslogin.email,twoday, dadoslogin.token,setListGlycemiaTwo);
     }
 
     if(email !== ""){
@@ -124,6 +108,17 @@ function filtrar(email, data_inicio_filtro, data_fim_filtro, token){
   })
 }
 
+function filtrarFullDay(email, data, token, callback){
+  getFitered({email, data_inicio_filtro:data, data_fim_filtro:data, hora_inicio:"00:00", hora_fim:"23:59" },token,(dados, messageErrorsList)=>{
+     
+    if(messageErrorsList.length > 0){
+      setMessageErrorList(messageErrorsList);
+    }else{
+      callback(dados);
+    }
+  })
+}
+
 
 function filtrarAdmin(email, data_inicio_filtro, data_fim_filtro){
   getFiteredByAdmin({email, data_inicio_filtro, data_fim_filtro, hora_inicio, hora_fim },(dados, messageErrorsList)=>{
@@ -134,20 +129,6 @@ function filtrarAdmin(email, data_inicio_filtro, data_fim_filtro){
       setListGlycemia(dados);
     }
   })
-}
-
-function getTextByLenght(text){
-  const stringLength = text.length;
-  const element = document.querySelector(".averageCard");
-  const width = element?element.clientWidth:100;
-  const num = 7.6;
-  const qtdLength = parseInt(width/num); 
-
-  if(stringLength > qtdLength){
-    return text.substring(0,qtdLength-1);;
-  }else{
-    return text;
-  }
 }
 
 function handleAccumulate(){
@@ -233,25 +214,6 @@ function getDadosLogin(){
   setMetaDataList(()=>newList)
  }
 
- function setMetaDataOptions(prop, value){
-  const newList = [].concat(metaDataList)
-  const index = newList.findIndex(item=>item.prop === prop);
-  const register = newList.find(item=>item.prop === prop)
-  
-  register.show = value;
-
-  newList[index] = register;
-  setMetaDataList(()=>newList)
- }
-
- function GetColor(color){
-  let cl = colors
-    
-  cl = /*cl[color] ||*/ cl["dark"]
-  cl = cl.main
-
-  return cl
- }
  
   return (
     <DashboardLayout>
@@ -262,18 +224,105 @@ function getDadosLogin(){
         handleFiltrar={handleFiltrar}
       />
       <If test={messageErrorsList.length === 0} Else={<ErrorAlert messageErrorList={messageErrorsList} resetMessages={()=>setMessageErrorList([])}/>}>
-      <If test={optionAccumulate}>
-        <ChartAcc dataChart={dataChart}/>
-      </If>
-      <If test={!optionAccumulate}>
-        <ChartList dataChart={dataChart}/>
-      </If>
-      <label className="relative inline-flex items-center cursor-pointer h-6">
+      <div className=" md:grid md:grid-cols-4 flex flex-col-reverse mt-16">
+        <div className="col-span-3">
+          <ChartThemeSelector onChange={setLightTheme} value={lightTheme}/>
+          <button className="btn btn-primary ml-2" onClick={()=>PrintContentCanvas("#grafico","#grafico canvas")}><Print collorFill="#fff" /></button>
+            <div>
+              <div>
+                Data filtrada:
+                <ChartList dataChart={dataChart} lightTheme={lightTheme}/>
+              </div>
+              <div>
+                Data: {dayjs(data_inicio_filtro).add(-1,'day').format('DD/MM/YYYY')}
+                <ChartList dataChart={adapterGlycemia(listGlycemiaOne, [].concat(metaDataList).filter(option=>option.show))} lightTheme={lightTheme}/>
+              </div>
+              <div>
+                Data: {dayjs(data_inicio_filtro).add(-2,'day').format('DD/MM/YYYY')}
+                <ChartList dataChart={adapterGlycemia(listGlycemiaTwo, [].concat(metaDataList).filter(option=>option.show))} lightTheme={lightTheme}/>
+              </div>
+            </div>
+        </div>
+        <div>
+  
+          <Map/>
+  
+          <div>
+              <h5 className="text-center text-sm font-extrabold">Horas de sono:</h5>
+              <div className="grid grid-cols-2">
+                  <div className="w-48">
+                      <Sleep collorFill="#000" _className=""/>
+                  </div>
+                  <div className='w-48 font-bold'  style={{position:"relative"}}>
+                      <img src={fundo}/> 
+                      <span style={{position:"absolute", top:"50%", left:"50%", transform:"translateY(-50%) translateX(-50%)"}}>{appData.sleepTime?minutoToHour(appData.sleepTime):0}</span>
+                  </div>
+              </div> 
+          </div>
+          <div>
+            <div className="grid grid-cols-3">
+                <div className="grid grid-rows-3">
+                    <h5 className="text-center text-sm font-extrabold">Passos Ativo</h5>
+                    <div className='w-32' style={{position:"relative"}}>
+                        <div style={{position:"absolute", left:"50%", transform:"translateX(-50%)"}}>
+                            <Steps collorFill="#000" _className="w-12"/>
+                        </div>
+                    </div>
+                    <div className="p-2 text-center text-xs font-extrabold">
+                        {appData.steps?parseInt(appData.steps):0}
+                    </div>
+                </div>
+                <div className="grid grid-rows-3">
+                    <h5 className="text-center text-sm font-extrabold">Atividades</h5>
+                    <div className='w-32'  style={{position:"relative"}}>
+                        <div style={{position:"absolute", left:"50%", transform:"translateX(-50%)"}}>
+                            <FrequencyHeart collorFill="#000" _className="w-12"/>
+                        </div>
+                    </div>
+                    <div className="p-2 text-center text-xs font-extrabold">
+                    {appData.activities?parseInt(appData.activities):0}
+                    </div>
+                </div>
+                <div className="grid grid-rows-3">
+                    <h5 className="text-center text-sm font-extrabold">Movimentos intensidade</h5>
+                    <div className='w-32'  style={{position:"relative"}}>
+                        <div style={{position:"absolute", left:"50%", transform:"translateX(-50%)"}}>
+                            <Activities  collorFill="#000" _className="w-12"/>
+                        </div>
+                    </div>
+                    <div className="p-2 text-center text-xs font-extrabold">
+                        {appData.intensityMovements?parseInt(appData.intensityMovements):0}
+                    </div>
+                </div>
+            </div> 
+          </div>
+          <div>
+            <div className="grid grid-cols-2">
+            <div>
+                    <h5 className="text-center text-sm font-extrabold">Distância</h5>
+                    <div className='w-48 font-bold' style={{position:"relative"}}>
+                        <img src={fundo}/> 
+                        <div style={{position:"absolute", top:"50%", left:"50%", transform:"translateY(-50%) translateX(-50%)"}}>{appData.distance?parseInt(appData.distance):0}Mt</div>
+                    </div>
+                </div>
+                <div>
+                    <h5 className="text-center text-sm font-extrabold">Tempo Ativo</h5>
+                    <div className='w-48 font-bold' style={{position:"relative"}}>
+                        <img src={fundo}/> 
+                        <div style={{position:"absolute", top:"50%", left:"50%", transform:"translateY(-50%) translateX(-50%)"}}>{appData.avtiveTime?minutoToHour(appData.avtiveTime):0}</div>
+                    </div>
+                </div>
+            </div> 
+          </div>
+        </div>
+      </div>
+
+      <label style={{display:"none"}} className="relative inline-flex items-center cursor-pointer h-6">
                 <input type="checkbox" onChange={handleAccumulate}  value="" checked={optionAccumulate} className="sr-only peer"/>
                 <div className="w-11 h-6 bg-gray-200 peer-focus:outline-none peer-focus:ring-4 peer-focus:ring-blue-300 dark:peer-focus:ring-blue-800 rounded-full peer dark:bg-gray-700 peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all dark:border-gray-600 peer-checked:bg-blue-600"></div>
                 <span className="ml-3 text-sm font-medium text-gray-900 dark:text-gray-300">Selecão multipla</span>
       </label>
-          <CardList>
+          <CardList style={{display:"none"}}>
 
             {
               metaDataList.map((item, key)=>(
@@ -295,7 +344,7 @@ function getDadosLogin(){
                     return(
                             <div key={key} id={"caixa"+item}>
                               <div className='w-32 font-bold' style={{position:"relative"}}>
-                                <img src={fundo}/> 
+                                <img src={fundo2}/> 
                                 <div style={{position:"absolute", top:"50%", left:"50%", transform:"translateY(-50%) translateX(-50%)"}}>{Math.round(Math.random()*100)+"%"}</div>
                               </div>
                             </div>

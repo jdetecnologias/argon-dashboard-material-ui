@@ -2,7 +2,7 @@ import PropTypes from "prop-types";
 
 export  default function CardList(props){
     return (
-        <div>
+        <div {...props}>
             <div className="row">
                 <div className="col-12 text-center">
                     Médias (período)
