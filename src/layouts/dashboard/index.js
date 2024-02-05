@@ -21,11 +21,8 @@ import { adapterGlycemia } from "./adapter/dataAdapter";
 import dayjs from "dayjs";
 import { loginRedirect } from "helper/loginRedirect";
 import ErrorAlert from "./components/ErrorAlert/errorAlert";
-import ItemCard from "./components/ItemCard/itemCard";
-import CardList from "./components/CardList/cardList";
 import FilterContainer from "./components/FilterItem/FilterContainer";
 import ChartList from "./components/Chart/chartList";
-import { getAverage } from "helper/math";
 import fundo2 from "./assets/fundo2.png"
 import { appDataState, metaDataListState } from "../../stateHandler/atoms/atoms";
 import { GetLastAppData } from "./model/getAppDataModel";
@@ -63,8 +60,8 @@ function Default() {
       const dadoslogin = getDadosLogin();
       email = dadoslogin.email;
       filtrar(dadoslogin.email, data_inicio_filtro, data_fim_filtro,dadoslogin.token);
-      const oneday =  dayjs(data_inicio_filtro).add(-1,'day').format('YYYY-MM-DD');
-      const twoday = dayjs(data_inicio_filtro).add(-2,'day').format('YYYY-MM-DD') 
+      const oneday =  dayjs().add(-1,'day').format('YYYY-MM-DD');
+      const twoday = dayjs().add(-2,'day').format('YYYY-MM-DD'); 
 
       filtrarFullDay(dadoslogin.email,oneday, dadoslogin.token,setListGlycemiaOne);
       filtrarFullDay(dadoslogin.email,twoday, dadoslogin.token,setListGlycemiaTwo);
@@ -229,11 +226,11 @@ function getDadosLogin(){
                 <ChartList dataChart={dataChart} lightTheme={lightTheme}/>
               </div>
               <div>
-                Data: {dayjs(data_inicio_filtro).add(-1,'day').format('DD/MM/YYYY')}
+                Data: {dayjs().add(-1,'day').format('DD/MM/YYYY')}
                 <ChartList dataChart={adapterGlycemia(listGlycemiaOne, [].concat(metaDataList).filter(option=>option.show))} lightTheme={lightTheme}/>
               </div>
               <div>
-                Data: {dayjs(data_inicio_filtro).add(-2,'day').format('DD/MM/YYYY')}
+                Data: {dayjs().add(-2,'day').format('DD/MM/YYYY')}
                 <ChartList dataChart={adapterGlycemia(listGlycemiaTwo, [].concat(metaDataList).filter(option=>option.show))} lightTheme={lightTheme}/>
               </div>
             </div>
