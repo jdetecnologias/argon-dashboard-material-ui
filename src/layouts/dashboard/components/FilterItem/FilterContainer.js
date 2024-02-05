@@ -27,7 +27,7 @@ export default function FilterContainer(props){
         <div className="grid grid-rows-2 relative text-xs md:text-lg">
             <div className="grid 4xl:grid-cols-6 3xl:grid-cols-5 2xl:grid-cols-4 md:grid-cols-2 sm:grid-cols-3">
                 <DateTime valueDate={data_inicio_filtro} label="De:" valueTime={hora_inicio} onChangeDate={(e)=>setDataInicio_filtro(e.target.value)} onChangeTime={(e)=>setHoraInicio(e.target.value)}/>
-                <DateTime valueDate={data_fim_filtro} label="De:" valueTime={hora_fim} onChangeDate={(e)=>setDataFim_filtro(e.target.value)} onChangeTime={(e)=>setHoraFim(e.target.value)}/>
+                <DateTime valueDate={data_fim_filtro} label="Até:" valueTime={hora_fim} onChangeDate={(e)=>setDataFim_filtro(e.target.value)} onChangeTime={(e)=>setHoraFim(e.target.value)}/>
             </div>
             <div className='grid grid-cols-10 '>
                 <div className='mt-1 col-span-3'>
