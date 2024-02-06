@@ -53,15 +53,17 @@ function Default() {
     const urlParams = new URLSearchParams(queryString);
     const adminAccess = urlParams.get('adminAccess') !== null && urlParams.get('adminAccess') === 'true' ;
     let email = "";
+    const oneday =  dayjs().add(-1,'day').format('YYYY-MM-DD');
+    const twoday = dayjs().add(-2,'day').format('YYYY-MM-DD'); 
     if(adminAccess){
       email = urlParams.get('email');
       filtrarAdmin(email, data_inicio_filtro, data_fim_filtro);
+      filtrarFullDayAdmin(email,oneday, setListGlycemiaOne);
+      filtrarFullDayAdmin(email,twoday, setListGlycemiaTwo);
     }else{
       const dadoslogin = getDadosLogin();
       email = dadoslogin.email;
       filtrar(dadoslogin.email, data_inicio_filtro, data_fim_filtro,dadoslogin.token);
-      const oneday =  dayjs().add(-1,'day').format('YYYY-MM-DD');
-      const twoday = dayjs().add(-2,'day').format('YYYY-MM-DD'); 
 
       filtrarFullDay(dadoslogin.email,oneday, dadoslogin.token,setListGlycemiaOne);
       filtrarFullDay(dadoslogin.email,twoday, dadoslogin.token,setListGlycemiaTwo);
@@ -99,6 +101,17 @@ function filtrar(email, data_inicio_filtro, data_fim_filtro, token){
 
 function filtrarFullDay(email, data, token, callback){
   getFitered({email, data_inicio_filtro:data, data_fim_filtro:data, hora_inicio:"00:00", hora_fim:"23:59" },token,(dados, messageErrorsList)=>{
+     
+    if(messageErrorsList.length > 0){
+      setMessageErrorList(messageErrorsList);
+    }else{
+      callback(dados);
+    }
+  })
+}
+
+function filtrarFullDayAdmin(email, data, callback){
+  getFiteredByAdmin({email, data_inicio_filtro:data, data_fim_filtro:data, hora_inicio:"00:00", hora_fim:"23:59" },(dados, messageErrorsList)=>{
      
     if(messageErrorsList.length > 0){
       setMessageErrorList(messageErrorsList);
