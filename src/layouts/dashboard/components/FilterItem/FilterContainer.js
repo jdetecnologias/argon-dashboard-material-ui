@@ -84,7 +84,7 @@ export default function FilterContainer(props){
                     </div>
                     <div className='grid grid-rows-3'>
                         <div>
-                        BPG:
+                        VBG:
                         </div>
                         <div className='grid grid-cols-2 w-20 text-lg font-bold '>
                             {appData.vbg?appData.vbg:0} <Oximetry colorFill="#000" _className=""/>
