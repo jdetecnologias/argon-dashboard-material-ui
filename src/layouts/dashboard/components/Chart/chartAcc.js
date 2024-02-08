@@ -21,9 +21,6 @@ export default function ChartAcc(props){
                         dataChart={{labels:dataChart.labels, datasets:dataChart.datasets}}
                     />
                 </div>
-                <div>
-                    <Map/>
-                </div>
             </div>
     )
 }
