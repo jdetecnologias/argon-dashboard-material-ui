@@ -30,7 +30,7 @@ export default function FilterContainer(props){
                 <DateTime valueDate={data_fim_filtro} label="Até:" valueTime={hora_fim} onChangeDate={(e)=>setDataFim_filtro(e.target.value)} onChangeTime={(e)=>setHoraFim(e.target.value)}/>
             </div>
             <div className='grid grid-cols-10 '>
-                <div className='mt-1 col-span-3'>
+                <div className='mt-1 grid-cols-3 col-span-3'>
                     <ButtonFilter onClick={handleFiltrar}/>
                 </div>
                 <div className='grid grid-cols-7 text-xs col-span-7'>
@@ -72,14 +72,6 @@ export default function FilterContainer(props){
                         </div>
                         <div className='grid grid-cols-2 w-20 text-lg font-bold '>
                             {appData.age?appData.age:0} <Age colorFill="#000" _className=""/>
-                        </div>
-                    </div>
-                    <div className='grid grid-rows-3'>
-                        <div>
-
-                        </div>
-                        <div className='grid grid-cols-2 w-20 text-lg font-bold '>
-
                         </div>
                     </div>
                     <div className='grid grid-rows-3'>
