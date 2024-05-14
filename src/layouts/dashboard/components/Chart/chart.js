@@ -7,6 +7,7 @@ import { getAverage } from "helper/math";
 import { GetLastGlycemia } from "layouts/dashboard/model/getGlycemiaData";
 import PropTypes from "prop-types";
 import { useEffect, useState } from "react";
+import { ModalInstance } from "../Modal/modal";
 export default function Chart(props){
     const {dataChart, _className,title, lightTheme} = props;
     const [lastGlycemia, setLastGlycemia] = useState({});
@@ -69,7 +70,12 @@ export default function Chart(props){
                 </div>    
                 <div className="text-4xl text-center">
                     Mg/dl
-                </div>                        
+                </div>   
+                <div className="text-4xl text-center">
+                    <ModalInstance>
+                        Oi eu sou goku
+                    </ModalInstance>
+                </div>                       
             </div>
         </div>
     )
