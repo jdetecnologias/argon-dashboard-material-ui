@@ -29,7 +29,7 @@ import { useArgonController, setLayout } from "context";
 
 function DashboardLayout({ bgColor, children, ...rest }) {
   const [controller, dispatch] = useArgonController();
-  const { miniSidenav, darkMode } = controller;
+  const { hideSidenav, miniSidenav, darkMode } = controller;
   const { pathname } = useLocation();
 
   useEffect(() => {
@@ -44,7 +44,7 @@ function DashboardLayout({ bgColor, children, ...rest }) {
         p: 3,
 
         [breakpoints.up("xl")]: {
-          marginLeft: miniSidenav ? pxToRem(120) : pxToRem(274),
+          marginLeft: hideSidenav? 0: miniSidenav ? pxToRem(120) : pxToRem(274),
           transition: transitions.create(["margin-left", "margin-right"], {
             easing: transitions.easing.easeInOut,
             duration: transitions.duration.standard,

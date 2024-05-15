@@ -23,7 +23,10 @@ import { GetLastAppData } from "./model/getAppDataModel";
 import { Fundo1 } from "./assets/fundo1";
 import AppData from "./components/AppData/appData";
 import Switcher from "./components/Switch/switch";
-
+import {
+  useArgonController,
+  setHideSidenav
+} from "context";
 
 let qtyMapShow = -1;
 function Default() {
@@ -44,6 +47,9 @@ function Default() {
   const [metaDataList, setMetaDataList] = useRecoilState(metaDataListState)
   const [lightTheme, setLightTheme] = useState(true); 
   const [showAppData, setShowAppData] = useState(true); 
+  const [controller, dispatch] =  useArgonController();
+  const {hideSidenav} = controller;
+  const showSidenav = !hideSidenav;
 
    const numbersOfDivs = [1,2,3,4,5]                                       
   useEffect(() => {
@@ -230,6 +236,9 @@ function getDadosLogin(){
       <If test={messageErrorsList.length === 0} Else={<ErrorAlert messageErrorList={messageErrorsList} resetMessages={()=>setMessageErrorList([])}/>}>
       <div>
         <div className="grid grid-cols-10">
+          <div className="col-span-2">
+            <Switcher onChange={(value)=>setHideSidenav(dispatch, !value)} value={showSidenav} label="menu lateral"/>
+          </div>
           <div className="col-span-2 col-end-10">
             <Switcher onChange={setShowAppData} value={showAppData} label="Dados App."/>
           </div>

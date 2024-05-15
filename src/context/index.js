@@ -32,6 +32,10 @@ Argon.displayName = "ArgonContext";
 // Argon Dashboard 2 MUI reducer
 function reducer(state, action) {
   switch (action.type) {
+    case "HIDE_SIDENAV": {
+      return { ...state, hideSidenav: action.value };
+    }
+
     case "MINI_SIDENAV": {
       return { ...state, miniSidenav: action.value };
     }
@@ -68,7 +72,8 @@ function reducer(state, action) {
 // Argon Dashboard 2 MUI context provider
 function ArgonControllerProvider({ children }) {
   const initialState = {
-    miniSidenav: false,
+    hideSidenav:false,
+    miniSidenav: true,
     darkSidenav: false,
     sidenavColor: null,
     transparentNavbar: true,
@@ -103,6 +108,7 @@ ArgonControllerProvider.propTypes = {
 };
 
 // Context module functions
+const setHideSidenav = (dispatch, value) => dispatch({ type: "HIDE_SIDENAV", value });
 const setMiniSidenav = (dispatch, value) => dispatch({ type: "MINI_SIDENAV", value });
 const setDarkSidenav = (dispatch, value) => dispatch({ type: "DARK_SIDENAV", value });
 const setSidenavColor = (dispatch, value) => dispatch({ type: "SIDENAV_COLOR", value });
@@ -116,6 +122,7 @@ const setDarkMode = (dispatch, value) => dispatch({ type: "DARK_MODE", value });
 export {
   ArgonControllerProvider,
   useArgonController,
+  setHideSidenav,
   setMiniSidenav,
   setDarkSidenav,
   setSidenavColor,
