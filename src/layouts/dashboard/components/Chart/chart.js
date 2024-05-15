@@ -7,11 +7,11 @@ import { getAverage } from "helper/math";
 import { GetLastGlycemia } from "layouts/dashboard/model/getGlycemiaData";
 import PropTypes from "prop-types";
 import { useEffect, useState } from "react";
-import { ModalInstance } from "../Modal/modal";
+
 export default function Chart(props){
     const {dataChart, _className,title, lightTheme} = props;
     const [lastGlycemia, setLastGlycemia] = useState({});
-
+    const [showData, setShowData] = useState(true);
     useEffect(() => {
         const queryString = window.location.search;
     
@@ -41,41 +41,45 @@ export default function Chart(props){
       },[]);
     
     const bgClassName = lightTheme ? "" : "bg-black";
-    let mainClassName ="grid grid-cols-10 "+bgClassName; 
+    let mainClassName ="grid grid-rows-2 grid-cols-10 "+bgClassName; 
     mainClassName +=  _className !== undefined ? " "+_className : ""; 
+
+    const colsSpanChart = showData?"col-span-8":"col-span-10";
+    const avgDataClass = showData?"":" hidden";
     return (
-        <div id="grafico" className={mainClassName}>
-            <div className={lightTheme?"col-span-8":"col-span-8 invert"}>
-                <GradientLineChart
-                title={title}
-                chart={dataChart}
-                height={200}
-                />
+        <div id="grafico">
+            <div className={mainClassName}>
+                <button onClick={()=>setShowData(!showData)} className="btn btn-primary btn-sm col-span-1 col-end-10">{showData?"Esconder":"Exibir"}</button>
             </div>
-            <div className={lightTheme?"col-span-2":"text-lime-300 col-span-2"}>
-                <div className="text-sm font-black">
-                    Maior: {parseInt(getMax(dataChart.datasets[0].data))}
+            <div className={mainClassName}>
+                <div className={lightTheme?colsSpanChart:colsSpanChart+" invert"}>
+                    <GradientLineChart
+                    title={title}
+                    chart={dataChart}
+                    height={200}
+                    />
                 </div>
-                <div className="text-sm font-black">
-                    Menor: {parseInt(getMin(dataChart.datasets[0].data))}
+                <div  className={lightTheme?"col-span-2"+avgDataClass:"text-lime-300 col-span-2"+avgDataClass}>
+                    <div className="text-sm font-black">
+                        Maior: {parseInt(getMax(dataChart.datasets[0].data))}
+                    </div>
+                    <div className="text-sm font-black">
+                        Menor: {parseInt(getMin(dataChart.datasets[0].data))}
+                    </div>
+                    <div className="text-sm font-black">
+                        Média:
+                    </div>
+                    <div className="text-4xl text-center">
+                        {parseInt(getAverage(dataChart.datasets[0].data))}
+                    </div>
+                    <div className="text-sm font-black">
+                        Atual({lastGlycemia && lastGlycemia.data?dayjs(lastGlycemia.data).format("DD/MM/YYYY"):"Sem dados"}): {lastGlycemia && lastGlycemia.lastGlycemia ? lastGlycemia.lastGlycemia : 0}
+                    </div>    
+                    <div className="text-4xl text-center">
+                        Mg/dl
+                    </div>                        
                 </div>
-                <div className="text-sm font-black">
-                    Média:
-                </div>
-                <div className="text-4xl text-center">
-                    {parseInt(getAverage(dataChart.datasets[0].data))}
-                </div>
-                <div className="text-sm font-black">
-                    Atual({lastGlycemia && lastGlycemia.data?dayjs(lastGlycemia.data).format("DD/MM/YYYY"):"Sem dados"}): {lastGlycemia && lastGlycemia.lastGlycemia ? lastGlycemia.lastGlycemia : 0}
-                </div>    
-                <div className="text-4xl text-center">
-                    Mg/dl
-                </div>   
-                <div className="text-4xl text-center">
-                    <ModalInstance>
-                        Oi eu sou goku
-                    </ModalInstance>
-                </div>                       
+
             </div>
         </div>
     )
