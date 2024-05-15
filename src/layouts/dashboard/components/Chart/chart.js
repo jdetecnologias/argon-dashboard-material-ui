@@ -7,6 +7,7 @@ import { getAverage } from "helper/math";
 import { GetLastGlycemia } from "layouts/dashboard/model/getGlycemiaData";
 import PropTypes from "prop-types";
 import { useEffect, useState } from "react";
+import Switcher from "../Switch/switch";
 
 export default function Chart(props){
     const {dataChart, _className,title, lightTheme} = props;
@@ -49,7 +50,9 @@ export default function Chart(props){
     return (
         <div id="grafico">
             <div className={mainClassName}>
-                <button onClick={()=>setShowData(!showData)} className="btn btn-primary btn-sm col-span-1 col-end-10">{showData?"Esconder":"Exibir"}</button>
+                <div className="col-span-2 col-end-10">
+                    <Switcher onChange={setShowData} value={showData} label="Médias"/>
+                </div>
             </div>
             <div className={mainClassName}>
                 <div className={lightTheme?colsSpanChart:colsSpanChart+" invert"}>

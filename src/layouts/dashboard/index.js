@@ -22,6 +22,8 @@ import { appDataState, metaDataListState } from "../../stateHandler/atoms/atoms"
 import { GetLastAppData } from "./model/getAppDataModel";
 import { Fundo1 } from "./assets/fundo1";
 import AppData from "./components/AppData/appData";
+import Switcher from "./components/Switch/switch";
+
 
 let qtyMapShow = -1;
 function Default() {
@@ -228,7 +230,9 @@ function getDadosLogin(){
       <If test={messageErrorsList.length === 0} Else={<ErrorAlert messageErrorList={messageErrorsList} resetMessages={()=>setMessageErrorList([])}/>}>
       <div>
         <div className="grid grid-cols-10">
-          <button onClick={()=>setShowAppData(!showAppData)} className="btn btn-sm btn-primary col-span-1 col-end-10">{showAppData?"Esconder":"Exibir"}</button>
+          <div className="col-span-2 col-end-10">
+            <Switcher onChange={setShowAppData} value={showAppData} label="Dados App."/>
+          </div>
         </div>
         <div className=" md:grid md:grid-cols-12 flex flex-col-reverse">
           <div className={showAppData?"col-span-8":"col-span-12"}>
