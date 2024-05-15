@@ -1,7 +1,7 @@
 import PropTypes from "prop-types";
 
 export function Fundo1(props){
-    const {_className, colorFill} = props;
+    const {colorFill} = props;
     console.log(colorFill)
     return (
 
@@ -66,6 +66,5 @@ export function Fundo1(props){
 }
 
 Fundo1.propTypes = {
-    _className: PropTypes.string.isRequired,
     colorFill:PropTypes.string.isRequired,
 }

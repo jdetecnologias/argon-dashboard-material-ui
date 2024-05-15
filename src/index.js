@@ -38,7 +38,7 @@ root.render(
       <ArgonControllerProvider>
         <PerfectScrollbar>
         <RecoilRoot>
-           <App2/>
+           <App/>
         </RecoilRoot>
         </PerfectScrollbar>
       </ArgonControllerProvider>

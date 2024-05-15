@@ -7,14 +7,8 @@ import Map from "layouts/dashboard/map/map";
 import ChartThemeSelector from "./components/Chart/chartThemeSelector";
 import { PrintContentCanvas } from 'helper/printDocument';
 import { Print } from "layouts/dashboard/assets/print";
-import { Sleep } from "layouts/dashboard/assets/sleep";
-import fundo from "layouts/dashboard/assets/fundo.png"
-import { Steps } from "layouts/dashboard/assets/steps";
-import { FrequencyHeart } from "layouts/dashboard/assets/frequencyHeart";
-import { Activities } from "layouts/dashboard/assets/activities";
 import If from "components/If/if";
 import { useRecoilState } from "recoil";
-import { minutoToHour } from "helper/date";
 import { getFitered, getFiteredByAdmin } from "./controller/getFilteredController";
 import { getCookie } from "helper/cookies";
 import { adapterGlycemia } from "./adapter/dataAdapter";
@@ -27,6 +21,7 @@ import fundo2 from "./assets/fundo2.png"
 import { appDataState, metaDataListState } from "../../stateHandler/atoms/atoms";
 import { GetLastAppData } from "./model/getAppDataModel";
 import { Fundo1 } from "./assets/fundo1";
+import AppData from "./components/AppData/appData";
 
 let qtyMapShow = -1;
 function Default() {
@@ -46,6 +41,7 @@ function Default() {
   const [messageErrorsList,setMessageErrorList] = useState([])
   const [metaDataList, setMetaDataList] = useRecoilState(metaDataListState)
   const [lightTheme, setLightTheme] = useState(true); 
+  const [showAppData, setShowAppData] = useState(true); 
 
    const numbersOfDivs = [1,2,3,4,5]                                       
   useEffect(() => {
@@ -230,92 +226,31 @@ function getDadosLogin(){
         handleFiltrar={handleFiltrar}
       />
       <If test={messageErrorsList.length === 0} Else={<ErrorAlert messageErrorList={messageErrorsList} resetMessages={()=>setMessageErrorList([])}/>}>
-      <div className=" md:grid md:grid-cols-12 flex flex-col-reverse mt-16">
-        <div className="col-span-8">
-          <ChartThemeSelector onChange={setLightTheme} value={lightTheme}/>
-          <button className="btn btn-primary ml-2" onClick={()=>PrintContentCanvas("#grafico","#grafico canvas")}><Print collorFill="#fff" /></button>
-            <div>
-              <div>
-                Data filtrada:
-                <ChartList dataChart={dataChart} lightTheme={lightTheme}/>
-              </div>
-              <div>
-                Data: {dayjs().add(-1,'day').format('DD/MM/YYYY')}
-                <ChartList dataChart={adapterGlycemia(listGlycemiaOne, [].concat(metaDataList).filter(option=>option.show))} lightTheme={lightTheme}/>
-              </div>
-              <div>
-                Data: {dayjs().add(-2,'day').format('DD/MM/YYYY')}
-                <ChartList dataChart={adapterGlycemia(listGlycemiaTwo, [].concat(metaDataList).filter(option=>option.show))} lightTheme={lightTheme}/>
-              </div>
-            </div>
+      <div>
+        <div className="grid grid-cols-10">
+          <button onClick={()=>setShowAppData(!showAppData)} className="btn btn-sm btn-primary col-span-1 col-end-10">{showAppData?"Esconder":"Exibir"}</button>
         </div>
-        <div className="col-span-4"> 
-          <div>
-              <h5 className="text-center text-sm font-extrabold">Horas de sono:</h5>
-              <div className="grid grid-cols-2">
-                  <div className="w-48">
-                      <Sleep colorFill="lightblue" _className=""/>
-                  </div>
-                  <div className='w-48 font-bold'  style={{position:"relative"}}>
-                      <Fundo1 colorFill="lightblue"/>
-                      <span style={{position:"absolute", top:"50%", left:"50%", transform:"translateY(-50%) translateX(-50%)"}}>{appData.sleepTime?minutoToHour(appData.sleepTime):0}</span>
-                  </div>
-              </div> 
-          </div>
-
-          <div className="grid grid-cols-3">
-              <div className="grid grid-rows-3">
-                  <h5 className="text-center text-sm font-extrabold">Passos Ativo</h5>
-                  <div className='w-32' style={{position:"relative"}}>
-                      <div style={{position:"absolute", left:"50%", transform:"translateX(-50%)"}}>
-                          <Steps colorFill="lightblue" _className="w-12"/>
-                      </div>
-                  </div>
-                  <div className="p-2 text-center text-xs font-extrabold">
-                      {appData.steps?parseInt(appData.steps):0}
-                  </div>
-              </div>
-              <div className="grid grid-rows-3">
-                  <h5 className="text-center text-sm font-extrabold">Atividades</h5>
-                  <div className='w-32'  style={{position:"relative"}}>
-                      <div style={{position:"absolute", left:"50%", transform:"translateX(-50%)"}}>
-                          <FrequencyHeart colorFill="lightblue" _className="w-12"/>
-                      </div>
-                  </div>
-                  <div className="p-2 text-center text-xs font-extrabold">
-                  {appData.activities?parseInt(appData.activities):0}
-                  </div>
-              </div>
-              <div className="grid grid-rows-3">
-                  <h5 className="text-center text-sm font-extrabold">Movimentos intensidade</h5>
-                  <div className='w-32'  style={{position:"relative"}}>
-                      <div style={{position:"absolute", left:"50%", transform:"translateX(-50%)"}}>
-                          <Activities  colorFill="lightblue" _className="w-12"/>
-                      </div>
-                  </div>
-                  <div className="p-2 text-center text-xs font-extrabold">
-                      {appData.intensityMovements?parseInt(appData.intensityMovements):0}
-                  </div>
-              </div>
-          </div> 
-          
-          <div>
-            <div className="grid grid-cols-2">
-            <div>
-                    <h5 className="text-center text-sm font-extrabold">Distância</h5>
-                    <div className='w-48 font-bold' style={{position:"relative"}}>
-                    <Fundo1 colorFill="lightblue"/>
-                        <div style={{position:"absolute", top:"50%", left:"50%", transform:"translateY(-50%) translateX(-50%)"}}>{appData.distance?parseInt(appData.distance):0}Mt</div>
-                    </div>
+        <div className=" md:grid md:grid-cols-12 flex flex-col-reverse">
+          <div className={showAppData?"col-span-8":"col-span-12"}>
+            <ChartThemeSelector onChange={setLightTheme} value={lightTheme}/>
+            <button className="btn btn-primary ml-2" onClick={()=>PrintContentCanvas("#grafico","#grafico canvas")}><Print collorFill="#fff" /></button>
+              <div>
+                <div>
+                  Data filtrada:
+                  <ChartList dataChart={dataChart} lightTheme={lightTheme}/>
                 </div>
                 <div>
-                    <h5 className="text-center text-sm font-extrabold">Tempo Ativo</h5>
-                    <div className='w-48 font-bold' style={{position:"relative"}}>
-                        <Fundo1 colorFill="lightblue"/>
-                        <div style={{position:"absolute", top:"50%", left:"50%", transform:"translateY(-50%) translateX(-50%)"}}>{appData.avtiveTime?minutoToHour(appData.avtiveTime):0}</div>
-                    </div>
+                  Data: {dayjs().add(-1,'day').format('DD/MM/YYYY')}
+                  <ChartList dataChart={adapterGlycemia(listGlycemiaOne, [].concat(metaDataList).filter(option=>option.show))} lightTheme={lightTheme}/>
                 </div>
-            </div> 
+                <div>
+                  Data: {dayjs().add(-2,'day').format('DD/MM/YYYY')}
+                  <ChartList dataChart={adapterGlycemia(listGlycemiaTwo, [].concat(metaDataList).filter(option=>option.show))} lightTheme={lightTheme}/>
+                </div>
+              </div>
+          </div>
+          <div className={showAppData?"col-span-4":"hidden"}>
+            <AppData/>
           </div>
         </div>
       </div>
