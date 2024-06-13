@@ -42,7 +42,7 @@ export default function Chart(props){
       },[]);
     
     const bgClassName = lightTheme ? "" : "bg-black";
-    let mainClassName ="grid grid-rows-2 grid-cols-10 "+bgClassName; 
+    let mainClassName ="grid grid-cols-10 "+bgClassName; 
     mainClassName +=  _className !== undefined ? " "+_className : ""; 
 
     const colsSpanChart = showData?"col-span-8":"col-span-10";
