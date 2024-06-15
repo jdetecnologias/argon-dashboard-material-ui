@@ -6,8 +6,8 @@ export default function DateTime(props){
                 <div className="grid grid-rows-2 text-xs  md:text-lg">
                     {label}
                 <div>
-                <input className="p-1" type="date" value={valueDate} onChange={(e)=>onChangeDate(e)}  placeholder={label}/>
-                <input className="p-1 ml-1" type="time" value={valueTime} onChange={(e)=>onChangeTime(e)} />         
+                <input className="p-1 border border-black" type="date" value={valueDate} onChange={(e)=>onChangeDate(e)}  placeholder={label}/>
+                <input className="p-1 ml-1 border border-black" type="time" value={valueTime} onChange={(e)=>onChangeTime(e)} />         
                 </div>
             </div>
         )
