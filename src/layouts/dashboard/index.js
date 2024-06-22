@@ -46,7 +46,7 @@ function Default() {
   const [messageErrorsList,setMessageErrorList] = useState([])
   const [metaDataList, setMetaDataList] = useRecoilState(metaDataListState)
   const [lightTheme, setLightTheme] = useState(true); 
-  const [showAppData, setShowAppData] = useState(true); 
+  const [showAppData, setShowAppData] = useState(false); 
   const [controller, dispatch] =  useArgonController();
   const {hideSidenav} = controller;
   const showSidenav = !hideSidenav;
@@ -236,10 +236,10 @@ function getDadosLogin(){
       <If test={messageErrorsList.length === 0} Else={<ErrorAlert messageErrorList={messageErrorsList} resetMessages={()=>setMessageErrorList([])}/>}>
       <div>
         <div className="grid grid-cols-10">
-          <div className="col-span-2">
+          <div className="col-span-2 d-none">
             <Switcher onChange={(value)=>setHideSidenav(dispatch, !value)} value={showSidenav} label="menu lateral"/>
           </div>
-          <div className="col-span-2 col-end-10">
+          <div className="col-span-2 col-end-10 d-none">
             <Switcher onChange={setShowAppData} value={showAppData} label="Dados App."/>
           </div>
         </div>
