@@ -8,6 +8,15 @@ import { Weight } from 'layouts/dashboard/assets/weight';
 import { Age } from 'layouts/dashboard/assets/age';
 import { useRecoilState } from 'recoil';
 import { appDataState } from '../../../../stateHandler/atoms/atoms';
+import AppDataItemTopo from '../AppData/appDataItemTopo';
+import { Sleep } from 'layouts/dashboard/assets/sleep';
+import { Activities } from 'layouts/dashboard/assets/activities';
+import { minutoToHour } from 'helper/date';
+import { FrequencyHeart } from 'layouts/dashboard/assets/frequencyHeart';
+import { ActivitiesGluco } from 'layouts/dashboard/assets/activitiesGluco';
+import { SleepGluco } from 'layouts/dashboard/assets/sleepGluco';
+import { FrequencyHeartGluco } from 'layouts/dashboard/assets/frequencyHeartGluco';
+import AppDataItemTopoGluco from '../AppData/appDataItemTopoGluco';
 
 export default function FilterContainer(props){
     const {
@@ -26,64 +35,32 @@ export default function FilterContainer(props){
     return (
         <div className="grid  mb-5 relative text-xs md:text-lg">
             <div className="grid grid-cols-12">
-                <div className="xl:col-span-3 sm:col-span-4">
-                    <DateTime valueDate={data_inicio_filtro} label="De:" valueTime={hora_inicio} onChangeDate={(e)=>setDataInicio_filtro(e.target.value)} onChangeTime={(e)=>setHoraInicio(e.target.value)}/>
-                    <DateTime valueDate={data_fim_filtro} label="Até:" valueTime={hora_fim} onChangeDate={(e)=>setDataFim_filtro(e.target.value)} onChangeTime={(e)=>setHoraFim(e.target.value)}/>
-
+                <div className="xl:col-span-4 sm:col-span-5">
+                    <div className="grid-rows-2">
+                        <div>
+                            <DateTime valueDate={data_inicio_filtro} label="De:" valueTime={hora_inicio} onChangeDate={(e)=>setDataInicio_filtro(e.target.value)} onChangeTime={(e)=>setHoraInicio(e.target.value)}/>
+                        </div>
+                        <div className='grid grid-cols-3 mt-1'>
+                            <div className='col-span-2'>
+                                <DateTime valueDate={data_fim_filtro} valueTime={hora_fim} onChangeDate={(e)=>setDataFim_filtro(e.target.value)} onChangeTime={(e)=>setHoraFim(e.target.value)}/>
+                            </div>
+                            <div className='col-span-1'>
+                                <ButtonFilter onClick={handleFiltrar}/>
+                            </div>
+                        </div>
+                    </div>
                 </div>
-                <div className="col-span-1">
-                    <ButtonFilter onClick={handleFiltrar}/>
-                </div>
-                <div className='xl:col-span-8 sm:col-span-7'>
-                    <div className='grid grid-cols-7 text-xs'>
-                        <div className='grid grid-rows-3'>
-                            <div>
-                                Altura(cm):
-                            </div>
-                            <div className='grid grid-cols-2 w-20 text-lg font-bold '>
-                                {appData.height?appData.height:0} <Height colorFill="#000" _className=""/>
-                            </div>
-                        </div>
-                        <div className='grid grid-rows-3'>
-                            <div>
-                                Passos:
-                            </div>
-                            <div className='grid grid-cols-2 w-20 text-lg font-bold '>
-                                {appData.steps?appData.steps:0} <Steps colorFill="#000" _className=""/>
-                            </div>
-                        </div>
-                        <div className='grid grid-rows-3'>
-                            <div>
-                                Peso(KG):
-                            </div>
-                            <div className='grid grid-cols-2 w-20 text-lg font-bold '>
-                                {appData.weight?appData.weight:0} <Weight colorFill="#000" _className=""/>
-                            </div>
-                        </div>
-                        <div className='grid grid-rows-3'>
-                            <div>
-                                Peso ideal(KG):
-                            </div>
-                            <div className='grid grid-cols-2 w-20 text-lg font-bold '>
-                                {appData.idealWeight?appData.idealWeight:0} <Weight colorFill="#000" _className=""/>
-                            </div>
-                        </div>
-                        <div className='grid grid-rows-3'>
-                            <div>
-                                Idade:
-                            </div>
-                            <div className='grid grid-cols-2 w-20 text-lg font-bold '>
-                                {appData.age?appData.age:0} <Age colorFill="#000" _className=""/>
-                            </div>
-                        </div>
-                        <div className='grid grid-rows-3'>
-                            <div>
-                            VBG:
-                            </div>
-                            <div className='grid grid-cols-2 w-20 text-lg font-bold '>
-                                {appData.vbg?appData.vbg:0} <Oximetry colorFill="#000" _className=""/>
-                            </div>
-                        </div>
+                <div className='xl:col-span-8 sm:col-span-7 '>
+                    <div className='grid justify-center lg:grid-cols-6 md:grid-cols-5 sm:grid-cols-3 xs:grid-cols-1 grid-flow-row grid-rows-2 text-xs'>                       
+                        <AppDataItemTopo value={appData.weight} label=" Altura(cm)" icon={<Height colorFill="#000" _className=""/>}/>
+                        <AppDataItemTopo value={appData.steps} label="Passos" icon={ <Steps colorFill="#000" _className=""/>}/>
+                        <AppDataItemTopo value={appData.weight} label="Peso(KG)" icon={<Weight colorFill="#000" _className=""/>}/>
+                        <AppDataItemTopo value={appData.idealWeight} label="Peso ideal(KG)" icon={ <Weight colorFill="#000" _className=""/>}/>
+                        <AppDataItemTopo value={appData.age} label="Idade" icon={ <Age colorFill="#000" _className=""/>}/>
+                        <AppDataItemTopo value={appData.vbg} label="VBG" icon={<Oximetry colorFill="#000" _className=""/>}/>
+                        <AppDataItemTopoGluco value={appData.sleepTime?minutoToHour(appData.sleepTime):0} icon={<SleepGluco colorFill="#000" _className="w-16"/>} />
+                        <AppDataItemTopoGluco value={appData.activities} icon={<FrequencyHeartGluco colorFill="#000" _className="w-16"/>}/>
+                        <AppDataItemTopoGluco value={appData.intensityMovements}  icon={<ActivitiesGluco  colorFill="#000" _className="w-16"/>}/>
                     </div>
                 </div>
             </div>
