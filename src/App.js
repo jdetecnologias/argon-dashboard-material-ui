@@ -146,16 +146,17 @@ export default function App() {
     <CacheProvider value={rtlCache}>
       <ThemeProvider theme={darkMode ? themeDarkRTL : themeRTL}>
         <CssBaseline />
-        {layout === "dashboard" && !hideSidenav && (
+        {layout === "dashboard" && (
           <>
-            <Sidenav
-              color={sidenavColor}
-              brand={darkSidenav || darkMode ? brand : brandDark}
-              brandName=""
-              routes={Allroutes}
-              onMouseEnter={handleOnMouseEnter}
-              onMouseLeave={handleOnMouseLeave}
-            />
+            {!hideSidenav &&  (<Sidenav
+                color={sidenavColor}
+                brand={darkSidenav || darkMode ? brand : brandDark}
+                brandName=""
+                routes={Allroutes}
+                onMouseEnter={handleOnMouseEnter}
+                onMouseLeave={handleOnMouseLeave}
+              />)
+            }
             <Configurator />
             {configsButton}
           </>
@@ -170,16 +171,17 @@ export default function App() {
   ) : (
     <ThemeProvider theme={darkMode ? themeDark : theme}>
       <CssBaseline />
-      {layout === "dashboard" && !hideSidenav && (
+      {layout === "dashboard" && (
         <>
-          <Sidenav
-            color={sidenavColor}
-            brand={darkSidenav || darkMode ? brand : brandDark}
-            brandName=""
-            routes={routes}
-            onMouseEnter={handleOnMouseEnter}
-            onMouseLeave={handleOnMouseLeave}
-          />
+         { !hideSidenav &&  (<Sidenav
+              color={sidenavColor}
+              brand={darkSidenav || darkMode ? brand : brandDark}
+              brandName=""
+              routes={routes}
+              onMouseEnter={handleOnMouseEnter}
+              onMouseLeave={handleOnMouseLeave}
+            />)
+          }
           <Configurator />
           {configsButton}
         </>

@@ -43,12 +43,13 @@ import {
   setMiniSidenav,
   setFixedNavbar,
   setSidenavColor,
+  setHideSidenav,
   setDarkMode,
 } from "context";
 
 function Configurator() {
   const [controller, dispatch] = useArgonController();
-  const { openConfigurator, darkSidenav, miniSidenav, fixedNavbar, sidenavColor, darkMode } =
+  const { openConfigurator, darkSidenav, miniSidenav, fixedNavbar, sidenavColor, darkMode, hideSidenav } =
     controller;
   const sidenavColors = ["primary", "dark", "info", "success", "warning", "error"];
 
@@ -56,6 +57,7 @@ function Configurator() {
   const handledarkSidenav = () => setDarkSidenav(dispatch, true);
   const handleWhiteSidenav = () => setDarkSidenav(dispatch, false);
   const handleMiniSidenav = () => setMiniSidenav(dispatch, !miniSidenav);
+  const handleHideSidenav = () => setHideSidenav(dispatch, !hideSidenav);
   const handleFixedNavbar = () => setFixedNavbar(dispatch, !fixedNavbar);
   const handleDarkMode = () => {
     setDarkSidenav(dispatch, !darkMode);
@@ -75,7 +77,7 @@ function Configurator() {
         <ArgonBox>
           <ArgonTypography variant="h5">Argon Configurator</ArgonTypography>
           <ArgonTypography variant="body2" color="text">
-            See our dashboard options.
+            Veja as opções do nosso dashborad.
           </ArgonTypography>
         </ArgonBox>
 
@@ -99,7 +101,7 @@ function Configurator() {
 
       <ArgonBox pt={1.25} pb={3} px={3}>
         <ArgonBox>
-          <ArgonTypography variant="h6">Sidenav Colors</ArgonTypography>
+          <ArgonTypography variant="h6">Cor do menu</ArgonTypography>
 
           <ArgonBox mb={0.5}>
             {sidenavColors.map((color) => (
@@ -133,9 +135,9 @@ function Configurator() {
         </ArgonBox>
 
         <ArgonBox mt={3} lineHeight={1}>
-          <ArgonTypography variant="h6">Sidenav Type</ArgonTypography>
+          <ArgonTypography variant="h6">Tipo do menu</ArgonTypography>
           <ArgonTypography variant="button" color="text" fontWeight="regular">
-            Choose between 2 different sidenav types.
+            Escolha entre dois tipos diferentes de menu.
           </ArgonTypography>
 
           <ArgonBox
@@ -150,7 +152,7 @@ function Configurator() {
               onClick={handleWhiteSidenav}
               fullWidth
             >
-              White
+              Branco
             </ArgonButton>
             <ArgonButton
               color="info"
@@ -161,12 +163,12 @@ function Configurator() {
                 ml: 1,
               }}
             >
-              Dark
+              Escuro
             </ArgonButton>
           </ArgonBox>
         </ArgonBox>
         <ArgonBox display="flex" justifyContent="space-between" mt={3} lineHeight={1}>
-          <ArgonTypography variant="h6">Navbar Fixed</ArgonTypography>
+          <ArgonTypography variant="h6">Topo Fixo</ArgonTypography>
 
           <Switch checked={fixedNavbar} onChange={handleFixedNavbar} />
         </ArgonBox>
@@ -174,15 +176,21 @@ function Configurator() {
         <Divider />
 
         <ArgonBox display="flex" justifyContent="space-between" lineHeight={1}>
-          <ArgonTypography variant="h6">Sidenav Mini</ArgonTypography>
+          <ArgonTypography variant="h6">Menu reduzido</ArgonTypography>
 
           <Switch checked={miniSidenav} onChange={handleMiniSidenav} />
+        </ArgonBox>
+
+        <ArgonBox display="flex" justifyContent="space-between" lineHeight={1}>
+          <ArgonTypography variant="h6">Esconder Menu</ArgonTypography>
+
+          <Switch checked={hideSidenav} onChange={handleHideSidenav} />
         </ArgonBox>
 
         <Divider />
 
         <ArgonBox display="flex" justifyContent="space-between" lineHeight={1}>
-          <ArgonTypography variant="h6">Light / Dark</ArgonTypography>
+          <ArgonTypography variant="h6">Claro / Escuro</ArgonTypography>
 
           <Switch checked={darkMode} onChange={handleDarkMode} />
         </ArgonBox>
