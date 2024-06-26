@@ -30,10 +30,10 @@ export default function FilterContainer(props){
             setHoraFim,
             handleFiltrar
         } = props;
-
+    
     const [appData, setAppData] = useRecoilState(appDataState)
     return (
-        <div className="marginBottomHeader grid relative text-xs md:text-lg">
+        <div className="grid relative text-xs md:text-lg">
             <div className="grid grid-cols-12">
                 <div className="lg:col-span-4 sm:col-span-6">
                     <div className="grid-rows-2">

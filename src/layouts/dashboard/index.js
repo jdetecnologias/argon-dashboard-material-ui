@@ -3,7 +3,6 @@ import { useState, useEffect } from "react";
 // Argon Dashboard 2 MUI example components
 import DashboardLayout from "examples/LayoutContainers/DashboardLayout";
 import DashboardNavbar from "examples/Navbars/DashboardNavbar";
-import Map from "layouts/dashboard/map/map";
 import ChartThemeSelector from "./components/Chart/chartThemeSelector";
 import { PrintContentCanvas } from 'helper/printDocument';
 import { Print } from "layouts/dashboard/assets/print";
@@ -17,15 +16,13 @@ import { loginRedirect } from "helper/loginRedirect";
 import ErrorAlert from "./components/ErrorAlert/errorAlert";
 import FilterContainer from "./components/FilterItem/FilterContainer";
 import ChartList from "./components/Chart/chartList";
-import fundo2 from "./assets/fundo2.png"
 import { appDataState, metaDataListState } from "../../stateHandler/atoms/atoms";
 import { GetLastAppData } from "./model/getAppDataModel";
-import { Fundo1 } from "./assets/fundo1";
 import AppData from "./components/AppData/appData";
-import Switcher from "./components/Switch/switch";
+
 import {
   useArgonController,
-  setHideSidenav
+  setShowNavbar,
 } from "context";
 
 let qtyMapShow = -1;
@@ -48,10 +45,8 @@ function Default() {
   const [lightTheme, setLightTheme] = useState(true); 
   const [showAppData, setShowAppData] = useState(false); 
   const [controller, dispatch] =  useArgonController();
-  const {hideSidenav} = controller;
-  const showSidenav = !hideSidenav;
-
-   const numbersOfDivs = [1,2,3,4,5]                                       
+  const {showNavbar} = controller;
+                                     
   useEffect(() => {
     const queryString = window.location.search;
     
@@ -227,12 +222,14 @@ function getDadosLogin(){
  
   return (
     <DashboardLayout bgColor="transparent">
-      <DashboardNavbar />
-      <FilterContainer
-        hora_inicio={hora_inicio} data_inicio_filtro={data_inicio_filtro} hora_fim={hora_fim}  data_fim_filtro={data_fim_filtro}
-        setDataInicio_filtro={setDataInicio_filtro} setHoraInicio={setHoraInicio} setDataFim_filtro={setDataFim_filtro}  setHoraFim={setHoraFim}
-        handleFiltrar={handleFiltrar}
-      />
+      <If test={showNavbar}>
+        <DashboardNavbar />
+        <FilterContainer
+          hora_inicio={hora_inicio} data_inicio_filtro={data_inicio_filtro} hora_fim={hora_fim}  data_fim_filtro={data_fim_filtro}
+          setDataInicio_filtro={setDataInicio_filtro} setHoraInicio={setHoraInicio} setDataFim_filtro={setDataFim_filtro}  setHoraFim={setHoraFim}
+          handleFiltrar={handleFiltrar}
+        />
+      </If>
       <If test={messageErrorsList.length === 0} Else={<ErrorAlert messageErrorList={messageErrorsList} resetMessages={()=>setMessageErrorList([])}/>}>
       <div>
         <div className=" md:grid md:grid-cols-12 flex flex-col-reverse">

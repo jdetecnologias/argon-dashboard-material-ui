@@ -45,11 +45,12 @@ import {
   setSidenavColor,
   setHideSidenav,
   setDarkMode,
+  setShowNavbar,
 } from "context";
 
 function Configurator() {
   const [controller, dispatch] = useArgonController();
-  const { openConfigurator, darkSidenav, miniSidenav, fixedNavbar, sidenavColor, darkMode, hideSidenav } =
+  const { openConfigurator, darkSidenav, miniSidenav, fixedNavbar, sidenavColor, darkMode, hideSidenav, showNavbar} =
     controller;
   const sidenavColors = ["primary", "dark", "info", "success", "warning", "error"];
 
@@ -59,6 +60,7 @@ function Configurator() {
   const handleMiniSidenav = () => setMiniSidenav(dispatch, !miniSidenav);
   const handleHideSidenav = () => setHideSidenav(dispatch, !hideSidenav);
   const handleFixedNavbar = () => setFixedNavbar(dispatch, !fixedNavbar);
+  const handleShowNavbar = () => setShowNavbar(dispatch, !showNavbar);
   const handleDarkMode = () => {
     setDarkSidenav(dispatch, !darkMode);
     setDarkMode(dispatch, !darkMode);
@@ -167,12 +169,11 @@ function Configurator() {
             </ArgonButton>
           </ArgonBox>
         </ArgonBox>
-        <ArgonBox display="flex" justifyContent="space-between" mt={3} lineHeight={1}>
-          <ArgonTypography variant="h6">Topo Fixo</ArgonTypography>
+        <ArgonBox display="flex" justifyContent="space-between"  mt={3} lineHeight={1}>
+          <ArgonTypography variant="h6">Esconder Topo</ArgonTypography>
 
-          <Switch checked={fixedNavbar} onChange={handleFixedNavbar} />
+          <Switch checked={showNavbar} onChange={handleShowNavbar} />
         </ArgonBox>
-
         <Divider />
 
         <ArgonBox display="flex" justifyContent="space-between" lineHeight={1}>
@@ -183,10 +184,8 @@ function Configurator() {
 
         <ArgonBox display="flex" justifyContent="space-between" lineHeight={1}>
           <ArgonTypography variant="h6">Esconder Menu</ArgonTypography>
-
           <Switch checked={hideSidenav} onChange={handleHideSidenav} />
         </ArgonBox>
-
         <Divider />
 
         <ArgonBox display="flex" justifyContent="space-between" lineHeight={1}>

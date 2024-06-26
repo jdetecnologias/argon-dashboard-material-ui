@@ -36,6 +36,10 @@ function reducer(state, action) {
       return { ...state, hideSidenav: action.value };
     }
 
+    case "SHOW_NAVBAR": {
+      return { ...state, showNavbar: action.value };
+    }
+
     case "MINI_SIDENAV": {
       return { ...state, miniSidenav: action.value };
     }
@@ -73,6 +77,7 @@ function reducer(state, action) {
 function ArgonControllerProvider({ children }) {
   const initialState = {
     hideSidenav:false,
+    showNavbar:true,
     miniSidenav: true,
     darkSidenav: false,
     sidenavColor: null,
@@ -118,6 +123,7 @@ const setOpenConfigurator = (dispatch, value) => dispatch({ type: "OPEN_CONFIGUR
 const setDirection = (dispatch, value) => dispatch({ type: "DIRECTION", value });
 const setLayout = (dispatch, value) => dispatch({ type: "LAYOUT", value });
 const setDarkMode = (dispatch, value) => dispatch({ type: "DARK_MODE", value });
+const setShowNavbar = (dispatch, value) => dispatch({ type: "SHOW_NAVBAR", value });
 
 export {
   ArgonControllerProvider,
@@ -132,4 +138,5 @@ export {
   setDirection,
   setLayout,
   setDarkMode,
+  setShowNavbar,
 };
