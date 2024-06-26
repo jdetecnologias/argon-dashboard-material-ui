@@ -36,8 +36,8 @@ function DashboardLayout({ bgColor, children, ...rest }) {
     setLayout(dispatch, "dashboard");
   }, [pathname]);
 
-  const background = darkMode && !bgColor ? "transparent" : bgColor;
-
+  const background = (darkMode && !bgColor) ? "transparent" : bgColor;
+  console.log("Background", background, darkMode, bgColor);
   return (
     <ArgonBox
       sx={({ breakpoints, transitions, functions: { pxToRem } }) => ({

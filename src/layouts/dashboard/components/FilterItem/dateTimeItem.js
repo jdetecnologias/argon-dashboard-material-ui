@@ -5,7 +5,7 @@ export default function DateTime(props){
     const {label, valueDate, valueTime, onChangeDate, onChangeTime} = props;
 
     return (
-                <div className="grid grid-rows-2 text-xs  md:text-lg">
+                <div className="grid grid-rows-2 text-xs">
                     <If test={label}>
                         {label}
                     </If>

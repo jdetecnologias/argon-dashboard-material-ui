@@ -226,7 +226,7 @@ function getDadosLogin(){
 
  
   return (
-    <DashboardLayout>
+    <DashboardLayout bgColor="transparent">
       <DashboardNavbar />
       <FilterContainer
         hora_inicio={hora_inicio} data_inicio_filtro={data_inicio_filtro} hora_fim={hora_fim}  data_fim_filtro={data_fim_filtro}
@@ -235,14 +235,6 @@ function getDadosLogin(){
       />
       <If test={messageErrorsList.length === 0} Else={<ErrorAlert messageErrorList={messageErrorsList} resetMessages={()=>setMessageErrorList([])}/>}>
       <div>
-        <div className="grid grid-cols-10">
-          <div className="col-span-2 d-none">
-            <Switcher onChange={(value)=>setHideSidenav(dispatch, !value)} value={showSidenav} label="menu lateral"/>
-          </div>
-          <div className="col-span-2 col-end-10 d-none">
-            <Switcher onChange={setShowAppData} value={showAppData} label="Dados App."/>
-          </div>
-        </div>
         <div className=" md:grid md:grid-cols-12 flex flex-col-reverse">
           <div className={showAppData?"col-span-8":"col-span-12"}>
             <ChartThemeSelector onChange={setLightTheme} value={lightTheme}/>

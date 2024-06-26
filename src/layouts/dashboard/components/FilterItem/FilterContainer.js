@@ -33,31 +33,33 @@ export default function FilterContainer(props){
 
     const [appData, setAppData] = useRecoilState(appDataState)
     return (
-        <div className="grid  mb-5 relative text-xs md:text-lg">
+        <div className="marginBottomHeader grid relative text-xs md:text-lg">
             <div className="grid grid-cols-12">
-                <div className="xl:col-span-4 sm:col-span-5">
+                <div className="lg:col-span-4 sm:col-span-6">
                     <div className="grid-rows-2">
                         <div>
                             <DateTime valueDate={data_inicio_filtro} label="De:" valueTime={hora_inicio} onChangeDate={(e)=>setDataInicio_filtro(e.target.value)} onChangeTime={(e)=>setHoraInicio(e.target.value)}/>
                         </div>
-                        <div className='grid grid-cols-3 mt-1'>
-                            <div className='col-span-2'>
+                        <div className='grid sm:grid-cols-12 mt-1'>
+                            <div className='sm:col-span-8 md:col-span-7 lg:col-span-8 xl:col-span-7'>
                                 <DateTime valueDate={data_fim_filtro} valueTime={hora_fim} onChangeDate={(e)=>setDataFim_filtro(e.target.value)} onChangeTime={(e)=>setHoraFim(e.target.value)}/>
                             </div>
-                            <div className='col-span-1'>
+                            <div className='sm:col-span-2 lg:col-span-1'>
                                 <ButtonFilter onClick={handleFiltrar}/>
                             </div>
                         </div>
                     </div>
                 </div>
-                <div className='xl:col-span-8 sm:col-span-7 '>
-                    <div className='grid justify-center lg:grid-cols-6 md:grid-cols-5 sm:grid-cols-3 xs:grid-cols-1 grid-flow-row grid-rows-2 text-xs'>                       
+                <div style={{marginTop:"-20px"}} className='lg:col-span-8  sm:col-span-6 '>
+                    <div className='grid justify-center lg:grid-cols-6 sm:grid-cols-3 xs:grid-cols-1 grid-flow-row text-xs'>                       
                         <AppDataItemTopo value={appData.weight} label=" Altura(cm)" icon={<Height colorFill="#000" _className=""/>}/>
                         <AppDataItemTopo value={appData.steps} label="Passos" icon={ <Steps colorFill="#000" _className=""/>}/>
                         <AppDataItemTopo value={appData.weight} label="Peso(KG)" icon={<Weight colorFill="#000" _className=""/>}/>
                         <AppDataItemTopo value={appData.idealWeight} label="Peso ideal(KG)" icon={ <Weight colorFill="#000" _className=""/>}/>
                         <AppDataItemTopo value={appData.age} label="Idade" icon={ <Age colorFill="#000" _className=""/>}/>
                         <AppDataItemTopo value={appData.vbg} label="VBG" icon={<Oximetry colorFill="#000" _className=""/>}/>
+                    </div>                    
+                    <div className='grid justify-center grid-cols-3 grid-flow-row text-xs'> 
                         <AppDataItemTopoGluco value={appData.sleepTime?minutoToHour(appData.sleepTime):0} icon={<SleepGluco colorFill="#000" _className="w-16"/>} />
                         <AppDataItemTopoGluco value={appData.activities} icon={<FrequencyHeartGluco colorFill="#000" _className="w-16"/>}/>
                         <AppDataItemTopoGluco value={appData.intensityMovements}  icon={<ActivitiesGluco  colorFill="#000" _className="w-16"/>}/>

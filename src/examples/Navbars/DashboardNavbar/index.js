@@ -177,15 +177,15 @@ function DashboardNavbar({ absolute, light, isMini }) {
     >
       <Toolbar sx={(theme) => navbarContainer(theme, { navbarType })}>
         <ArgonBox
-          color={light && transparentNavbar ? "white" : "dark"}
-          mb={{ xs: 1, md: 0 }}
+          color="dark"
+          mb={{ xs: 0, md: 0 }}
           sx={(theme) => navbarRow(theme, { isMini })}
         >
           <Breadcrumbs
             icon="home"
             title={route[route.length - 1]}
             route={route}
-            light={transparentNavbar ? light : false}
+            light={false}
           />
           <Icon fontSize="medium" sx={navbarDesktopMenu} onClick={handleMiniSidenav}>
             {miniSidenav ? "menu_open" : "menu"}
@@ -198,7 +198,7 @@ function DashboardNavbar({ absolute, light, isMini }) {
               </Link>
               <IconButton
                 size="small"
-                color={light && transparentNavbar ? "white" : "dark"}
+                color="dark"
                 sx={navbarMobileMenu}
                 onClick={handleMiniSidenav}
               >
@@ -206,7 +206,7 @@ function DashboardNavbar({ absolute, light, isMini }) {
               </IconButton>
               <IconButton
                 size="small"
-                color={light && transparentNavbar ? "white" : "dark"}
+                color="dark"
                 sx={navbarIconButton}
                 onClick={handleLogout}
               >
@@ -215,14 +215,14 @@ function DashboardNavbar({ absolute, light, isMini }) {
               <ArgonTypography
                 variant="button"
                 fontWeight="regular"
-                color={light ? "white" : "dark"}
+                color="dark"
                 sx={{ lineHeight: 0 }}
               >
                   {email !== null?email:""}
               </ArgonTypography>
               <IconButton
                 size="small"
-                color={light && transparentNavbar ? "white" : "dark"}
+                color="dark"
                 sx={navbarIconButton}
                 onClick={handleConfiguratorOpen}
               >
