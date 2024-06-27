@@ -33,7 +33,7 @@ export default function FilterContainer(props){
     
     const [appData, setAppData] = useRecoilState(appDataState)
     return (
-        <div className="grid relative text-xs md:text-lg">
+        <div className="grid relative text-xs">
             <div className="grid grid-cols-12">
                 <div className="lg:col-span-4 sm:col-span-6">
                     <div className="grid-rows-2">
@@ -41,7 +41,7 @@ export default function FilterContainer(props){
                             <DateTime valueDate={data_inicio_filtro} label="De:" valueTime={hora_inicio} onChangeDate={(e)=>setDataInicio_filtro(e.target.value)} onChangeTime={(e)=>setHoraInicio(e.target.value)}/>
                         </div>
                         <div className='grid sm:grid-cols-12 mt-1'>
-                            <div className='sm:col-span-8 md:col-span-7 lg:col-span-8 xl:col-span-7'>
+                            <div className='sm:col-span-8 md:col-span-7 lg:col-span-8 1xl:col-span-7'>
                                 <DateTime valueDate={data_fim_filtro} valueTime={hora_fim} onChangeDate={(e)=>setDataFim_filtro(e.target.value)} onChangeTime={(e)=>setHoraFim(e.target.value)}/>
                             </div>
                             <div className='sm:col-span-2 lg:col-span-1'>

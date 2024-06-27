@@ -170,7 +170,7 @@ function Configurator() {
           </ArgonBox>
         </ArgonBox>
         <ArgonBox display="flex" justifyContent="space-between"  mt={3} lineHeight={1}>
-          <ArgonTypography variant="h6">Esconder Topo</ArgonTypography>
+          <ArgonTypography variant="h6">Exibir topo</ArgonTypography>
 
           <Switch checked={showNavbar} onChange={handleShowNavbar} />
         </ArgonBox>

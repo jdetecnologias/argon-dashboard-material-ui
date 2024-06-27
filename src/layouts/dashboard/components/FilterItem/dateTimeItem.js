@@ -20,7 +20,7 @@ export default function DateTime(props){
                             className="p-1 ml-1 border border-black" 
                             type="time" 
                             value={valueTime} 
-                            onChange={(e)=>onChangeTime(e)} />         
+                            onChange={(e)=>onChangeTime(e)} />                                 
                     </div>
                 </div>
         )
