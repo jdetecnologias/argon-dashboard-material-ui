@@ -8,8 +8,8 @@ export default function AppDataItemTopoGluco(props){
 
     return (
             <div>
-                <div className='grid grid-cols-2 w-auto text-lg font-bold'>
-                {icon?icon:""} <span className='flex items-center'>{value?value:0} </span>
+                <div className='grid sm:grid-cols-1 md:grid-cols-2 w-auto text-lg font-bold sm:place-items-center'>
+                {icon?icon:""} <span>{value?value:0} </span>
                 </div>
             </div>
             )
