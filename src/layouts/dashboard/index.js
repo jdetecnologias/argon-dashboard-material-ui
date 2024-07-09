@@ -224,8 +224,8 @@ function getDadosLogin(){
  
   return (
     <DashboardLayout bgColor="transparent">
+      <DashboardNavbar />
       <If test={showNavbar}>
-        <DashboardNavbar />
         <FilterContainer
           hora_inicio={hora_inicio} data_inicio_filtro={data_inicio_filtro} hora_fim={hora_fim}  data_fim_filtro={data_fim_filtro}
           setDataInicio_filtro={setDataInicio_filtro} setHoraInicio={setHoraInicio} setDataFim_filtro={setDataFim_filtro}  setHoraFim={setHoraFim}
