@@ -55,14 +55,13 @@ export default function FilterContainer(props){
                         <AppDataItemTopo value={appData.weight} label=" Altura(cm)" icon={<Height colorFill="#000" _className=""/>}/>
                         <AppDataItemTopo value={appData.steps} label="Passos" icon={ <Steps colorFill="#000" _className=""/>}/>
                         <AppDataItemTopo value={appData.weight} label="Peso(KG)" icon={<Weight colorFill="#000" _className=""/>}/>
-                        <AppDataItemTopo value={appData.idealWeight} label="Peso ideal(KG)" icon={ <Weight colorFill="#000" _className=""/>}/>
                         <AppDataItemTopo value={appData.age} label="Idade" icon={ <Age colorFill="#000" _className=""/>}/>
                         <AppDataItemTopo value={appData.vbg} label="VBG" icon={<Oximetry colorFill="#000" _className=""/>}/>
                     </div>                    
                     <div className='grid justify-center grid-cols-3 grid-flow-row text-xs'> 
-                        <AppDataItemTopoGluco value={appData.sleepTime?minutoToHour(appData.sleepTime):0} icon={<SleepGluco colorFill="#000" _className="w-16"/>} />
-                        <AppDataItemTopoGluco value={appData.activities} icon={<FrequencyHeartGluco colorFill="#000" _className="w-16"/>}/>
-                        <AppDataItemTopoGluco value={appData.intensityMovements}  icon={<ActivitiesGluco  colorFill="#000" _className="w-16"/>}/>
+                        <AppDataItemTopo value={appData.sleepTime?minutoToHour(appData.sleepTime):0} label ="Sono" icon={<SleepGluco colorFill="#000" _className="w-16"/>} />
+                        <AppDataItemTopo value={appData.activities} label="Batimentos" icon={<FrequencyHeartGluco  colorFill="#000" _className="w-16"/>}/>
+                        <AppDataItemTopo value={appData.intensityMovements} label="Atividades"  icon={<ActivitiesGluco colorFill="#000" _className="w-16"/>}/>
                     </div>
                 </div>
             </div>

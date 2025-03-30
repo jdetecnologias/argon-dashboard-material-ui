@@ -5,7 +5,8 @@ export default function AppDataItemTopo(props){
             label,
             value,
             icon,
-            iconLabel
+            iconLabel,
+            showIcon
         } = props;
 
     return (
@@ -13,8 +14,8 @@ export default function AppDataItemTopo(props){
                 <div>
                     {label?label:""}{iconLabel?iconLabel:""}
                 </div>
-                <div className='grid grid-cols-2 w-20 text-lg font-bold '>
-                    {value?value:0} {icon?icon:""}
+                <div className='grid grid-cols-2 w-20 text-lg font-bold text-center'>
+                    {value?value:0} {icon&&showIcon?icon:""}
                 </div>
             </div>
             )
@@ -24,5 +25,6 @@ AppDataItemTopo.propTypes = {
     label:PropTypes.string.isRequired, 
     value:PropTypes.string.isRequired,
     icon:PropTypes.node,
-    iconLabel:PropTypes.node
+    iconLabel:PropTypes.node,
+    showIcon:PropTypes.bool
 }
