@@ -157,8 +157,8 @@ export default function App() {
                 onMouseLeave={handleOnMouseLeave}
               />)
             }
-            <Configurator />
-            {configsButton}
+           <Configurator />
+            {/*configsButton*/}
           </>
         )}
         {layout === "vr" && <Configurator />}
@@ -183,7 +183,7 @@ export default function App() {
             />)
           }
           <Configurator />
-          {configsButton}
+          {/*configsButton*/}
         </>
       )}
       {layout === "vr" && <Configurator />}

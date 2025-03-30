@@ -220,14 +220,6 @@ function DashboardNavbar({ absolute, light, isMini }) {
               >
                   {email !== null?email:""}
               </ArgonTypography>
-              <IconButton
-                size="small"
-                color="dark"
-                sx={navbarIconButton}
-                onClick={handleConfiguratorOpen}
-              >
-                <Icon>settings</Icon>
-              </IconButton>
               {renderMenu()}
             </ArgonBox>
           </ArgonBox>
