@@ -60,7 +60,7 @@ export default function FilterContainer(props){
                     </div>                    
                     <div className='grid justify-center grid-cols-3 grid-flow-row text-xs'> 
                         <AppDataItemTopo value={appData.sleepTime?minutoToHour(appData.sleepTime):0} label ="Sono" icon={<SleepGluco colorFill="#000" _className="w-16"/>} />
-                        <AppDataItemTopo value={appData.activities} label="Batimentos" icon={<FrequencyHeartGluco  colorFill="#000" _className="w-16"/>}/>
+                        <AppDataItemTopo value={appData.activities} label="Batimentos Cardíacos" icon={<FrequencyHeartGluco  colorFill="#000" _className="w-16"/>}/>
                         <AppDataItemTopo value={appData.intensityMovements} label="Atividades"  icon={<ActivitiesGluco colorFill="#000" _className="w-16"/>}/>
                     </div>
                 </div>

@@ -28,6 +28,7 @@ export function adapterGlycemia(listGlycemia,options){
 
     const dtset = propsAllowed.map(prop=>{
         return ({
+            propName:prop,
             label:GetLabelname(options,prop),
             color: GetOptionColor(options,prop),
             data:GetData(dataSet,prop)

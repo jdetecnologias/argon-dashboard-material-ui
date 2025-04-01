@@ -14,7 +14,7 @@ const metaDataListState = atom({
   default:  (
               [
                 {prop:"valor_glicemia", label:"Glicemia", show:true,color:"success"},
-                {prop:"heartRate", label:"Frequência cardiaca", show:false,color:"error"},
+                {prop:"heartRate", label:"Batimento cardiaco", show:false,color:"error"},
                 {prop:"oxymetry", label:"Oximetria", show:false,color:"primary"},
                 {prop:"bodyTemperature", label:"Temperatura corporal", show:false,color:"warning"},
                 {prop:"weight", label:"Peso", show:false,color:"secondary"},

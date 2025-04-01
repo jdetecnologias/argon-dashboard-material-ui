@@ -4,7 +4,6 @@ import PropTypes from "prop-types";
 
 export default function ChartList(props){
     const {dataChart, lightTheme} = props;   
-
     return (    
             <>
                {
@@ -13,6 +12,7 @@ export default function ChartList(props){
                             
                                 Chart 
                                 key={key} 
+                                propName={dataset.propName}
                                 title={dataset.label} 
                                 lightTheme={lightTheme}
                                 dataChart={{labels:dataChart.labels, datasets:[dataset]}}

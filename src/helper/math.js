@@ -37,3 +37,14 @@ export function getAverage(values){
     }
     return 0;
   }
+
+  export function getLastValue(values){
+
+    if(values !== undefined && values !== null && values.length>0){
+     const last = values[(values.length-1)]
+        
+      return last;
+    }
+    return 0;
+
+  }
