@@ -52,11 +52,11 @@ export default function FilterContainer(props){
                 </div>
                 <div style={{marginTop:"-20px"}} className='lg:col-span-8  sm:col-span-6 '>
                     <div className='grid justify-center lg:grid-cols-6 sm:grid-cols-3 xs:grid-cols-1 grid-flow-row text-xs'>                       
-                        <AppDataItemTopo value={appData.weight} label=" Altura(cm)" icon={<Height colorFill="#000" _className=""/>}/>
-                        <AppDataItemTopo value={appData.steps} label="Passos" icon={ <Steps colorFill="#000" _className=""/>}/>
-                        <AppDataItemTopo value={appData.weight} label="Peso(KG)" icon={<Weight colorFill="#000" _className=""/>}/>
-                        <AppDataItemTopo value={appData.age} label="Idade" icon={ <Age colorFill="#000" _className=""/>}/>
-                        <AppDataItemTopo value={appData.vbg} label="VBG" icon={<Oximetry colorFill="#000" _className=""/>}/>
+                        <AppDataItemTopo showIcon={true} value={appData.weight} label=" Altura(cm)" icon={<Height colorFill="#000" _className=""/>}/>
+                        <AppDataItemTopo showIcon={true} value={appData.steps} label="Passos" icon={ <Steps colorFill="#000" _className=""/>}/>
+                        <AppDataItemTopo showIcon={true} value={appData.weight} label="Peso(KG)" icon={<Weight colorFill="#000" _className=""/>}/>
+                        <AppDataItemTopo showIcon={true} value={appData.age} label="Idade" icon={ <Age colorFill="#000" _className=""/>}/>
+                        <AppDataItemTopo showIcon={true} value={appData.vbg} label="VBG" icon={<Oximetry colorFill="#000" _className=""/>}/>
                     </div>                    
                     <div className='grid justify-center grid-cols-3 grid-flow-row text-xs'> 
                         <AppDataItemTopo value={appData.sleepTime?minutoToHour(appData.sleepTime):0} label ="Sono" icon={<SleepGluco colorFill="#000" _className="w-16"/>} />
