@@ -60,7 +60,7 @@ function Default() {
       filtrarAdmin(email, data_inicio_filtro, data_fim_filtro);
       filtrarFullDayAdmin(email,oneday, setListGlycemiaOne);
       filtrarFullDayAdmin(email,twoday, setListGlycemiaTwo);
-      setShowNavbar(dispatch,false);
+      setShowNavbar(dispatch,true);
     }else{
       const dadoslogin = getDadosLogin();
       email = dadoslogin.email;
