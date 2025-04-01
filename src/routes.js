@@ -118,7 +118,7 @@ const routes = [
     name: "Passos",
     key: "diaria7",
     route: "/meus_indices",
-    metadataname:"weight",
+    metadataname:"steps",
     icon: <Steps colorFill="#000" _className=""/>,
     component: <Averages />,
   },
