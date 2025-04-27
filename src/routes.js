@@ -49,6 +49,8 @@ import { Localization } from "layouts/dashboard/assets/localization";
 import { ClipBoard } from "layouts/dashboard/assets/clipboard";
 import { Sleep } from "layouts/dashboard/assets/sleep";
 import { Back } from "layouts/dashboard/assets/back";
+import { EletroCardio } from "layouts/dashboard/assets/eletroCardio";
+import { BloodPressure } from "layouts/dashboard/assets/bloodPressure";
 
 const routes = [
   {
@@ -136,6 +138,22 @@ const routes = [
     key: "diaria6",
     route: "/meus_indices",
     icon: <Activities colorFill="#000" _className=""/>,
+    component: <Averages />,
+  },
+  {
+    type: "route",
+    name: "Eletrocardiograma",
+    key: "diaria7",
+    route: "/meus_indices",
+    icon: <EletroCardio colorFill="#000" _className=""/>,
+    component: <Averages />,
+  },
+  {
+    type: "route",
+    name: "Pressão arterial",
+    key: "diaria8",
+    route: "/meus_indices",
+    icon: <BloodPressure colorFill="#000" _className=""/>,
     component: <Averages />,
   },
   {
