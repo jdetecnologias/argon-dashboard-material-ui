@@ -18,7 +18,11 @@ const metaDataListState = atom({
                 {prop:"oxymetry", label:"Oximetria", show:false,color:"primary"},
                 {prop:"bodyTemperature", label:"Temperatura corporal", show:false,color:"warning"},
                 {prop:"weight", label:"Peso", show:false,color:"secondary"},
-                {prop:"steps", label:"Passos", show:false,color:"info"}
+                {prop:"steps", label:"Passos", show:false,color:"info"},
+                {prop:"bloodPressure", label:"Pressão arterial", show:false,color:"info"},
+                {prop:"bloodPressureHigh", label:"Pressão sistólica", show:false, color:"success"},
+                {prop:"bloodPressureLow", label:"Pressão diastólica", show:false, color:"error"},
+                {prop:"eletroCardio", label:"Eletrocardiograma", show:false,color:"info"}
               ]
             )
 });

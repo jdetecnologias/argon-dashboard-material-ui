@@ -24,6 +24,8 @@ import {
   useArgonController,
   setShowNavbar,
 } from "context";
+import ChartAcc from "./components/Chart/chartAcc";
+import ChartSelector from "./components/Chart/ChartSelector";
 
 let qtyMapShow = -1;
 function Default() {
@@ -86,7 +88,22 @@ function Default() {
   },[messageErrorsList])
 
   useEffect(() => {
-    setDataChart( adapterGlycemia(listGlycemia, [].concat(metaDataList).filter(option=>option.show)))
+    const listaAtualizada = listGlycemia.map(glycemia=>{
+      if(glycemia.bloodPressure){
+        const listBloodPressure = glycemia.bloodPressure.split(",");
+        glycemia.bloodPressureHigh = parseInt(listBloodPressure[0]);
+        glycemia.bloodPressureLow = parseInt(listBloodPressure[1]);
+      }
+
+      return glycemia;
+    })
+    const dataAdapted = adapterGlycemia(listaAtualizada, [].concat(metaDataList).filter(option=>option.show));
+    if(dataAdapted.datasets.length > 1){
+      setOptionAccumulate(true)
+    }else{
+      setOptionAccumulate(false)
+    }
+    setDataChart( dataAdapted)
   },[listGlycemia,metaDataList])
 
 
@@ -241,7 +258,13 @@ function getDadosLogin(){
               <div>
                 <div>
                   Data filtrada:
-                  <ChartList dataChart={dataChart} lightTheme={lightTheme}/>
+                  <ChartSelector dataChart={dataChart} optionAccumulate={optionAccumulate} lightTheme={lightTheme}/>
+                  <If test={optionAccumulate}>
+                    <ChartAcc dataChart={dataChart} lightTheme={lightTheme}/>
+                  </If>
+                  <If test={!optionAccumulate}>
+                    <ChartList dataChart={dataChart} lightTheme={lightTheme}/>
+                  </If>
                 </div>
                 <div>
                   Data: {dayjs().add(-1,'day').format('DD/MM/YYYY')}

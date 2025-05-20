@@ -12,6 +12,7 @@ import { getUnitMesure } from "helper/unitMesure";
 import { getLastValue } from "helper/math";
 import { hasAverages } from "helper/unitMesure";
 import { hasAveragesData } from "helper/unitMesure";
+import UniqueAveragesView from "./UniqueAveragesView";
 
 export default function Chart(props){
     const {dataChart, _className,title, lightTheme, propName} = props;
@@ -67,27 +68,17 @@ export default function Chart(props){
                     height={200}
                     />
                 </div>
-                <div  className={lightTheme?"col-span-2"+avgDataClass:"text-lime-300 col-span-2"+avgDataClass}>
-                    <div className={averagesClass+"text-sm font-black"}>
-                        Maior: {parseInt(getMax(dataChart.datasets[0].data))}
-                    </div>
-                    <div className={averagesClass+"text-sm font-black"}>
-                        Menor: {parseInt(getMin(dataChart.datasets[0].data))}
-                    </div>
-                    <div className={averagesClass+"text-sm font-black"}>
-                        Média:
-                    </div>
-                    <div className={"text-4xl text-center"}>
-                        {hasAverages?parseInt(getAverage(dataChart.datasets[0].data)):parseInt(getLastValue(dataChart.datasets[0].data))}
-                    </div>
-                    <div className="text-sm font-black">
-                        Atual({lastGlycemia && lastGlycemia.data?dayjs(lastGlycemia.data).format("DD/MM/YYYY"):"Sem dados"}): {lastGlycemia && lastGlycemia.lastGlycemia ? lastGlycemia.lastGlycemia : 0}
-                    </div>    
-                    <div className="text-4xl text-center">
-                       {getUnitMesure(propName)}
-                    </div>                        
-                </div>
-
+                <UniqueAveragesView 
+                    showData={showData}
+                    lightTheme={lightTheme}
+                    maior={parseInt(getMax(dataChart.datasets[0].data))} 
+                    menor={parseInt(getMin(dataChart.datasets[0].data))}
+                    average={hasAverages?parseInt(getAverage(dataChart.datasets[0].data)):parseInt(getLastValue(dataChart.datasets[0].data))}
+                    unitMesure={getUnitMesure(propName)}
+                    atual= {lastGlycemia && lastGlycemia.lastGlycemia ? lastGlycemia.lastGlycemia : 0}
+                    atualData={lastGlycemia && lastGlycemia.data?dayjs(lastGlycemia.data).format("DD/MM/YYYY"):"Sem dados"}
+                    hasAverages={hasAverages}
+                />
             </div>
         </div>
     )

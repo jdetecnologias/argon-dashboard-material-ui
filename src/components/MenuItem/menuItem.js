@@ -25,7 +25,7 @@ function MenuItem({ routes }) {
                                                     obj[propr] = item[propr]
                                                     return obj;
                                                   },{}) 
-                                                if(item.prop === prop){
+                                                if(prop.some(propItem=>propItem === item.prop)) {
                                                   newObj.show = true;
                                                 }else{
                                                   newObj.show = false;
@@ -38,12 +38,12 @@ function MenuItem({ routes }) {
    }
 
 
-  const renderControlls = ({ type, name, icon, metadataname, key, href, route })=>{ 
+  const renderControlls = ({ type, name, icon, metadataname, key, href, route, metadatanamelist = undefined })=>{ 
 
         return (
           <Link style={{opacity:metaDataList.some(metadata=>metadata.show && metadata.prop === metadataname)?"1":"0.5"}}  key={key}  rel="noreferrer">
             <SidenavItemControlls
-              onClickControll={metadataname?()=>setMetaDataItemShow(metadataname):()=>false}
+              onClickControll={metadatanamelist?()=>setMetaDataItemShow(metadatanamelist):metadataname?()=>setMetaDataItemShow([metadataname]):()=>false}
               name={name}
               icon={icon}
               active={key === itemName}
@@ -53,10 +53,10 @@ function MenuItem({ routes }) {
       }
 
   // Render all the routes from the routes.js (All the visible items on the Sidenav)
-  const renderRoutes = routes.map(({ type, name, icon, title, metadataname,key, href, route }) => {
+  const renderRoutes = routes.map(({ type, name, icon, title, metadataname,key, href, route, metadatanamelist }) => {
     let returnValue;
     if (type === "controlls") {
-      returnValue =  renderControlls({ type, name, icon, metadataname,title, key, href, route })
+      returnValue =  renderControlls({ type, name, icon, metadataname,title, key, href, route,metadatanamelist })
     }else if (type === "route") {
       if (href) {
         returnValue = (
