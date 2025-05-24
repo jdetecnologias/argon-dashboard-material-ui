@@ -1,7 +1,8 @@
 import GradientLineChart from "examples/Charts/LineCharts/DefaultLineChart";
 import { getAverage } from "helper/math";
 import PropTypes from "prop-types";
-import colors from "assets/theme/base/colors";
+
+import MultipleAveragesView from "./MultipleAveragesView";
 
 export default function ChartAccSvg(props){
     const {dataChart, _className,title, lightTheme} = props;   
@@ -21,17 +22,7 @@ export default function ChartAccSvg(props){
                 <div className="text-sm">
                     Média do período:
                 </div>
-                {
-                
-                    dataChart.datasets && dataChart.datasets.map((dataset, key)=>{
-                        
-                       return (
-                                <div key={key} className={"text-sm"}>
-                                 <b style={{color:colors[dataset.color].main}}> {dataset.label}  {parseInt(getAverage(dataset.data))} </b>
-                                </div>
-                              )
-                    })
-                }
+                <MultipleAveragesView datasets={dataChart.datasets}/> 
             </div>
         </div>
     )

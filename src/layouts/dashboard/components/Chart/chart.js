@@ -13,9 +13,11 @@ import { getLastValue } from "helper/math";
 import { hasAverages } from "helper/unitMesure";
 import { hasAveragesData } from "helper/unitMesure";
 import UniqueAveragesView from "./UniqueAveragesView";
+import MultipleAveragesView from "./MultipleAveragesView";
+import If from "components/If/if";
 
 export default function Chart(props){
-    const {dataChart, _className,title, lightTheme, propName} = props;
+    const {dataChart, _className,title, lightTheme, propName, optionAccumulate} = props;
     const [lastGlycemia, setLastGlycemia] = useState({});
     const [showData, setShowData] = useState(true);
     useEffect(() => {
@@ -68,17 +70,26 @@ export default function Chart(props){
                     height={200}
                     />
                 </div>
+                <div  className={lightTheme?"col-span-2"+avgDataClass:"text-lime-300 col-span-2"+avgDataClass}>
+
+                <If test={optionAccumulate}>
+                    <MultipleAveragesView datasets={dataChart.datasets}/>
+                </If>
+                <If test={!optionAccumulate}>
                 <UniqueAveragesView 
-                    showData={showData}
-                    lightTheme={lightTheme}
-                    maior={parseInt(getMax(dataChart.datasets[0].data))} 
-                    menor={parseInt(getMin(dataChart.datasets[0].data))}
-                    average={hasAverages?parseInt(getAverage(dataChart.datasets[0].data)):parseInt(getLastValue(dataChart.datasets[0].data))}
-                    unitMesure={getUnitMesure(propName)}
-                    atual= {lastGlycemia && lastGlycemia.lastGlycemia ? lastGlycemia.lastGlycemia : 0}
-                    atualData={lastGlycemia && lastGlycemia.data?dayjs(lastGlycemia.data).format("DD/MM/YYYY"):"Sem dados"}
-                    hasAverages={hasAverages}
-                />
+                        showData={showData}
+                        lightTheme={lightTheme}
+                        maior={parseInt(getMax(dataChart.datasets[0].data))} 
+                        menor={parseInt(getMin(dataChart.datasets[0].data))}
+                        average={hasAverages?parseInt(getAverage(dataChart.datasets[0].data)):parseInt(getLastValue(dataChart.datasets[0].data))}
+                        unitMesure={getUnitMesure(propName)}
+                        atual= {lastGlycemia && lastGlycemia.lastGlycemia ? lastGlycemia.lastGlycemia : 0}
+                        atualData={lastGlycemia && lastGlycemia.data?dayjs(lastGlycemia.data).format("DD/MM/YYYY"):"Sem dados"}
+                        hasAverages={hasAverages}
+                    />
+                </If>
+               
+                </div>
             </div>
         </div>
     )
@@ -89,5 +100,6 @@ Chart.propTypes = {
     _className: PropTypes.string.isRequired,
     title: PropTypes.string.isRequired,
     lightTheme: PropTypes.bool.isRequired,
-    propName: PropTypes.string.isRequired
+    propName: PropTypes.string.isRequired,
+    optionAccumulate: PropTypes.bool.isRequired
 }

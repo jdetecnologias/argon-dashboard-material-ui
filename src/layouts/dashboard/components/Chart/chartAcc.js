@@ -5,26 +5,23 @@ import ChartThemeSelector from "./chartThemeSelector";
 import { useState } from "react";
 import { PrintContentCanvas } from 'helper/printDocument';
 import { Print } from "layouts/dashboard/assets/print";
+import Chart from "./chart";
 
 export default function ChartAcc(props){
-    const {dataChart} = props;   
-    const [lightTheme, setLightTheme] = useState(true); 
+    const {dataChart, lightTheme} = props;   
+
     return (
-            <div className=" md:grid md:grid-cols-4 flex flex-col-reverse mt-16">
-                <div className="col-span-3">
-                    <ChartThemeSelector onChange={setLightTheme} value={lightTheme}/>
-                    <button className="btn btn-primary ml-2" onClick={()=>PrintContentCanvas("#grafico","#grafico canvas")}><Print collorFill="#fff" /></button>
-                     <ChartAccSvg 
+             <Chart 
+                        optionAccumulate={true}
                         key={1} 
                         title="Dados" 
                         lightTheme={lightTheme}
                         dataChart={{labels:dataChart.labels, datasets:dataChart.datasets}}
                     />
-                </div>
-            </div>
     )
 }
 
 ChartAcc.propTypes = {
     dataChart: PropTypes.objectOf(PropTypes.array).isRequired,
+    lightTheme: PropTypes.bool.isRequired
 }

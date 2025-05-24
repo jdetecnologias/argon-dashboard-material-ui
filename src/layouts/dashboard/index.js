@@ -259,12 +259,6 @@ function getDadosLogin(){
                 <div>
                   Data filtrada:
                   <ChartSelector dataChart={dataChart} optionAccumulate={optionAccumulate} lightTheme={lightTheme}/>
-                  <If test={optionAccumulate}>
-                    <ChartAcc dataChart={dataChart} lightTheme={lightTheme}/>
-                  </If>
-                  <If test={!optionAccumulate}>
-                    <ChartList dataChart={dataChart} lightTheme={lightTheme}/>
-                  </If>
                 </div>
                 <div>
                   Data: {dayjs().add(-1,'day').format('DD/MM/YYYY')}
