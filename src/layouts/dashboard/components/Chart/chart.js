@@ -20,6 +20,7 @@ export default function Chart(props){
     const {dataChart, _className,title, lightTheme, propName, optionAccumulate} = props;
     const [lastGlycemia, setLastGlycemia] = useState({});
     const [showData, setShowData] = useState(true);
+    const [selectedAverageData, setSelectedAverageData] = useState(0)
     useEffect(() => {
         const queryString = window.location.search;
     
@@ -47,6 +48,12 @@ export default function Chart(props){
 
 
       },[]);
+
+    function handleSelectedAverageData(e){
+        const value = e.target.value;
+
+        setSelectedAverageData(value)
+    }  
     console.log(dataChart, _className,title, lightTheme)
     const bgClassName = lightTheme ? "" : "bg-black";
     let mainClassName ="grid grid-cols-10 "+bgClassName; 
@@ -71,24 +78,24 @@ export default function Chart(props){
                     />
                 </div>
                 <div  className={lightTheme?"col-span-2"+avgDataClass:"text-lime-300 col-span-2"+avgDataClass}>
-
-                <If test={optionAccumulate}>
-                    <MultipleAveragesView datasets={dataChart.datasets}/>
-                </If>
-                <If test={!optionAccumulate}>
+                <div>
+                    <select onChange={handleSelectedAverageData} id="labels" className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
+                        {
+                            dataChart.datasets.map((dataset, index)=><option value={index} key={index}>{dataset.label}</option>)
+                        }
+                    </select>
+                </div>
                 <UniqueAveragesView 
                         showData={showData}
                         lightTheme={lightTheme}
-                        maior={parseInt(getMax(dataChart.datasets[0].data))} 
-                        menor={parseInt(getMin(dataChart.datasets[0].data))}
-                        average={hasAverages?parseInt(getAverage(dataChart.datasets[0].data)):parseInt(getLastValue(dataChart.datasets[0].data))}
+                        maior={parseInt(getMax(dataChart.datasets[selectedAverageData].data))} 
+                        menor={parseInt(getMin(dataChart.datasets[selectedAverageData].data))}
+                        average={hasAverages?parseInt(getAverage(dataChart.datasets[selectedAverageData].data)):parseInt(getLastValue(dataChart.datasets[selectedAverageData].data))}
                         unitMesure={getUnitMesure(propName)}
                         atual= {lastGlycemia && lastGlycemia.lastGlycemia ? lastGlycemia.lastGlycemia : 0}
                         atualData={lastGlycemia && lastGlycemia.data?dayjs(lastGlycemia.data).format("DD/MM/YYYY"):"Sem dados"}
                         hasAverages={hasAverages}
                     />
-                </If>
-               
                 </div>
             </div>
         </div>

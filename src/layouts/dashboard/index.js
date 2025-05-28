@@ -262,11 +262,11 @@ function getDadosLogin(){
                 </div>
                 <div>
                   Data: {dayjs().add(-1,'day').format('DD/MM/YYYY')}
-                  <ChartList dataChart={adapterGlycemia(listGlycemiaOne, [].concat(metaDataList).filter(option=>option.show))} lightTheme={lightTheme}/>
-                </div>
+                  <ChartSelector dataChart={adapterGlycemia(listGlycemiaOne, [].concat(metaDataList).filter(option=>option.show))} optionAccumulate={optionAccumulate} lightTheme={lightTheme}/>
+                   </div>
                 <div>
                   Data: {dayjs().add(-2,'day').format('DD/MM/YYYY')}
-                  <ChartList dataChart={adapterGlycemia(listGlycemiaTwo, [].concat(metaDataList).filter(option=>option.show))} lightTheme={lightTheme}/>
+                  <ChartSelector dataChart={adapterGlycemia(listGlycemiaTwo, [].concat(metaDataList).filter(option=>option.show))} optionAccumulate={optionAccumulate} lightTheme={lightTheme}/>
                 </div>
               </div>
           </div>
