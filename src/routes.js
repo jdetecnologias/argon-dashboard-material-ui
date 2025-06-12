@@ -141,11 +141,11 @@ const routes = [
     component: <Averages />,
   },
   {
-    type: "controlls",
+    type: "route",//"controlls",
     name: "Eletrocardiograma",
     key: "diaria7",
     route: "/meus_indices",
-    metadataname:"eletroCardio",
+    //metadataname:"eletroCardio",
     icon: <EletroCardio colorFill="#000" _className=""/>,
     component: <Averages />,
   },
